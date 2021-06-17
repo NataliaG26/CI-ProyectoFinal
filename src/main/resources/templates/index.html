@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Menu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+
+<body>
+
+<div th:switch="${institution}" class="container my-5">
+		<div class="row">
+			<div class="col-md-6">
+				<h2 th:case="null">Options</h2>
+				
+				
+				<div sec:authorize="hasRole('admin')">
+					<div class="container my-4">
+						<p><a href="/institution/"><i class="bi bi-house-door-fill"></i> Go to Institutions</a></p>
+					</div>
+				</div>
+				
+				<div sec:authorize="hasRole('operator')">
+					<div class="container my-4">
+						<p><a href="/person/"><i class="fas fa-user-edit ml-2"></i> Go to Persons</a></p>
+					</div>
+					
+					<div class="container my-4">
+						<p><a href="/autotransition/"><i class="fas fa-calendar ml-2"></i> Go to Autotransitions</a></p>
+					</div>
+					<div class="container my-4">
+						<p><a href="/personautotran/"><i class="fas fa-calendar ml-2"></i> Go to Personautotran</a></p>
+					</div>
+				</div>
+				
+				<div class="container my-4">
+					<p><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></p>
+				</div>
+		
+			
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

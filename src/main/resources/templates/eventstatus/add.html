@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>New Eventstatus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5" >
+		<h2 class="mb-5">New Eventstatus</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<form action="#" th:object="${eventstatus}" th:action="@{/eventstatus/add}" method="post" >
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="evestatName" class="col-form-label">Name</label>
+							<input type="text" class="form-control" th:field="*{evestatName}" placeholder="EvestatName Name">
+							<span th:if="${#fields.hasErrors('evestatName')}" th:errors="*{evestatName}" class="text-danger"></span>
+						</div>
+						
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="evestatAllowsmobility" class="col-form-label">Allows mobility</label>
+							<select th:field="*{evestatAllowsmobility}" class="form-control"
+								id="evestatAllowsmobility">
+								<option th:each="opt : ${isActiveList}"
+									th:value="${opt}" th:text="${opt}" />
+							</select> 
+							<span th:if="${#fields.hasErrors('evestatAllowsmobility')}" th:errors="*{evestatAllowsmobility}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="evestatIsactive" class="col-form-label">Is active</label>
+							<select th:field="*{evestatIsactive}" class="form-control"
+								id="evestatIsactive">
+								<option th:each="opt : ${isActiveList}"
+									th:value="${opt}" th:text="${opt}" />
+							</select> 
+							<span th:if="${#fields.hasErrors('evestatIsactive')}" th:errors="*{evestatIsactive}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="epidemevent" class="col-form-label">Epidemevent</label>
+							<select th:field="*{epidemevent}" class="form-control"
+								id="epidemevent">
+								<option th:each="epideme : ${epidemeventList}"
+									th:value="${epideme}" th:text="${epideme.epieveName}" />
+							</select> 
+							<span th:if="${#fields.hasErrors('epidemevent')}" th:errors="*{epidemevent}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="epidemstatus" class="col-form-label">Epidemstatus</label>
+							<select th:field="*{epidemstatus}" class="form-control"
+								id="epidemstatus">
+								<option th:each="opt : ${epidemstatusList}"
+									th:value="${opt}" th:text="${opt.epistatName}" />
+							</select> 
+							<span th:if="${#fields.hasErrors('epidemstatus')}" th:errors="*{epidemstatus}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="epidemstatuscolor" class="col-form-label">Epidemstatuscolor</label>
+							<select th:field="*{epidemstatuscolor}" class="form-control"
+								id="epidemstatuscolor">
+								<option th:each="opt : ${epidemstatuscolorList}"
+									th:value="${opt}" th:text="${opt.epistatcolName}" />
+							</select> 
+							<span th:if="${#fields.hasErrors('epidemstatuscolor')}" th:errors="*{epidemstatuscolor}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="institution" class="col-form-label">Institution</label>
+							<select th:field="*{institution}" class="form-control"
+								id="institution">
+								<option th:each="opt : ${institutionList}"
+									th:value="${opt}" th:text="${opt.instName}" />
+							</select> 
+							<span th:if="${#fields.hasErrors('institution')}" th:errors="*{institution}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-4 mt-3">
+							<input type="submit" name="action" class="btn btn-primary" value="Add Evenstatus" onClick="history.go(-1);">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="reset" class="btn btn-secondary" value="Clear">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="submit" name="action" class="btn btn-secondary" value="Cancel">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

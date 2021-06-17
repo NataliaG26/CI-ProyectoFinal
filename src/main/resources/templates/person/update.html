@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Show Person</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5" >
+		<h2 class="mb-5">Person</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<form action="#" th:object="${person}" th:action="@{/person/update/{id}(id=${person.persId})}" method="post" >
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="persName" class="col-form-label">Name</label>
+							<input type="text" class="form-control" th:field="*{persName}" placeholder="Person Name">
+							<span th:if="${#fields.hasErrors('persName')}" th:errors="*{persName}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="persLastname" class="col-form-label">Person Last Name</label>
+							<input type="text" class="form-control" id="persLastname" th:field="*{persLastname}" placeholder="Person Last Name">
+							<span th:if="${#fields.hasErrors('persLastname')}" th:errors="*{persLastname}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-5">
+							<label for="persIddocument" class="col-form-label">ID Document</label>
+							<input type="text" class="form-control" id="persIddocument" th:field="*{persIddocument}" placeholder="ID Document">
+							<span th:if="${#fields.hasErrors('persIddocument')}" th:errors="*{persIddocumentl}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-5">
+							<label for="persIsactive" class="col-form-label">Is Active</label>
+							<select th:field="*{persIsactive}" class="form-control"
+								id="persIsactive">
+								<option th:each="opt : ${personIsactiveL}"
+									th:value="${opt}" th:text="${opt}" />
+							</select>
+							<span th:if="${#fields.hasErrors('persIsactive')}" th:errors="*{persIsactive}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-2">
+							<label for="persId" class="col-form-label">Person ID</label>
+							<input type="text" class="form-control" id="persId" th:field="*{persId}" readonly>
+							<span th:if="${#fields.hasErrors('persId')}" th:errors="*{persId}" class="text-danger"></span>
+						</div>
+					</div>
+						
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="persAddress" class="col-form-label">Address</label>
+							<input type="text" class="form-control" id="persAddress" th:field="*{persAddress}" placeholder="carrera 76 N 2A - 110">
+							<span th:if="${#fields.hasErrors('persAddress')}" th:errors="*{persAddress}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="persContactnumber" class="col-form-label">Contact Number</label>
+							<input type="text" class="form-control" id="persContactnumber" th:field="*{persContactnumber}" placeholder="3217584620">
+							<span th:if="${#fields.hasErrors('persContactnumber')}" th:errors="*{persContactnumber}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="persEmail" class="col-form-label">Email</label>
+							<input type="email" class="form-control" id="persEmail" th:field="*{persEmail}" placeholder="example@gmail.com">
+							<span th:if="${#fields.hasErrors('persEmail')}" th:errors="*{persEmail}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="institution" class="col-form-label">Institution</label>
+							<select th:field="*{institution}" class="form-control"
+								id="institution">
+								<option th:each="inst : ${institutions}"
+									th:value="${inst.instId}" th:text="${inst.instName}" />
+							</select> 
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="persLatitude" class="col-form-label">Latitude</label>
+							<input type="text" class="form-control" id="persLatitude" th:field="*{persLatitude}" placeholder="Latitutde">
+							<span th:if="${#fields.hasErrors('persLatitude')}" th:errors="*{persLatitude}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="persLongitude" class="col-form-label">Longitude</label>
+							<input type="text" class="form-control" id="persLongitude" th:field="*{persLongitude}" placeholder="Longitude">
+							<span th:if="${#fields.hasErrors('persLongitude')}" th:errors="*{persLongitude}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="persOnsetdate" class="col-form-label">Set Date</label>
+							<input type="date" class="form-control" id="persOnsetdate" th:field="*{persOnsetdate}">
+							<span th:if="${#fields.hasErrors('persOnsetdate')}" th:errors="*{persOnsetdate}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="persPoliticsaccepteddate" class="col-form-label">Politics Accepted Date</label>
+							<input type="date" class="form-control" id="persPoliticsaccepteddate" th:field="*{persPoliticsaccepteddate}">
+							<span th:if="${#fields.hasErrors('persPoliticsaccepteddate')}" th:errors="*{persPoliticsaccepteddate}" class="text-danger"></span>
+						</div> 
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="persPoliticsaccepted" class="col-form-label">Politics Accepted</label>
+							<input type="text" class="form-control" id="persPoliticsaccepted" th:field="*{persPoliticsaccepted}" placeholder="Politics Accepted">
+							<span th:if="${#fields.hasErrors('persPoliticsaccepted')}" th:errors="*{persPoliticsaccepted}" class="text-danger"></span>
+						</div>
+						
+					</div>
+					
+					
+					
+					<div class="row">
+						<div class="col-md-4 mt-3">
+							<input type="submit" name="action" class="btn btn-primary" value="Update Person">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="reset" class="btn btn-secondary" value="Clear">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="submit" name="action" class="btn btn-secondary" value="Cancel">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

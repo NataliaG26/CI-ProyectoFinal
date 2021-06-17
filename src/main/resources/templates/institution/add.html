@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Add Institution</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5">
+		<h2 class="mb-5">New Institution</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<form action="#" th:action="@{/institution/add}" th:object="${institution}" method="post">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="instName" class="col-form-label">Institution Name</label>
+							<input type="text" class="form-control" th:field="*{instName}" placeholder="Institution Name">
+							<span th:if="${#fields.hasErrors('instName')}" th:errors="*{instName}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="instAcademicserverurl" class="col-form-label">Academic Server URL</label>
+							<input type="text" class="form-control" id="instAcademicserverurl" th:field="*{instAcademicserverurl}" placeholder="Academic Server URL">
+							<span th:if="${#fields.hasErrors('instAcademicserverurl')}" th:errors="*{instAcademicserverurl}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="instAcadextradataurl" class="col-form-label">Academic extra data URL</label>
+							<input type="text" class="form-control" id="instAcadextradataurl" th:field="*{instAcadextradataurl}" placeholder="Academic extra data URL">
+							<span th:if="${#fields.hasErrors('instAcadextradataurl')}" th:errors="*{instAcadextradataurl}" class="text-danger"></span>
+						</div>
+					</div>
+						
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="instAcadpersoninfodocurl" class="col-form-label">Academic person info doc URL</label>
+							<input type="text" class="form-control" id="instAcadpersoninfodocurl" th:field="*{instAcadpersoninfodocurl}" placeholder="Academic person info doc URL">
+							<span th:if="${#fields.hasErrors('instAcadpersoninfodocurl')}" th:errors="*{instAcadpersoninfodocurl}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="instAcadloginurl" class="col-form-label">Academic login URL</label>
+							<input type="text" class="form-control" id="instAcadloginurl" th:field="*{instAcadloginurl}" placeholder="Academic login URL">
+							<span th:if="${#fields.hasErrors('instAcadloginurl')}" th:errors="*{instAcadloginurl}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="instAcadpersoninfoidurl" class="col-form-label">Academic person info ID URL</label>
+							<input type="text" class="form-control" id="instAcadpersoninfoidurl" th:field="*{instAcadpersoninfoidurl}" placeholder="Academic person info ID URL">
+							<span th:if="${#fields.hasErrors('instAcadpersoninfoidurl')}" th:errors="*{instAcadpersoninfoidurl}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="instAcadphysicalspacesurl" class="col-form-label">Academic physical space URL</label>
+							<input type="text" class="form-control" id="instAcadphysicalspacesurl" th:field="*{instAcadphysicalspacesurl}" placeholder="Academic physical space URL">
+							<span th:if="${#fields.hasErrors('instAcadphysicalspacesurl')}" th:errors="*{instAcadphysicalspacesurl}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="instAcadprogrammedcoursesurl" class="col-form-label">Academic program med course URL</label>
+							<input type="text" class="form-control" id="instAcadprogrammedcoursesurl" th:field="*{instAcadprogrammedcoursesurl}" placeholder="Academic program med course URL">
+							<span th:if="${#fields.hasErrors('instAcadprogrammedcoursesurl')}" th:errors="*{instAcadprogrammedcoursesurl}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="instLdapurl" class="col-form-label">Ldap URL</label>
+							<input type="text" class="form-control" id="instLdapurl" th:field="*{instLdapurl}" placeholder="Academic Ldap URL">
+							<span th:if="${#fields.hasErrors('instLdapurl')}" th:errors="*{instLdapurl}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="instAcadloginusername" class="col-form-label">Academic login user name</label>
+							<input type="text" class="form-control" id="instAcadloginusername" th:field="*{instAcadloginusername}" placeholder="Academic login user name">
+							<span th:if="${#fields.hasErrors('instAcadloginusername')}" th:errors="*{instAcadloginusername}" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="instAcadloginpassword" class="col-form-label">Login password</label>
+							<input type="text" class="form-control" id="instAcadloginpassword" th:field="*{instAcadloginpassword}" placeholder="Login Password">
+							<span th:if="${#fields.hasErrors('instAcadloginpassword')}" th:errors="*{instAcadloginpassword}" class="text-danger"></span>
+						</div> 
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="instLdapbasedn" class="col-form-label">InstLdapbasedn</label>
+							<input type="text" class="form-control" id="instLdapbasedn" th:field="*{instLdapbasedn}" placeholder="InstLdapbasedn">
+							<span th:if="${#fields.hasErrors('instLdapbasedn')}" th:errors="*{instLdapbasedn}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="instLdappassword" class="col-form-label">InstLdappassword</label>
+							<input type="text" class="form-control" id="instLdappassword" th:field="*{instLdappassword}" placeholder="InstLdappassword">
+							<span th:if="${#fields.hasErrors('instLdappassword')}" th:errors="*{instLdappassword}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="instLdapusersearchbase" class="col-form-label">InstLdapusersearchbase</label>
+							<input type="text" class="form-control" id="instLdapusersearchbase" th:field="*{instLdapusersearchbase}" placeholder="InstLdapusersearchbase">
+							<span th:if="${#fields.hasErrors('instLdapusersearchbase')}" th:errors="*{instLdapusersearchbase}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="instLdapusersearchfilter" class="col-form-label">InstLdapusersearchfilter</label>
+							<input type="text" class="form-control" id="instLdapusersearchfilter" th:field="*{instLdapusersearchfilter}" placeholder="InstLdapusersearchfilter">
+							<span th:if="${#fields.hasErrors('instLdapusersearchfilter')}" th:errors="*{instLdapusersearchfilter}" class="text-danger"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-4 mt-3">
+							<input type="submit" name="action" class="btn btn-primary" value="Add Institution">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="reset" class="btn btn-secondary" value="Clear">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="submit" name="action" class="btn btn-secondary" value="Cancel">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
