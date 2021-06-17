@@ -28,7 +28,7 @@ public class InstitutionRestControllerImpl implements InstitutionRestController 
 	}
 
 	@Override
-	@GetMapping("show/{id}")
+	@GetMapping("/show/{id}")
 	public Institution showInstitution(@PathVariable("id") long id) {
 		try {
 			return institutionService.getInstitutionById(id);
@@ -40,20 +40,20 @@ public class InstitutionRestControllerImpl implements InstitutionRestController 
 	}
 
 	@Override
-	@PutMapping("update/{id}")
+	@PutMapping("/update/{id}")
 	public void updateInstitution(Institution institution) throws LogicalException {
 		institutionService.updateInstitution(institution);
 	}
 
 	@Override
-	@PostMapping("add")
+	@PostMapping("/add")
 	public Institution saveInstitution(Institution institution) throws LogicalException {
 		return institutionService.createInstitution(institution);
 	}
 
 
 	@Override
-	@DeleteMapping("games/{id}")
+	@DeleteMapping("/del/{id}")
 	public void deleteInstitution(@PathVariable("id") long id) {
 		try {
 			institutionService.delete(id);
