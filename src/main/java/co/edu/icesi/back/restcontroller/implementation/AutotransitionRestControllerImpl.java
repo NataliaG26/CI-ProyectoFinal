@@ -5,9 +5,16 @@ import org.springframework.validation.BindingResult;
 
 import co.edu.icesi.back.model.Autotransition;
 import co.edu.icesi.back.restcontroller.interfaces.AutotransitionRestController;
+import co.edu.icesi.back.service.interfaces.AutotransitionService;
 
 public class AutotransitionRestControllerImpl implements AutotransitionRestController{
 
+	private AutotransitionService autotransitionService;
+	
+	public AutotransitionRestControllerImpl(AutotransitionService autotransitionService) {
+		this.autotransitionService = autotransitionService;
+	}
+	
 	@Override
 	public String indexAutotransition(Model model) {
 		// TODO Auto-generated method stub

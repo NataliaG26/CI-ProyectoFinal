@@ -14,6 +14,6 @@ public interface PersonService {
 	
 	public Iterable<Person> findAll();
 	
-	public void delete(Person person);
+	public void delete(long id) throws LogicalException;
 
 }

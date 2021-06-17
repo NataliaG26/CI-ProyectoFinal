@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.back.exception.LogicalException;
-import co.edu.icesi.back.model.Person;
-import co.edu.icesi.back.service.interfaces.InstitutionService;
-import co.edu.icesi.back.service.interfaces.PersonService;
+import co.edu.icesi.front.model.classes.Person;
+import co.edu.icesi.front.bd.interfaces.InstitutionDelegate;
+import co.edu.icesi.front.bd.interfaces.PersonDelegate;
 import co.edu.icesi.front.controller.interfaces.PersonController;
 import lombok.extern.log4j.Log4j2;
 
@@ -25,14 +25,14 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class PersonControllerImpl implements PersonController {
 	
-	private PersonService personService;
-	private InstitutionService institutionService;
+	private PersonDelegate personDelegate;
+	private InstitutionDelegate institutionDelegate;
 	private ArrayList<String> personIsactiveL;
 	
 	@Autowired
-	public PersonControllerImpl(PersonService personService, InstitutionService institutionService) {
-		this.personService = personService;
-		this.institutionService = institutionService;
+	public PersonControllerImpl(PersonDelegate personDelegate, InstitutionDelegate institutionDelegate) {
+		this.personDelegate = personDelegate;
+		this.institutionDelegate = institutionDelegate;
 		
 		personIsactiveL = new ArrayList<String>();
 		personIsactiveL.add("Y");
@@ -42,7 +42,7 @@ public class PersonControllerImpl implements PersonController {
 	@GetMapping("/")
 	@Override
 	public String indexPerson(Model model) {
-		model.addAttribute("persons", personService.findAll());
+		model.addAttribute("persons", personDelegate.findAll());
 		return "person/index";
 	}
 	
@@ -50,10 +50,10 @@ public class PersonControllerImpl implements PersonController {
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 		
 		try {
-			Person person = personService.getPersonById(id);
+			Person person = personDelegate.getPersonById(id);
 			model.addAttribute("person", person);
 			model.addAttribute("personIsactiveL", personIsactiveL);
-			model.addAttribute("institutions", institutionService.findAll());
+			model.addAttribute("institutions", institutionDelegate.findAll());
 		}catch(LogicalException e) {
 			e.printStackTrace();
 		}
@@ -68,13 +68,13 @@ public class PersonControllerImpl implements PersonController {
 			if(bindingresult.hasErrors()) {
 				model.addAttribute("person", person);
 				model.addAttribute("personIsactiveL", personIsactiveL);
-				model.addAttribute("institutions", institutionService.findAll());
+				model.addAttribute("institutions", institutionDelegate.findAll());
 			 	return "person/update";
 			}else {
 				
 		//institutionService.createInstitution(institution);
 			try {
-				personService.updatePerson(person);
+				personDelegate.updatePerson(person);
 				return "redirect:/person/showPerson/{id}";
 			}catch(LogicalException e) {
 				//model.addAttribute("institution", new Institution());
@@ -89,13 +89,8 @@ public class PersonControllerImpl implements PersonController {
 	
 	@GetMapping("/del/{id}")
 	public String showDeleteForm(@PathVariable("id") long id, Model model) {
-		try {
-			Person person = personService.getPersonById(id);
-			personService.delete(person);
-			model.addAttribute("person", personService.findAll());
-		}catch(LogicalException e) {
-			e.printStackTrace();
-		}
+		personDelegate.delete(id);
+		model.addAttribute("person", personDelegate.findAll());
 		return "redirect:/person/";
 	}
 	
@@ -103,7 +98,7 @@ public class PersonControllerImpl implements PersonController {
 	public String showAddPerson(Model model) {
 		model.addAttribute("person", new Person());
 		model.addAttribute("personIsactiveL", personIsactiveL);
-		model.addAttribute("institutions", institutionService.findAll());
+		model.addAttribute("institutions", institutionDelegate.findAll());
 		return "person/add";
 	}
 	
@@ -116,7 +111,7 @@ public class PersonControllerImpl implements PersonController {
 			 	return "person/add";
 			}else {
 				try {
-					personService.createPerson(person);
+					personDelegate.createPerson(person);
 				}catch(LogicalException e) {
 					e.printStackTrace();
 					return "redirect:/person/";
@@ -130,7 +125,7 @@ public class PersonControllerImpl implements PersonController {
 	@GetMapping("/showPerson/{id}")
 	public String showPerson(@PathVariable("id") long id, Model model) {
 		try {
-			Person person =personService.getPersonById(id);
+			Person person = personDelegate.getPersonById(id);
 			model.addAttribute("person", person);
 		}catch(LogicalException e) {
 			e.printStackTrace();

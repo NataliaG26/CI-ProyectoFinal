@@ -136,8 +136,9 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	@Transactional
-	public void delete(Person person){
+	public void delete(long id) throws LogicalException{
 		//personRepository.delete(person);
+		Person person = getPersonById(id);
 		personDAO.Delete(person);
 	}
 

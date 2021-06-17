@@ -1,29 +1,23 @@
 package co.edu.icesi.back.restcontroller.interfaces;
 
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.back.model.Person;
+import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Institution;
 
 public interface PersonRestController {
 	
-public String showUpdateForm(@PathVariable("id") long id, Model model);
+	public Iterable<Person> showAll();
 	
-	public String updateInstitution(@PathVariable("id") long id,
-			@RequestParam(value = "action", required = true) String action,
-			@Validated Person person, BindingResult bindingresult, Model model) throws LogicalException;
+	public Person showPerson(@PathVariable("id") long id) throws LogicalException;
 	
-	public String showDeleteForm(@PathVariable("id") long id, Model model);
+	public Person savePerson(Person person) throws LogicalException;
 	
-	public String showAddPerson(Model model);
+	public void deletePerson(@PathVariable("id") long id) throws LogicalException;
 	
-	public String savePerson(@Validated Person person, BindingResult bindingresult, Model model,
-			@RequestParam(value = "action", required = true) String action) throws LogicalException;
+	public void updatePerson(Person person) throws LogicalException;
 	
-	public String showPerson(@PathVariable("id") long id, Model model);
+	public void updateInstitution(@PathVariable("id") long id, Institution institution);
 
 }
