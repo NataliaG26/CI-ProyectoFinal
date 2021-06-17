@@ -19,7 +19,7 @@ public interface InstitutionService {
 	
 	public Iterable<Institution> findAll();
 	
-	public void delete(Institution institution);
+	public void delete(long id) throws LogicalException;
 
 }
 

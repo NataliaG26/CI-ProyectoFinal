@@ -1,7 +1,5 @@
 package co.edu.icesi.front.controller.implementations;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.back.exception.LogicalException;
-import co.edu.icesi.back.groups.Add1;
-import co.edu.icesi.back.model.Institution;
-import co.edu.icesi.back.service.interfaces.InstitutionService;
+
+import co.edu.icesi.front.model.classes.Institution;
 import co.edu.icesi.front.controller.interfaces.InstitutionController;
+import co.edu.icesi.front.bd.interfaces.InstitutionDelegate;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
@@ -25,30 +23,24 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class InstitutionControllerImpl implements InstitutionController{
 
-	private InstitutionService institutionService;
+	private InstitutionDelegate institutionDelegate;
 	
 	@Autowired
-	public InstitutionControllerImpl(InstitutionService institutionService) {
-		this.institutionService = institutionService;
+	public InstitutionControllerImpl(InstitutionDelegate institutionDelegate) {
+		this.institutionDelegate = institutionDelegate;
 	}
 
 	@GetMapping("/")
 	@Override
 	public String indexInstitution(Model model) {
-		
-		model.addAttribute("institutions", institutionService.findAll());
+		model.addAttribute("institutions", institutionDelegate.findAll());
 		return "institution/index";
 	}
 	
 	@GetMapping("/update/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
-		
-		try {
-			Institution institution = institutionService.getInstitutionById(id);
-			model.addAttribute("institution", institution);
-		}catch(LogicalException e) {
-			e.printStackTrace();
-		}
+		Institution institution = institutionDelegate.getInstitutionById(id);
+		model.addAttribute("institution", institution);
 		return "institution/update";
 	}
 	
@@ -61,16 +53,8 @@ public class InstitutionControllerImpl implements InstitutionController{
 				//model.addAttribute("institution", new Institution());
 			 	return "institution/update/{id}";
 			}else {
-				
-		//institutionService.createInstitution(institution);
-			try {
-				institutionService.updateInstitution(institution);
+				institutionDelegate.updateInstitution(institution);
 				return "redirect:/institution/showInstitution/{id}";
-			}catch(LogicalException e) {
-				//model.addAttribute("institution", new Institution());
-				e.printStackTrace();
-				return "redirect:/institution/showInstitution/{id}";
-			}
 			}
 		}
 		return "redirect:/institution/";
@@ -79,13 +63,9 @@ public class InstitutionControllerImpl implements InstitutionController{
 	
 	@GetMapping("/del/{id}")
 	public String showDeleteForm(@PathVariable("id") long id, Model model) {
-		try {
-			Institution institution = institutionService.getInstitutionById(id);
-			institutionService.delete(institution);
-			model.addAttribute("institutions", institutionService.findAll());
-		}catch(LogicalException e) {
-			e.printStackTrace();
-		}
+		Institution institution = institutionDelegate.getInstitutionById(id);
+		institutionDelegate.delete(institution.getInstId());
+		model.addAttribute("institutions", institutionDelegate.findAll());
 		return "institution/index";
 	}
 	
@@ -100,18 +80,9 @@ public class InstitutionControllerImpl implements InstitutionController{
 			@RequestParam(value = "action", required = true) String action) throws LogicalException {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {	
-				//model.addAttribute("institution", new Institution());
 			 	return "institution/add";
 			}else {
-				
-		//institutionService.createInstitution(institution);
-			try {
-				institutionService.createInstitution(institution);
-			}catch(LogicalException e) {
-				//model.addAttribute("institution", new Institution());
-				e.printStackTrace();
-				return "redirect:/institution/";
-			}
+				institutionDelegate.createInstitution(institution);
 			}
 		}
 		return "redirect:/institution/";
@@ -120,17 +91,11 @@ public class InstitutionControllerImpl implements InstitutionController{
 	
 	@GetMapping("/showInstitution/{id}")
 	public String showInstitution(@PathVariable("id") long id, Model model) {
-		try {
-			Institution institution = institutionService.getInstitutionById(id);
-			model.addAttribute("institution", institution);
-		}catch(LogicalException e) {
-			e.printStackTrace();
-		}
+		Institution institution = institutionDelegate.getInstitutionById(id);
+		model.addAttribute("institution", institution);
 		return "institution/showInstitution";
 	}
-	
-	
-	
+
 	
 	
 }
