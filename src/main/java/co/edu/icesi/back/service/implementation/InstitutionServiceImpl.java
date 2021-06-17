@@ -118,13 +118,12 @@ public class InstitutionServiceImpl implements InstitutionService{
 			institutionDAO.Save(existingInstitution);
 			return existingInstitution;
 		}
-		
+
 	}
 	
 	@Override
 	public Institution getInstitutionById(long id) throws LogicalException {
 		try {
-			log.info("aquii service"+id);
 			//Institution institution = institutionRepository.findById(id).get();
 			Institution institution = institutionDAO.findById(id);
 			return institution;
@@ -143,8 +142,9 @@ public class InstitutionServiceImpl implements InstitutionService{
 	
 	@Override
 	@Transactional
-	public void delete(Institution institution) {
+	public void delete(long id) throws LogicalException {
 		//institutionRepository.delete(institution);
+		Institution institution =  getInstitutionById(id);
 		institutionDAO.Delete(institution);
 	}
 }
