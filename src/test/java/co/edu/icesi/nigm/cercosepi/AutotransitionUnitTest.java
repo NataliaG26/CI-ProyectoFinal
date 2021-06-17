@@ -22,15 +22,15 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.icesi.nigm.exception.LogicalException;
-import co.edu.icesi.nigm.model.Autotransition;
-import co.edu.icesi.nigm.model.Eventstatus;
-import co.edu.icesi.nigm.model.Institution;
-import co.edu.icesi.nigm.repository.AutotransitionRepository;
-import co.edu.icesi.nigm.service.interfaces.AutotransitionService;
-import co.edu.icesi.nigm.service.implementation.AutotransitionServiceImpl;
-import co.edu.icesi.nigm.service.interfaces.InstitutionService;
-import co.edu.icesi.nigm.daos.interfaces.AutotransitionDAO;
+import co.edu.icesi.back.daos.interfaces.AutotransitionDAO;
+import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Autotransition;
+import co.edu.icesi.back.model.Eventstatus;
+import co.edu.icesi.back.model.Institution;
+import co.edu.icesi.back.repository.AutotransitionRepository;
+import co.edu.icesi.back.service.implementation.AutotransitionServiceImpl;
+import co.edu.icesi.back.service.interfaces.AutotransitionService;
+import co.edu.icesi.back.service.interfaces.InstitutionService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

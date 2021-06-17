@@ -18,12 +18,12 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.icesi.nigm.exception.LogicalException;
-import co.edu.icesi.nigm.model.Institution;
-import co.edu.icesi.nigm.repository.InstitutionRepository;
-import co.edu.icesi.nigm.service.interfaces.InstitutionService;
-import co.edu.icesi.nigm.service.implementation.InstitutionServiceImpl;
-import co.edu.icesi.nigm.daos.interfaces.InstitutionDAO;
+import co.edu.icesi.back.daos.interfaces.InstitutionDAO;
+import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Institution;
+import co.edu.icesi.back.repository.InstitutionRepository;
+import co.edu.icesi.back.service.implementation.InstitutionServiceImpl;
+import co.edu.icesi.back.service.interfaces.InstitutionService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

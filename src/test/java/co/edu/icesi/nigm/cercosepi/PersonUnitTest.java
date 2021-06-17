@@ -20,14 +20,14 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.icesi.nigm.exception.LogicalException;
-import co.edu.icesi.nigm.model.Institution;
-import co.edu.icesi.nigm.model.Person;
-import co.edu.icesi.nigm.repository.PersonRepository;
-import co.edu.icesi.nigm.service.interfaces.InstitutionService;
-import co.edu.icesi.nigm.service.interfaces.PersonService;
-import co.edu.icesi.nigm.service.implementation.PersonServiceImpl;
-import co.edu.icesi.nigm.daos.interfaces.PersonDAO;
+import co.edu.icesi.back.daos.interfaces.PersonDAO;
+import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Institution;
+import co.edu.icesi.back.model.Person;
+import co.edu.icesi.back.repository.PersonRepository;
+import co.edu.icesi.back.service.implementation.PersonServiceImpl;
+import co.edu.icesi.back.service.interfaces.InstitutionService;
+import co.edu.icesi.back.service.interfaces.PersonService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

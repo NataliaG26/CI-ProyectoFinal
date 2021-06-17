@@ -16,16 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import co.edu.icesi.nigm.RastreoCercosEpidemiologicosApplication;
-import co.edu.icesi.nigm.model.Institution;
-import co.edu.icesi.nigm.model.Person;
-import co.edu.icesi.nigm.model.Autotransition;
-import co.edu.icesi.nigm.model.Eventstatus;
-import co.edu.icesi.nigm.model.Personautotran;
-import co.edu.icesi.nigm.daos.interfaces.PersonDAO;
-import co.edu.icesi.nigm.daos.interfaces.InstitutionDAO;
-import co.edu.icesi.nigm.daos.interfaces.AutotransitionDAO;
-import co.edu.icesi.nigm.daos.interfaces.PersonautotranDAO;
+import co.edu.icesi.back.RastreoCercosEpidemiologicosApplication;
+import co.edu.icesi.back.daos.interfaces.AutotransitionDAO;
+import co.edu.icesi.back.daos.interfaces.InstitutionDAO;
+import co.edu.icesi.back.daos.interfaces.PersonDAO;
+import co.edu.icesi.back.daos.interfaces.PersonautotranDAO;
+import co.edu.icesi.back.model.Autotransition;
+import co.edu.icesi.back.model.Eventstatus;
+import co.edu.icesi.back.model.Institution;
+import co.edu.icesi.back.model.Person;
+import co.edu.icesi.back.model.Personautotran;
 
 @SpringBootTest
 @ContextConfiguration(classes= RastreoCercosEpidemiologicosApplication.class)

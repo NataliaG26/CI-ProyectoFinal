@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import co.edu.icesi.nigm.RastreoCercosEpidemiologicosApplication;
-import co.edu.icesi.nigm.daos.interfaces.InstitutionDAO;
-import co.edu.icesi.nigm.model.Institution;
+import co.edu.icesi.back.RastreoCercosEpidemiologicosApplication;
+import co.edu.icesi.back.daos.interfaces.InstitutionDAO;
+import co.edu.icesi.back.model.Institution;
 
 @SpringBootTest
 @ContextConfiguration(classes= RastreoCercosEpidemiologicosApplication.class)
