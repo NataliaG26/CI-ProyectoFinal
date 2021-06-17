@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.back.exception.LogicalException;
-import co.edu.icesi.back.model.Person;
+import co.edu.icesi.front.model.classes.Person;
 
 public interface PersonController {
 	
