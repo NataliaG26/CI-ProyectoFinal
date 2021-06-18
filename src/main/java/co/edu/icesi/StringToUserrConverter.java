@@ -1,4 +1,4 @@
-package co.edu.icesi.back;
+package co.edu.icesi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;

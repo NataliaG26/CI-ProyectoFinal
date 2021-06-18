@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.back.daos.interfaces.InstitutionDAO;
 import co.edu.icesi.back.exception.LogicalException;
@@ -122,6 +122,7 @@ public class InstitutionServiceImpl implements InstitutionService{
 	}
 	
 	@Override
+	@Transactional
 	public Institution getInstitutionById(long id) throws LogicalException {
 		try {
 			//Institution institution = institutionRepository.findById(id).get();
@@ -134,6 +135,7 @@ public class InstitutionServiceImpl implements InstitutionService{
 	}
 	
 	@Override
+	@Transactional
 	public Iterable<Institution> findAll(){
 		//return institutionRepository.findAll();
 		return institutionDAO.findAll();

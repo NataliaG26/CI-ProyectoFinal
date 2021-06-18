@@ -1,10 +1,17 @@
 package co.edu.icesi.front.bd.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import co.edu.icesi.front.model.classes.Institution;
 import co.edu.icesi.front.bd.interfaces.InstitutionDelegate;
@@ -17,6 +24,11 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 	
 	public InstitutionDelegateImpl() {
 		this.restTemplate = new RestTemplate();
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        messageConverters.add(converter);
+        this.restTemplate.setMessageConverters(messageConverters);
 	}
 	
 

@@ -5,16 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-
-import co.edu.icesi.front.model.classes.Person;
 
 public class Institution {
 	
@@ -22,28 +14,47 @@ public class Institution {
 	
 	private long instId;
 	
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instAcademicserverurl;
 
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instAcadextradataurl;
 
+	@Column(name = "INST_ACADLOGINPASSWORD")
 	private String instAcadloginpassword;
-
+	
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instAcadloginurl;
 
+	//@NotBlank(message="the login user name cannot be blank")
+	@Column(name = "INST_ACADLOGINUSERNAME")
 	private String instAcadloginusername;
 
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instAcadpersoninfodocurl;
 	
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instAcadpersoninfoidurl;
 	
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instAcadphysicalspacesurl;
 
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instAcadprogrammedcoursesurl;
 
 	private String instLdapbasedn;
 
 	private String instLdappassword;
 
+	@NotBlank(message="the link cannot be blank")
+	@Pattern(regexp = "^(((https)://)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$", message ="The link must start with 'https'")
 	private String instLdapurl;
 
 	private String instLdapusername;

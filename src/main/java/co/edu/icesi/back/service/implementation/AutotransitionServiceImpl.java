@@ -135,8 +135,9 @@ public class AutotransitionServiceImpl implements AutotransitionService{
 	
 	@Override
 	@Transactional
-	public void delete(Autotransition autotransition) {
+	public void delete(long id) throws LogicalException {
 		//autotransitionRepository.delete(autotransition);
+		Autotransition autotransition = getAutotransitionById(id);
 		autotransitionDAO.Delete(autotransition);
 	}
 	

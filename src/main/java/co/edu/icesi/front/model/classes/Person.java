@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import co.edu.icesi.front.model.classes.Institution;
-import co.edu.icesi.front.model.classes.Personautotran;
+//import co.edu.icesi.front.model.classes.Personautotran;
 
 public class Person {
 	
@@ -48,8 +48,8 @@ public class Person {
 
 	private Institution institution;
 
-	@JsonIgnore
-	private List<Personautotran> personautotrans;
+//	@JsonIgnore
+//	private List<Personautotran> personautotrans;
 
 	public Person() {
 	}
@@ -182,27 +182,27 @@ public class Person {
 	public void setInstitution(Institution institution) {
 		this.institution = institution;
 	}
-
-	public List<Personautotran> getPersonautotrans() {
-		return this.personautotrans;
-	}
-
-	public void setPersonautotrans(List<Personautotran> personautotrans) {
-		this.personautotrans = personautotrans;
-	}
-
-	public Personautotran addPersonautotran(Personautotran personautotran) {
-		getPersonautotrans().add(personautotran);
-		personautotran.setPerson(this);
-
-		return personautotran;
-	}
-
-	public Personautotran removePersonautotran(Personautotran personautotran) {
-		getPersonautotrans().remove(personautotran);
-		personautotran.setPerson(null);
-
-		return personautotran;
-	}
+//
+//	public List<Personautotran> getPersonautotrans() {
+//		return this.personautotrans;
+//	}
+//
+//	public void setPersonautotrans(List<Personautotran> personautotrans) {
+//		this.personautotrans = personautotrans;
+//	}
+//
+//	public Personautotran addPersonautotran(Personautotran personautotran) {
+//		getPersonautotrans().add(personautotran);
+//		personautotran.setPerson(this);
+//
+//		return personautotran;
+//	}
+//
+//	public Personautotran removePersonautotran(Personautotran personautotran) {
+//		getPersonautotrans().remove(personautotran);
+//		personautotran.setPerson(null);
+//
+//		return personautotran;
+//	}
 
 }

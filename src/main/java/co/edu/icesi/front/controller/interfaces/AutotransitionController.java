@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.back.groups.CreateAutotransition;
 import co.edu.icesi.back.groups.UpdateAutotransition;
-import co.edu.icesi.back.model.Autotransition;
+import co.edu.icesi.front.model.classes.Autotransition;
 
 public interface AutotransitionController {
 	

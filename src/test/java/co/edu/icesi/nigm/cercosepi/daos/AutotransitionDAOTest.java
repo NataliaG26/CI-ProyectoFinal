@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import co.edu.icesi.back.RastreoCercosEpidemiologicosApplication;
+import co.edu.icesi.RastreoCercosEpidemiologicosApplication;
 import co.edu.icesi.back.daos.interfaces.AutotransitionDAO;
 import co.edu.icesi.back.model.Autotransition;
 

@@ -13,5 +13,5 @@ public interface AutotransitionService {
 	
 	public Iterable<Autotransition> findAll();
 	
-	public void delete(Autotransition autotransition);
+	public void delete(long id) throws LogicalException;
 }

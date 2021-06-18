@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j2;
-import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.back.groups.CreateAutotransition;
 import co.edu.icesi.back.groups.UpdateAutotransition;
-import co.edu.icesi.back.model.Autotransition;
-import co.edu.icesi.back.service.interfaces.AutotransitionService;
-import co.edu.icesi.back.service.interfaces.EventstatusService;
-import co.edu.icesi.back.service.interfaces.InstitutionService;
+import co.edu.icesi.front.model.classes.Autotransition;
+import co.edu.icesi.front.bd.interfaces.AutotransitionDelegate;
+import co.edu.icesi.front.bd.interfaces.EventstatusDelegate;
+import co.edu.icesi.front.bd.interfaces.InstitutionDelegate;
 import co.edu.icesi.front.controller.interfaces.AutotransitionController;
 
 @Controller
@@ -30,17 +29,17 @@ import co.edu.icesi.front.controller.interfaces.AutotransitionController;
 @Log4j2
 public class AutotransitionControllerImpl implements AutotransitionController{
 	
-	private AutotransitionService autotransitionService;
-	private InstitutionService institutionService;
-	private EventstatusService eventstatusService;
+	private AutotransitionDelegate autotransitionDelegate;
+	private InstitutionDelegate institutionDelegate;
+	private EventstatusDelegate eventstatusDelegate;
 	private ArrayList<String> autotranIsactiveL;
 	private ArrayList<String> autotranLogicaloperandL;
 
 	@Autowired	
-	public AutotransitionControllerImpl(AutotransitionService autotranservice, InstitutionService institutionService, EventstatusService eventstatusService) {
-		this.autotransitionService = autotranservice;
-		this.institutionService = institutionService;
-		this.eventstatusService = eventstatusService;
+	public AutotransitionControllerImpl(AutotransitionDelegate autotransitionDelegate, InstitutionDelegate institutionDelegate, EventstatusDelegate eventstatusDelegate) {
+		this.autotransitionDelegate = autotransitionDelegate;
+		this.institutionDelegate = institutionDelegate;
+		this.eventstatusDelegate = eventstatusDelegate;
 		
 		autotranIsactiveL = new ArrayList<String>();
 		autotranIsactiveL.add("Y");
@@ -53,17 +52,17 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 		
 	@GetMapping("/")
 	public String indexAutotransition(Model model) {
-		model.addAttribute("autotransitions", autotransitionService.findAll());
+		model.addAttribute("autotransitions", autotransitionDelegate.findAll());
 		return "autotransition/index";
 	}
 	
 	@GetMapping("/add")
 	public String addAutotransition(Model model) {
 		model.addAttribute("autotransition", new Autotransition());
-		model.addAttribute("institutions", institutionService.findAll());
+		model.addAttribute("institutions", institutionDelegate.findAll());
 		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
 		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-		model.addAttribute("eventstatusList", eventstatusService.findAll());
+		model.addAttribute("eventstatusList", institutionDelegate.findAll());
 		return "autotransition/add";
 	}
 		
@@ -72,18 +71,14 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 			,BindingResult bindingresult, @RequestParam(value = "action", required = true) String action, Model model) {
 		if (!action.equals("Cancel"))
 			if(bindingresult.hasErrors()) {
-				model.addAttribute("institutions", institutionService.findAll());
+				model.addAttribute("institutions", institutionDelegate.findAll());
 				model.addAttribute("autotranIsactiveList", autotranIsactiveL);
 				model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-				model.addAttribute("eventstatusList", eventstatusService.findAll());
+				model.addAttribute("eventstatusList", eventstatusDelegate.findAll());
 			 	return "autotransition/add";
 			}		
 			else {
-				try {
-				autotransitionService.createAutotransition(autotransition);
-				}catch(LogicalException e) {
-					e.printStackTrace();
-				}
+				autotransitionDelegate.createAutotransition(autotransition);
 			}			
 		return "redirect:/autotransition/";
 	}
@@ -91,14 +86,9 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 	@GetMapping("/del/{id}")
 	public String deleteAutotransition(@PathVariable("id") long id, Model model) {
 		Autotransition autotransition;
-		try {
-			autotransition = autotransitionService.getAutotransitionById(id);
-			autotransitionService.delete(autotransition);
-		} catch (LogicalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		model.addAttribute("autotransitions", autotransitionService.findAll());
+		autotransition = autotransitionDelegate.getAutotransitionById(id);
+		autotransitionDelegate.delete(autotransition.getAutotranId());
+		model.addAttribute("autotransitions", autotransitionDelegate.findAll());
 		return "autotransition/index";
 	}
 
@@ -106,19 +96,14 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 	@GetMapping("/update/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 		Autotransition autotransition;
-		try {
-			autotransition = autotransitionService.getAutotransitionById(id);
-			if (autotransition == null) 
-				throw new IllegalArgumentException("Invalid user Id:" + id);
-			model.addAttribute("autotransition", autotransition);
-			model.addAttribute("institutions", institutionService.findAll());
-			model.addAttribute("autotranIsactiveList", autotranIsactiveL);
-			model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-			model.addAttribute("eventstatusList", eventstatusService.findAll());
-		} catch (LogicalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		autotransition = autotransitionDelegate.getAutotransitionById(id);
+		if (autotransition == null) 
+			throw new IllegalArgumentException("Invalid user Id:" + id);
+		model.addAttribute("autotransition", autotransition);
+		model.addAttribute("institutions", institutionDelegate.findAll());
+		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
+		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
+		model.addAttribute("eventstatusList", eventstatusDelegate.findAll());	
 		return "autotransition/update";
 	}
 
@@ -130,18 +115,13 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 		if (action != null && !action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {
 				
-				model.addAttribute("institutions", institutionService.findAll());
+				model.addAttribute("institutions", institutionDelegate.findAll());
 				model.addAttribute("autotranIsactiveList", autotranIsactiveL);
 				model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-				model.addAttribute("eventstatusList", eventstatusService.findAll());
+				model.addAttribute("eventstatusList", eventstatusDelegate.findAll());
 				return "autotransition/update/{id}";
 			}
-			try {
-				autotransitionService.updateAutotransition(autotransition);
-			} catch (LogicalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			autotransitionDelegate.updateAutotransition(autotransition);
 		}
 		return "redirect:/autotransition/";
 	}
