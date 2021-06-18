@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import co.edu.icesi.back.exception.LogicalException;
-import co.edu.icesi.back.model.Personautotran;
 import co.edu.icesi.front.bd.interfaces.AutotransitionDelegate;
 import co.edu.icesi.front.model.classes.Autotransition;
 
@@ -16,7 +14,11 @@ public class AutotransitionDelegateImpl  implements AutotransitionDelegate{
 	
 	RestTemplate restTemplate;
 	final String SERVER="http://localhost:8080/api-rest/autotransition/";
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 3e673c56906c6dfaede13c54d30b358835dcd430
 	public AutotransitionDelegateImpl() {
 		this.restTemplate = new RestTemplate();
 	}
