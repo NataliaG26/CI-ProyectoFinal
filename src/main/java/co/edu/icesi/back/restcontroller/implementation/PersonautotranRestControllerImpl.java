@@ -41,7 +41,7 @@ public class PersonautotranRestControllerImpl implements PersonautotranRestContr
 
 	@Override
 	@DeleteMapping("/del/{id}")
-	public void deletePersonautotran(long id) throws LogicalException {
+	public void deletePersonautotran(@PathVariable("id") long id) throws LogicalException {
 		personautotranService.delete(id);
 	}
 
