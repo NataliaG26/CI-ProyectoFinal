@@ -1,9 +1,19 @@
 package co.edu.icesi.back.restcontroller.interfaces;
 
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Personautotran;
 
 public interface PersonautotranRestController {
 	
-	public String indexPersonautotran(Model model);
+	public Iterable<Personautotran> showAll();
+	
+	public Personautotran showPersonautotran(@PathVariable("id") long id) throws LogicalException;
+	
+	public Personautotran savePersonautotran(Personautotran personautotran) throws LogicalException;
+	
+	public void deletePersonautotran(@PathVariable("id") long id) throws LogicalException;
+	
+	public void updatePersonautotran(Personautotran person) throws LogicalException;
 
 }

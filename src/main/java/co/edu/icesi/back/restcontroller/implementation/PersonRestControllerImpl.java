@@ -29,7 +29,7 @@ public class PersonRestControllerImpl implements PersonRestController {
 	}
 
 	@Override
-	@GetMapping("show/{id}")
+	@GetMapping("showPerson/{id}")
 	public Person showPerson(@PathVariable("id") long id) throws LogicalException {
 		return personService.getPersonById(id);
 	}

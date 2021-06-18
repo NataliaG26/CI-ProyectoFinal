@@ -29,7 +29,7 @@ import co.edu.icesi.back.model.Eventstatus;
 import co.edu.icesi.back.model.Institution;
 import co.edu.icesi.back.repository.AutotransitionRepository;
 import co.edu.icesi.back.service.implementation.AutotransitionServiceImpl;
-import co.edu.icesi.back.service.interfaces.AutotransitionService;
+import co.edu.icesi.back.service.interfaces.AutotransitionDelegate;
 import co.edu.icesi.back.service.interfaces.InstitutionService;
 
 @ExtendWith(SpringExtension.class)
@@ -38,7 +38,7 @@ import co.edu.icesi.back.service.interfaces.InstitutionService;
 public class AutotransitionUnitTest {
 	
 	@InjectMocks
-	private static AutotransitionService autotransitionService;
+	private static AutotransitionDelegate autotransitionService;
 	
 	@Mock
 	private static InstitutionService institutionService;

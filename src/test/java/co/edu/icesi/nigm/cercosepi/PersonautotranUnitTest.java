@@ -18,7 +18,7 @@ import co.edu.icesi.back.model.Person;
 import co.edu.icesi.back.model.Personautotran;
 import co.edu.icesi.back.repository.PersonautotranRepository;
 import co.edu.icesi.back.service.implementation.PersonautotranServiceImpl;
-import co.edu.icesi.back.service.interfaces.AutotransitionService;
+import co.edu.icesi.back.service.interfaces.AutotransitionDelegate;
 import co.edu.icesi.back.service.interfaces.PersonService;
 import co.edu.icesi.back.service.interfaces.PersonautotranService;
 import lombok.extern.java.Log;
@@ -38,7 +38,7 @@ public class PersonautotranUnitTest {
 	private static PersonService personService;
 	
 	@Mock
-	private static AutotransitionService autotransitionService;
+	private static AutotransitionDelegate autotransitionService;
 	
 	@Mock 
 	private static PersonautotranDAO personautotranDAO;

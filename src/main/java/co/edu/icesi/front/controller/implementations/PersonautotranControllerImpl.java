@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.back.exception.LogicalException;
-import co.edu.icesi.back.model.Autotransition;
-import co.edu.icesi.back.model.Personautotran;
-import co.edu.icesi.back.service.interfaces.AutotransitionService;
-import co.edu.icesi.back.service.interfaces.PersonService;
-import co.edu.icesi.back.service.interfaces.PersonautotranService;
+import co.edu.icesi.front.model.classes.Autotransition;
+import co.edu.icesi.front.model.classes.Personautotran;
+import co.edu.icesi.front.bd.interfaces.AutotransitionDelegate;
+import co.edu.icesi.front.bd.interfaces.PersonDelegate;
+import co.edu.icesi.front.bd.interfaces.PersonautotranDelegate;
 import co.edu.icesi.front.controller.interfaces.PersonautotranController;
 import lombok.extern.log4j.Log4j2;
 
@@ -26,35 +26,35 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class PersonautotranControllerImpl implements PersonautotranController {
 	
-	private PersonautotranService personautotranService;
-	private PersonService personService;
-	private AutotransitionService autotransitionService;
+	private PersonautotranDelegate personautotranDelegate;
+	private PersonDelegate personDelegate;
+	private AutotransitionDelegate autotransitionDelegate;
 	
 	@Autowired
-	public PersonautotranControllerImpl(PersonautotranService personautotranService, PersonService personService,
-			AutotransitionService autotransitionService) {
-		this.personautotranService = personautotranService;
-		this.personService = personService;
-		this.autotransitionService = autotransitionService;
+	public PersonautotranControllerImpl(PersonautotranDelegate personautotranDelegate, PersonDelegate personDelegate,
+			AutotransitionDelegate autotransitionDelegate) {
+		this.personautotranDelegate = personautotranDelegate;
+		this.personDelegate = personDelegate;
+		this.autotransitionDelegate = autotransitionDelegate;
 	}
 	
 	@Override
 	public String indexPersonautotran(Model model) {
-		model.addAttribute("personautotran", personautotranService.findAll());
+		model.addAttribute("personautotran", personautotranDelegate.findAll());
 		return null;
 	}
 	
 	@GetMapping("/")
 	public String indexAutotransition(Model model) {
-		model.addAttribute("autotransitions", personautotranService.findAll());
+		model.addAttribute("autotransitions", personautotranDelegate.findAll());
 		return "personautotran/index";
 	}
 	
 	@GetMapping("/add")
 	public String addPersonautotran(Model model) {
 		model.addAttribute("personautotran", new Personautotran());
-		model.addAttribute("persons", personService.findAll());
-		model.addAttribute("autotransitions", autotransitionService.findAll());
+		model.addAttribute("persons", personDelegate.findAll());
+		model.addAttribute("autotransitions", autotransitionDelegate.findAll());
 		return "personautotran/add";
 	}
 	
@@ -63,13 +63,13 @@ public class PersonautotranControllerImpl implements PersonautotranController {
 			,BindingResult bindingresult, @RequestParam(value = "action", required = true) String action, Model model) {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {
-				model.addAttribute("persons", personService.findAll());
-				model.addAttribute("autotransitions", autotransitionService.findAll());
+				model.addAttribute("persons", personDelegate.findAll());
+				model.addAttribute("autotransitions", autotransitionDelegate.findAll());
 			 	return "/add";
 			}		
 			else {
 				try {
-				personautotranService.createPersonautotran(personautotran);
+					personautotranDelegate.createPersonautotran(personautotran);
 				}catch(LogicalException e) {
 					e.printStackTrace();
 				}
@@ -80,15 +80,8 @@ public class PersonautotranControllerImpl implements PersonautotranController {
 	
 	@GetMapping("/del/{id}")
 	public String deleteAutotransition(@PathVariable("id") long id, Model model) {
-		Personautotran personautotran;
-		try {
-			personautotran = personautotranService.getPersonautotranById(id);
-			personautotranService.delete(personautotran);
-		} catch (LogicalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		model.addAttribute("autotransitions", personautotranService.findAll());
+		personautotranDelegate.delete(id);
+		model.addAttribute("autotransitions", personautotranDelegate.findAll());
 		return "autotransition/index";
 	}
 
@@ -97,12 +90,12 @@ public class PersonautotranControllerImpl implements PersonautotranController {
 	public String showUpdatePersonautotran(@PathVariable("id") long id,Model model) {
 		Personautotran personautotran;
 		try {
-			personautotran = personautotranService.getPersonautotranById(id);
+			personautotran = personautotranDelegate.getPersonautotranById(id);
 			if (personautotran == null) 
 				throw new IllegalArgumentException("Invalid user Id:" + id);
 			model.addAttribute("personautotran", personautotran);
-			model.addAttribute("persons", personService.findAll());
-			model.addAttribute("autotransitions", autotransitionService.findAll());
+			model.addAttribute("persons", personDelegate.findAll());
+			model.addAttribute("autotransitions", autotransitionDelegate.findAll());
 			} catch (LogicalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,13 +110,13 @@ public class PersonautotranControllerImpl implements PersonautotranController {
 			BindingResult bindingresult,   Model model) {
 		if (action != null && !action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {
-				model.addAttribute("persons", personService.findAll());
-				model.addAttribute("autotransitions", autotransitionService.findAll());
+				model.addAttribute("persons", personDelegate.findAll());
+				model.addAttribute("autotransitions", autotransitionDelegate.findAll());
 			 	return "personautotran/update";
 			}		
 			else {
 				try {
-				personautotranService.updatePersonautotran(personautotran);
+					personautotranDelegate.updatePersonautotran(personautotran);
 				}catch(LogicalException e) {
 					e.printStackTrace();
 				}
