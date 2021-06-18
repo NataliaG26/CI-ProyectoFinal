@@ -3,6 +3,7 @@ package co.edu.icesi.back.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import co.edu.icesi.back.model.UserType;
@@ -15,10 +16,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-
+/*
 		httpSecurity.
 				authorizeRequests()
 					.antMatchers("/login**").permitAll()
+					.antMatchers("/api-rest/**").permitAll()
+			        .antMatchers("/h2/**").permitAll()
 					.antMatchers("/institution/**").hasRole(UserType.admin.toString())
 					.antMatchers("/institution/index").hasRole(UserType.operator.toString())
 					.antMatchers("/person/**").hasRole(UserType.operator.toString())
@@ -30,6 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.loginPage("/login")
 					.defaultSuccessUrl("/")
 					.failureUrl("/login?error")
+					.usernameParameter("username")
+					.passwordParameter("password")
 					.and()
 				.logout()
 					//.logoutUrl("/logout")
@@ -37,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.permitAll()
 					.and()
 				.exceptionHandling()
-					.accessDeniedHandler(accessDeniedHandler);
+					.accessDeniedHandler(accessDeniedHandler);*/
 
 //				.and().logout()
 //				.invalidateHttpSession(true).clearAuthentication(true)

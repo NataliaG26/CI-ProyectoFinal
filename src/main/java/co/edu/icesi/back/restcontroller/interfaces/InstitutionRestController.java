@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.back.model.Institution;
+import co.edu.icesi.back.model.Institutions;
 
 public interface InstitutionRestController {
 	

@@ -1,16 +1,19 @@
 package co.edu.icesi.back.restcontroller.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.back.model.Institution;
+import co.edu.icesi.back.model.Institutions;
 import co.edu.icesi.back.restcontroller.interfaces.InstitutionRestController;
 import co.edu.icesi.back.service.interfaces.InstitutionService;
 
@@ -24,6 +27,10 @@ public class InstitutionRestControllerImpl implements InstitutionRestController 
 	@Override
 	@GetMapping("/")
 	public Iterable<Institution> showAllInstitutions() {
+		//Institutions institutions = new Institutions();
+		//institutions.setInstitutions(institutionService.findAll());
+		//System.out.println(institutions);
+		//return institutions;
 		return institutionService.findAll();
 	}
 

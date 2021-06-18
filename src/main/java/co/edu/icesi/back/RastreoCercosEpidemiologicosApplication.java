@@ -1,4 +1,4 @@
-package co.edu.icesi;
+package co.edu.icesi.back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +25,7 @@ import co.edu.icesi.back.service.implementation.PersonServiceImpl;
 import co.edu.icesi.back.service.implementation.UserrServiceImpl;
 
 @SpringBootApplication
-@ComponentScan("co.edu.icesi.")
+@ComponentScan("co.edu.icesi")
 public class RastreoCercosEpidemiologicosApplication {
 	
 	@Bean

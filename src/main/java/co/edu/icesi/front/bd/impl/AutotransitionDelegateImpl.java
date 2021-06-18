@@ -15,12 +15,8 @@ import co.edu.icesi.front.model.classes.Autotransition;
 public class AutotransitionDelegateImpl  implements AutotransitionDelegate{
 	
 	RestTemplate restTemplate;
-<<<<<<< HEAD
 	final String SERVER="http://localhost:8080/api-rest/autotransition/";
-=======
-	final String SERVER="http://localhost:8080/api-rest/personautotran/";
->>>>>>> f4d3fd15f7bb7be94aa313ebc040a34182cbaab1
-	
+
 	public AutotransitionDelegateImpl() {
 		this.restTemplate = new RestTemplate();
 	}

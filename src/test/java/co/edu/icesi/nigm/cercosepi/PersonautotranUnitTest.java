@@ -12,13 +12,13 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import co.edu.icesi.back.back.service.interfaces.AutotransitionDelegate;
 import co.edu.icesi.back.daos.interfaces.PersonautotranDAO;
 import co.edu.icesi.back.model.Autotransition;
 import co.edu.icesi.back.model.Person;
 import co.edu.icesi.back.model.Personautotran;
 import co.edu.icesi.back.repository.PersonautotranRepository;
 import co.edu.icesi.back.service.implementation.PersonautotranServiceImpl;
-import co.edu.icesi.back.service.interfaces.AutotransitionDelegate;
 import co.edu.icesi.back.service.interfaces.PersonService;
 import co.edu.icesi.back.service.interfaces.PersonautotranService;
 import lombok.extern.java.Log;

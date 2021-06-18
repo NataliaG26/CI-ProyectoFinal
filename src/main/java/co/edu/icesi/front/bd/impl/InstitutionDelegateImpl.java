@@ -14,22 +14,27 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import co.edu.icesi.front.model.classes.Institution;
+import co.edu.icesi.front.model.classes.Institutions;
 import co.edu.icesi.front.bd.interfaces.InstitutionDelegate;
 
 @Component
 public class InstitutionDelegateImpl implements InstitutionDelegate{
 	
 	RestTemplate restTemplate;
-	final String SERVER="http://localhost:8080/api-rest/institution/";
+	public static final String SERVER="http://localhost:8080/api-rest/institution/";
 	
 	public InstitutionDelegateImpl() {
 		this.restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
         messageConverters.add(converter);
         this.restTemplate.setMessageConverters(messageConverters);
 	}
+	
+	public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 	
 
 	@Override
@@ -47,17 +52,17 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 		return restTemplate.getForObject(SERVER + "show/"+id, Institution.class);
 	}
 
+//	@Override
+//	public Iterable<Institution> findAll() {
+//		Institutions institutions = restTemplate.getForObject(SERVER, Institutions.class);
+//		return institutions.getInstitutions();
+//	}
+	
 	@Override
-	public Iterable<Institution> findAll() {
+	public List<Institution> findAll() {
 		Institution[] institutions = restTemplate.getForObject(SERVER, Institution[].class);
-		List<Institution> list;
-		try {
-			list = Arrays.asList(institutions);
-			return list;
-		}catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		List<Institution> list = Arrays.asList(institutions);
+		return list;
 	}
 
 	@Override

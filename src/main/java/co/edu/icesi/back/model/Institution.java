@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the INSTITUTION database table.
  * 
@@ -95,35 +97,36 @@ public class Institution implements Serializable {
 	@NotBlank//(message="Noop")
 	@Column(name = "INST_NAME")
 	private String instName;
-
+	
+	@JsonIgnore
 	// bi-directional many-to-one association to Accessdenialevent
 	@OneToMany(mappedBy = "institution")
 	private List<Accessdenialevent> accessdenialevents;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Devicestatus
 	@OneToMany(mappedBy = "institution")
 	private List<Devicestatus> devicestatuses;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Devicetype
 	@OneToMany(mappedBy = "institution")
 	private List<Devicetype> devicetypes;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Epidemstatustransition
 	@OneToMany(mappedBy = "institution")
 	private List<Epidemstatustransition> epidemstatustransitions;
-
+	
 	// bi-directional many-to-one association to Eventstatus
 	@OneToMany(mappedBy = "institution")
 	private List<Eventstatus> eventstatuses;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to HatParameter
 	@OneToMany(mappedBy = "institution")
 	private List<HatParameter> hatParameters;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Institutioncampus
 	@OneToMany(mappedBy = "institution")
 	private List<Institutioncampus> institutioncampuses;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Measurement
 	@OneToMany(mappedBy = "institution")
 	private List<Measurement> measurements;
@@ -131,11 +134,11 @@ public class Institution implements Serializable {
 	// bi-directional many-to-one association to Person
 	@OneToMany(mappedBy = "institution")
 	private List<Person> persons;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Physicalspacetype
 	@OneToMany(mappedBy = "institution")
 	private List<Physicalspacetype> physicalspacetypes;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Posessiontype
 	@OneToMany(mappedBy = "institution")
 	private List<Posessiontype> posessiontypes;

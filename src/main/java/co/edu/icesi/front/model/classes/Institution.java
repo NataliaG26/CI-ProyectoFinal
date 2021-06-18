@@ -2,6 +2,8 @@ package co.edu.icesi.front.model.classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import co.edu.icesi.back.model.Eventstatus;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -67,6 +69,9 @@ public class Institution {
 	
 	@JsonIgnore
 	private List<Person> persons;
+	
+	@JsonIgnore
+	private List<Eventstatus> eventstatuses;
 
 	public Institution() {
 	}

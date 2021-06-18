@@ -1,5 +1,7 @@
 package co.edu.icesi.front.bd.interfaces;
 
+import java.util.List;
+
 import co.edu.icesi.front.model.classes.Institution;
 
 public interface InstitutionDelegate {
@@ -10,7 +12,7 @@ public interface InstitutionDelegate {
 	
 	public Institution getInstitutionById(long id);
 	
-	public Iterable<Institution> findAll();
+	public List<Institution> findAll();
 	
 	public void delete(long id);
 
