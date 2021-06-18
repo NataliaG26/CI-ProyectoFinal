@@ -88,8 +88,7 @@ public class InstitutionControllerImpl implements InstitutionController{
 				institutionDelegate.createInstitution(institution);
 			}
 		}
-		return "redirect:/institution/";
-			
+		return "redirect:/institution/";		
 	}
 	
 	@GetMapping("/showInstitution/{id}")

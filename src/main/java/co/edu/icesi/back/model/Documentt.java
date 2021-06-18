@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the DOCUMENTT database table.
@@ -38,7 +40,8 @@ public class Documentt implements Serializable {
 
 	@Column(name="DOC_URL")
 	private String docUrl;
-
+	
+	@JsonIgnore
 	//bi-directional many-to-one association to Docstateinstance
 	@OneToMany(mappedBy="documentt")
 	private List<Docstateinstance> docstateinstances;

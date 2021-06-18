@@ -56,8 +56,6 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 
 	@Override
 	public void delete(long id) {
-		System.out.println("Delegado 1 ");
 		restTemplate.delete(SERVER + id);
-		System.out.println("Delegado");
 	}
 }

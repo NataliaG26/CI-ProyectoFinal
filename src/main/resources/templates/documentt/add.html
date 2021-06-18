@@ -22,9 +22,9 @@
 				<form action="#" th:object="${documentt}" th:action="@{documentt/add}" method="post" >
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="docIspositive" class="col-form-label">Document is positive</label>
-							<input type="text"  th:field="*{docIspositive}">
-							<span th:if="${#fields.hasErrors('docIspositive')}" th:errors="*{docIspositive}" class="text-danger"></span>
+							<label for="docName" class="col-form-label">Document Name</label>
+							<input type="text"  th:field="*{docName}">
+							<span th:if="${#fields.hasErrors('docName')}" th:errors="*{docName}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="docName" class="col-form-label">Document name</label>
@@ -32,18 +32,25 @@
 							<span th:if="${#fields.hasErrors('docName')}" th:errors="*{docName}" class="text-danger"></span>
 						</div>
 					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="docUrl" class="col-form-label">Document URL</label>
+							<input type="text"  th:field="*{docUrl}">
+							<span th:if="${#fields.hasErrors('docUrl')}" th:errors="*{docUrl}" class="text-danger"></span>
+						</div>
+					</div>
 					
 					<div class="row">
 					<div class="form-group col-md-6">
-							<label for="documenttype" class="col-form-label">Document type</label>
+							<label for="documenttype" class="col-form-label">Documenttype</label>
 							<div class="form-group col-md-3">
 								<a href="/documenttype/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
 							<select th:field="*{documenttype}" class="form-control"
 								id="documenttype">
-								<option th:each="doctype : ${documenttype}"
-									th:value="${doctype.doctypeId}" th:text="${doctype.doctypeName}" />
+								<option th:each="doctt : ${documenttypes}"
+									th:value="${doctt.doctypeId}" th:text="${doctt.doctypeName}" />
 							</select> 
 						</div>
 						<div class="form-group col-md-6">
