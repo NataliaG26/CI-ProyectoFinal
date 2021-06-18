@@ -38,7 +38,7 @@ public class Eventstatus implements Serializable {
 
 	@Column(name="EVESTAT_NAME")
 	private String evestatName;
-
+/*
 	//bi-directional many-to-one association to Autotransition
 	@OneToMany(mappedBy="eventstatus1")
 	private List<Autotransition> autotransitions1;
@@ -46,7 +46,7 @@ public class Eventstatus implements Serializable {
 	//bi-directional many-to-one association to Autotransition
 	@OneToMany(mappedBy="eventstatus2")
 	private List<Autotransition> autotransitions2;
-
+*/
 	//bi-directional many-to-one association to Epidemstatustransition
 	@OneToMany(mappedBy="eventstatus1")
 	private List<Epidemstatustransition> epidemstatustransitions1;
@@ -113,7 +113,7 @@ public class Eventstatus implements Serializable {
 	public void setEvestatName(String evestatName) {
 		this.evestatName = evestatName;
 	}
-
+/*
 	public List<Autotransition> getAutotransitions1() {
 		return this.autotransitions1;
 	}
@@ -157,7 +157,7 @@ public class Eventstatus implements Serializable {
 
 		return autotransitions2;
 	}
-
+*/
 	public List<Epidemstatustransition> getEpidemstatustransitions1() {
 		return this.epidemstatustransitions1;
 	}

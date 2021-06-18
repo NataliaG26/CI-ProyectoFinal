@@ -20,6 +20,8 @@ import javax.validation.constraints.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the PERSON database table.
@@ -84,34 +86,42 @@ public class Person implements Serializable {
 	@DateTimeFormat(pattern = "dd/mm/yyyy")
 	private Date persPoliticsaccepteddate;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Accessdenialevent
 	@OneToMany(mappedBy="person1")
 	private List<Accessdenialevent> accessdenialevents1;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Accessdenialevent
 	@OneToMany(mappedBy="person2")
 	private List<Accessdenialevent> accessdenialevents2;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Attendance
 	@OneToMany(mappedBy="person")
 	private List<Attendance> attendances;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Contactfence
 	@OneToMany(mappedBy="person")
 	private List<Contactfence> contactfences;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Docstateinstance
 	@OneToMany(mappedBy="person")
 	private List<Docstateinstance> docstateinstances;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Documentt
 	@OneToMany(mappedBy="person")
 	private List<Documentt> documentts;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Followup
 	@OneToMany(mappedBy="person1")
 	private List<Followup> followups1;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Followup
 	@OneToMany(mappedBy="person2")
 	private List<Followup> followups2;
@@ -126,58 +136,72 @@ public class Person implements Serializable {
 	@JoinColumn(name="INST_INST_ID")
 	private Institution institution;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Personautotran
 	@OneToMany(mappedBy="person")
 	private List<Personautotran> personautotrans;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Personrelationship
 	@OneToMany(mappedBy="person1")
 	private List<Personrelationship> personrelationships1;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Personrelationship
 	@OneToMany(mappedBy="person2")
 	private List<Personrelationship> personrelationships2;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to PersonFence
 	@OneToMany(mappedBy="person")
 	private List<PersonFence> personFences;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to PersonRole
 	@OneToMany(mappedBy="person")
 	private List<PersonRole> personRoles;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to PersonVulner
 	@OneToMany(mappedBy="person")
 	private List<PersonVulner> personVulners;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Physicalcheckup
 	@OneToMany(mappedBy="person")
 	private List<Physicalcheckup> physicalcheckups;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Posession
 	@OneToMany(mappedBy="person")
 	private List<Posession> posessions;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Userr
 	@OneToMany(mappedBy="person")
 	private List<Userr> userrs;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to UstPersonNexus
 	@OneToMany(mappedBy="person")
 	private List<UstPersonNexus> ustPersonNexuses;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to UstPersonStatus
 	@OneToMany(mappedBy="person")
 	private List<UstPersonStatus> ustPersonStatuses;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to UstPersonSymptom
 	@OneToMany(mappedBy="person")
 	private List<UstPersonSymptom> ustPersonSymptoms;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to UstSocialclosecontact
 	@OneToMany(mappedBy="person")
 	private List<UstSocialclosecontact> ustSocialclosecontacts;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Visit
 	@OneToMany(mappedBy="person")
 	private List<Visit> visits;

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +38,7 @@ public class AutotransitionRestControllerImpl implements AutotransitionRestContr
 
 	@Override
 	@PostMapping("/add")
-	public Autotransition saveAutotransition(Autotransition autotransition) throws LogicalException {
+	public Autotransition saveAutotransition(@RequestBody Autotransition autotransition) throws LogicalException {
 		return autotransitionService.createAutotransition(autotransition);
 	}
 

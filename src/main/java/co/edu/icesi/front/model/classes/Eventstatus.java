@@ -62,7 +62,7 @@ public class Eventstatus{
 	public void setAutotransitions1(List<Autotransition> autotransitions1) {
 		this.autotransitions1 = autotransitions1;
 	}
-
+/*
 	public Autotransition addAutotransitions1(Autotransition autotransitions1) {
 		getAutotransitions1().add(autotransitions1);
 		autotransitions1.setEventstatus1(this);
@@ -76,7 +76,7 @@ public class Eventstatus{
 
 		return autotransitions1;
 	}
-
+*/
 	public List<Autotransition> getAutotransitions2() {
 		return this.autotransitions2;
 	}
@@ -84,7 +84,7 @@ public class Eventstatus{
 	public void setAutotransitions2(List<Autotransition> autotransitions2) {
 		this.autotransitions2 = autotransitions2;
 	}
-
+/*
 	public Autotransition addAutotransitions2(Autotransition autotransitions2) {
 		getAutotransitions2().add(autotransitions2);
 		autotransitions2.setEventstatus2(this);
@@ -98,7 +98,7 @@ public class Eventstatus{
 
 		return autotransitions2;
 	}
-
+*/
 	public Institution getInstitution() {
 		return this.institution;
 	}

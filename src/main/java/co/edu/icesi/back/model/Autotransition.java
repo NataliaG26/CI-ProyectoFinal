@@ -55,7 +55,7 @@ public class Autotransition implements Serializable {
 	//bi-directional many-to-one association to Actionn
 	@OneToMany(mappedBy="autotransition")
 	private List<Actionn> actionns;
-
+/*
 	//bi-directional many-to-one association to Eventstatus
 	@NotNull(groups = {CreateAutotransition.class, UpdateAutotransition.class})
 	@ManyToOne
@@ -67,7 +67,7 @@ public class Autotransition implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="EVESTAT_EVESTAT_IDDESTINATION")
 	private Eventstatus eventstatus2;
-
+*/
 	//bi-directional many-to-one association to AutotranTrigger
 	@OneToMany(mappedBy="autotransition")
 	private List<AutotranTrigger> autotranTriggers;
@@ -144,7 +144,7 @@ public class Autotransition implements Serializable {
 
 		return actionn;
 	}
-
+/*
 	public Eventstatus getEventstatus1() {
 		return this.eventstatus1;
 	}
@@ -160,7 +160,7 @@ public class Autotransition implements Serializable {
 	public void setEventstatus2(Eventstatus eventstatus2) {
 		this.eventstatus2 = eventstatus2;
 	}
-
+*/
 	public List<AutotranTrigger> getAutotranTriggers() {
 		return this.autotranTriggers;
 	}

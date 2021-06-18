@@ -19,10 +19,10 @@ public class Autotransition{
 	private String autotranName;
 
 	private BigDecimal instInstId;
-
+/*
 	private Eventstatus eventstatus1;
 
-	private Eventstatus eventstatus2;
+	private Eventstatus eventstatus2; */
 	
 //	@JsonIgnore
 //	private List<Personautotran> personautotrans;
@@ -69,7 +69,7 @@ public class Autotransition{
 	public void setInstInstId(BigDecimal instInstId) {
 		this.instInstId = instInstId;
 	}
-
+/*
 	public Eventstatus getEventstatus1() {
 		return this.eventstatus1;
 	}
@@ -84,7 +84,7 @@ public class Autotransition{
 
 	public void setEventstatus2(Eventstatus eventstatus2) {
 		this.eventstatus2 = eventstatus2;
-	}
+	} */
 
 //	public List<Personautotran> getPersonautotrans() {
 //		return this.personautotrans;

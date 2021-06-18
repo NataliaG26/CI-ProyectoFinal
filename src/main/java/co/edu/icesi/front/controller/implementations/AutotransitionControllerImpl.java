@@ -31,15 +31,15 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 	
 	private AutotransitionDelegate autotransitionDelegate;
 	private InstitutionDelegate institutionDelegate;
-	private EventstatusDelegate eventstatusDelegate;
+	//private EventstatusDelegate eventstatusDelegate;
 	private ArrayList<String> autotranIsactiveL;
 	private ArrayList<String> autotranLogicaloperandL;
 
 	@Autowired	
-	public AutotransitionControllerImpl(AutotransitionDelegate autotransitionDelegate, InstitutionDelegate institutionDelegate, EventstatusDelegate eventstatusDelegate) {
+	public AutotransitionControllerImpl(AutotransitionDelegate autotransitionDelegate, InstitutionDelegate institutionDelegate /*, EventstatusDelegate eventstatusDelegate*/) {
 		this.autotransitionDelegate = autotransitionDelegate;
 		this.institutionDelegate = institutionDelegate;
-		this.eventstatusDelegate = eventstatusDelegate;
+		//this.eventstatusDelegate = eventstatusDelegate;
 		
 		autotranIsactiveL = new ArrayList<String>();
 		autotranIsactiveL.add("Y");
@@ -62,7 +62,7 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 		model.addAttribute("institutions", institutionDelegate.findAll());
 		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
 		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-		model.addAttribute("eventstatusList", institutionDelegate.findAll());
+		//model.addAttribute("eventstatusList", institutionDelegate.findAll());
 		return "autotransition/add";
 	}
 		
@@ -74,7 +74,7 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 				model.addAttribute("institutions", institutionDelegate.findAll());
 				model.addAttribute("autotranIsactiveList", autotranIsactiveL);
 				model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-				model.addAttribute("eventstatusList", eventstatusDelegate.findAll());
+				//model.addAttribute("eventstatusList", eventstatusDelegate.findAll());
 			 	return "autotransition/add";
 			}		
 			else {
@@ -103,7 +103,7 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 		model.addAttribute("institutions", institutionDelegate.findAll());
 		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
 		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-		model.addAttribute("eventstatusList", eventstatusDelegate.findAll());	
+		//model.addAttribute("eventstatusList", eventstatusDelegate.findAll());	
 		return "autotransition/update";
 	}
 
@@ -118,7 +118,7 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 				model.addAttribute("institutions", institutionDelegate.findAll());
 				model.addAttribute("autotranIsactiveList", autotranIsactiveL);
 				model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
-				model.addAttribute("eventstatusList", eventstatusDelegate.findAll());
+				//model.addAttribute("eventstatusList", eventstatusDelegate.findAll());
 				return "autotransition/update/{id}";
 			}
 			autotransitionDelegate.updateAutotransition(autotransition);

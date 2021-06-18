@@ -39,10 +39,10 @@ public class AutotransitionServiceImpl implements AutotransitionService{
 		
 		institutionService.getInstitutionById(autotransition.getInstInstId().longValue());
 		
-		if(autotransition.getEventstatus1() == null || autotransition.getEventstatus2() == null) {
+		/*if(autotransition.getEventstatus1() == null || autotransition.getEventstatus2() == null) {
 			throw new LogicalException("El estado epidemiológico no puede ser null");
 		}
-		else if(autotransition.getAutotranIsactive() == null) {
+		else */if(autotransition.getAutotranIsactive() == null) {
 			throw new LogicalException("El activo de la Autotransición no puede ser null");
 		}
 		else if(!autotransition.getAutotranIsactive().equals("Y") && !autotransition.getAutotranIsactive().equals("N")) {
@@ -80,10 +80,10 @@ public class AutotransitionServiceImpl implements AutotransitionService{
 		
 		institutionService.getInstitutionById(autotransition.getAutotranId());
 		
-		if(autotransition.getEventstatus1() == null || autotransition.getEventstatus2() == null) {
+		/*if(autotransition.getEventstatus1() == null || autotransition.getEventstatus2() == null) {
 			throw new LogicalException("El estado epidemiológico no puede ser null");
 		}
-		else if(autotransition.getAutotranIsactive() == null) {
+		else */if(autotransition.getAutotranIsactive() == null) {
 			throw new LogicalException("El activo de la Autotransición no puede ser null");
 		}
 		else if(!autotransition.getAutotranIsactive().equals("Y") && !autotransition.getAutotranIsactive().equals("N")) {
@@ -106,8 +106,8 @@ public class AutotransitionServiceImpl implements AutotransitionService{
 			existingAutotransition.setAutotranLogicaloperand(autotransition.getAutotranLogicaloperand());
 			existingAutotransition.setAutotranName(autotransition.getAutotranName());
 			existingAutotransition.setInstInstId(autotransition.getInstInstId());
-			existingAutotransition.setEventstatus1(autotransition.getEventstatus1());
-			existingAutotransition.setEventstatus2(autotransition.getEventstatus2());
+			/*existingAutotransition.setEventstatus1(autotransition.getEventstatus1());
+			existingAutotransition.setEventstatus2(autotransition.getEventstatus2());*/
 			
 			//autotransitionRepository.save(existingAutotransition);
 			autotransitionDAO.Edit(existingAutotransition);

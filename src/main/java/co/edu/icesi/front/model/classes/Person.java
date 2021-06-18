@@ -1,27 +1,29 @@
 package co.edu.icesi.front.model.classes;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
-import co.edu.icesi.front.model.classes.Institution;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 //import co.edu.icesi.front.model.classes.Personautotran;
 
 public class Person {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@SequenceGenerator(name="PERSON_PERSID_GENERATOR", sequenceName="PERSON_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PERSON_PERSID_GENERATOR")
 	private long persId;
 
 	private String persAddress;
 
 	private String persContactnumber;
 
+	@Email
+	@Size(min=6)
 	private String persEmail;
 
 	private String persExtid;
@@ -40,10 +42,14 @@ public class Person {
 
 	private String persName;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/mm/yyyy")
 	private Date persOnsetdate;
 
 	private String persPoliticsaccepted;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/mm/yyyy")
 	private Date persPoliticsaccepteddate;
 
 	private Institution institution;
