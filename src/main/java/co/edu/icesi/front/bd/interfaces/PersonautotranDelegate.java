@@ -5,7 +5,7 @@ import co.edu.icesi.front.model.classes.Personautotran;
 
 public interface PersonautotranDelegate {
 	
-	public Personautotran createPersonautotran(Personautotran personautotran) throws LogicalException;
+	public Personautotran createPersonautotran(Personautotran personautotran, long personId, long autotranId) throws LogicalException;
 	
 	public void updatePersonautotran(Personautotran personautotran) throws LogicalException;
 	

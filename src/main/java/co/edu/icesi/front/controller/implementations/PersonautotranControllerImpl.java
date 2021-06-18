@@ -46,7 +46,7 @@ public class PersonautotranControllerImpl implements PersonautotranController {
 	
 	@GetMapping("/")
 	public String indexAutotransition(Model model) {
-		model.addAttribute("autotransitions", personautotranDelegate.findAll());
+		model.addAttribute("personautotrans", personautotranDelegate.findAll());
 		return "personautotran/index";
 	}
 	
@@ -59,17 +59,19 @@ public class PersonautotranControllerImpl implements PersonautotranController {
 	}
 	
 	@PostMapping("/add")
-	public String savePersonautotran(@Validated @ModelAttribute("personautotran") Personautotran personautotran
-			,BindingResult bindingresult, @RequestParam(value = "action", required = true) String action, Model model) {
+	public String savePersonautotran(@ModelAttribute("personautotran") Personautotran personautotran,
+			BindingResult bindingresult, @RequestParam(value = "action", required = true) String action, Model model) {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {
 				model.addAttribute("persons", personDelegate.findAll());
 				model.addAttribute("autotransitions", autotransitionDelegate.findAll());
-			 	return "/add";
+			 	return "personautotran/add";
 			}		
 			else {
 				try {
-					personautotranDelegate.createPersonautotran(personautotran);
+					long person = personautotran.getPersonId(); 	
+					long autotran = personautotran.getAutotranId();
+					personautotranDelegate.createPersonautotran(personautotran, person, autotran);
 				}catch(LogicalException e) {
 					e.printStackTrace();
 				}

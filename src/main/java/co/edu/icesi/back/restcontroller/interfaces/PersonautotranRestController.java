@@ -10,7 +10,8 @@ public interface PersonautotranRestController {
 	
 	public Personautotran showPersonautotran(@PathVariable("id") long id) throws LogicalException;
 	
-	public Personautotran savePersonautotran(Personautotran personautotran) throws LogicalException;
+	public Personautotran savePersonautotran(@PathVariable("personid") long personId, @PathVariable("autotranid") long autotranId, 
+			Personautotran personautotran) throws LogicalException;
 	
 	public void deletePersonautotran(@PathVariable("id") long id) throws LogicalException;
 	

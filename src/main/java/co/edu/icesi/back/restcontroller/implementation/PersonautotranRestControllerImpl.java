@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.back.exception.LogicalException;
@@ -28,15 +29,16 @@ public class PersonautotranRestControllerImpl implements PersonautotranRestContr
 	}
 
 	@Override
-	@GetMapping("showPersonautotran/{id}")
+	@GetMapping("/{id}")
 	public Personautotran showPersonautotran(@PathVariable("id") long id) throws LogicalException {
 		return personautotranService.getPersonautotranById(id);
 	}
 
 	@Override
-	@PostMapping("/add")
-	public Personautotran savePersonautotran(Personautotran personautotran) throws LogicalException {
-		return personautotranService.createPersonautotran(personautotran);
+	@PostMapping("/add/{personid}/{autotranid}")
+	public Personautotran savePersonautotran( @PathVariable(value="personid", required = true) long personid,  @PathVariable(value="autotranid", required = true) long autotranId,
+			Personautotran personautotran) throws LogicalException {
+		return personautotranService.createPersonautotran(personautotran, personid, autotranId);
 	}
 
 	@Override

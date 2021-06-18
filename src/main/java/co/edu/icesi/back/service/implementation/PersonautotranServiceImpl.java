@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 
 import co.edu.icesi.back.daos.interfaces.PersonautotranDAO;
 import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Autotransition;
+import co.edu.icesi.back.model.Person;
 import co.edu.icesi.back.model.Personautotran;
 import co.edu.icesi.back.repository.PersonautotranRepository;
 import co.edu.icesi.back.service.interfaces.AutotransitionService;
@@ -34,24 +36,25 @@ public class PersonautotranServiceImpl implements PersonautotranService{
 
 	@Override
 	@Transactional
-	public Personautotran createPersonautotran(Personautotran personautotran) throws LogicalException {
+	public Personautotran createPersonautotran(Personautotran personautotran, long personId, long autotranId) throws LogicalException {
 		if(personautotran == null) {
 			throw new LogicalException("La autotrancición de la persona no puede ser null");
 		}
-		else if(personautotran.getPerson()== null) {
-			throw new LogicalException("La persona no puede ser null");
-		}
-		personService.getPersonById(personautotran.getPerson().getPersId());
+//		else if(personautotran.getPerson()== null) {
+//			throw new LogicalException("La persona no puede ser null");
+//		}
+		Person person = personService.getPersonById(personId);
 		
-		if(personautotran.getAutotransition() == null) {
-			throw new LogicalException("La autotransición no puede ser null");
-		}
-		autotransitionService.getAutotransitionById(personautotran.getAutotransition().getAutotranId());
+//		if(personautotran.getAutotransition() == null) {
+//			throw new LogicalException("La autotransición no puede ser null");
+//		}
+		Autotransition autotran = autotransitionService.getAutotransitionById(autotranId);
 		
-		if(personautotran.getPerautDate()==null) {
-			throw new LogicalException("La fecha no puede ser null");
-		}
-		
+//		if(personautotran.getPerautDate()==null) {
+//			throw new LogicalException("La fecha no puede ser null");
+//		}
+		personautotran.setPerson(person);
+		personautotran.setAutotransition(autotran);
 		//personautotranRepository.save(personautotran);
 		personautotranDAO.Save(personautotran);
 		return personautotran;

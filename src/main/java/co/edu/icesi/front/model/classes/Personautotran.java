@@ -1,10 +1,11 @@
 package co.edu.icesi.front.model.classes;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
-import co.edu.icesi.front.model.classes.Autotransition;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Personautotran {
 	
@@ -12,11 +13,17 @@ public class Personautotran {
 
 	private long perautId;
 
-	private Date perautDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate perautDate;
 
 	private Autotransition autotransition;
 
 	private Person person;
+
+	private long personId;
+
+	private long autotranId;
 
 	public Personautotran() {
 	}
@@ -29,11 +36,11 @@ public class Personautotran {
 		this.perautId = perautId;
 	}
 
-	public Date getPerautDate() {
+	public LocalDate getPerautDate() {
 		return this.perautDate;
 	}
 
-	public void setPerautDate(Date perautDate) {
+	public void setPerautDate(LocalDate perautDate) {
 		this.perautDate = perautDate;
 	}
 
@@ -51,6 +58,19 @@ public class Personautotran {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+	
+	public long getAutotranId() {
+		return autotranId;
+	}
+	public void setAutotranId(long autotranId) {
+		this.autotranId = autotranId;
+	}
+	public long getPersonId() {
+		return personId;
+	}
+	public void setPersonId(long personId) {
+		this.personId = personId;
 	}
 
 }

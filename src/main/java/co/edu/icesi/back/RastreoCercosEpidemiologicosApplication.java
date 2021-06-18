@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Documentt;
 import co.edu.icesi.back.model.Epidemevent;
 import co.edu.icesi.back.model.Epidemstatus;
 import co.edu.icesi.back.model.Epidemstatuscolor;
@@ -16,6 +17,7 @@ import co.edu.icesi.back.model.Institution;
 import co.edu.icesi.back.model.Person;
 import co.edu.icesi.back.model.UserType;
 import co.edu.icesi.back.model.Userr;
+import co.edu.icesi.back.service.implementation.DocumenttServiceImpl;
 import co.edu.icesi.back.service.implementation.EpidemeventServiceImpl;
 import co.edu.icesi.back.service.implementation.EpidemstatusServiceImpl;
 import co.edu.icesi.back.service.implementation.EpidemstatuscolorServiceImpl;
@@ -43,7 +45,7 @@ public class RastreoCercosEpidemiologicosApplication {
 		EpidemeventServiceImpl epidemeventService = c.getBean(EpidemeventServiceImpl.class);
 		EpidemstatusServiceImpl epidemstatusService = c.getBean(EpidemstatusServiceImpl.class);
 		EpidemstatuscolorServiceImpl epidemstatuscolorServiceImpl = c.getBean(EpidemstatuscolorServiceImpl.class);
-		
+		DocumenttServiceImpl documenttServiceImpl = c.getBean(DocumenttServiceImpl.class);
 		
 		Institution institution1 = new Institution();
 		institution1 = new Institution();
@@ -126,6 +128,9 @@ public class RastreoCercosEpidemiologicosApplication {
 		eventstatus3.setEpidemstatuscolor(epidemstatuscolor1);
 		eventstatus3.setInstitution(institution1);
 		
+		Documentt documentt1 = new Documentt();
+		documentt1.setDocName("Doc 1");
+		
 		try {
 			institutionService.createInstitution(institution1);
 			institutionService.createInstitution(institution2);
@@ -140,6 +145,7 @@ public class RastreoCercosEpidemiologicosApplication {
 			eventstatusService.createEventstatus(eventstatus1);
 			eventstatusService.createEventstatus(eventstatus2);
 			eventstatusService.createEventstatus(eventstatus3);
+			documenttServiceImpl.createDocumentt(documentt1);
 		} catch (LogicalException e) {
 			e.printStackTrace();
 		}

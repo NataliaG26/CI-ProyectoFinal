@@ -108,6 +108,7 @@ public class PersonControllerImpl implements PersonController {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {	
 				model.addAttribute("personIsactiveL", personIsactiveL);
+				model.addAttribute("institutions", institutionDelegate.findAll());
 			 	return "person/add";
 			}else {
 				try {

@@ -13,9 +13,6 @@ public class Person {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="PERSON_PERSID_GENERATOR", sequenceName="PERSON_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PERSON_PERSID_GENERATOR")
 	private long persId;
 
 	private String persAddress;
@@ -42,14 +39,12 @@ public class Person {
 
 	private String persName;
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date persOnsetdate;
 
 	private String persPoliticsaccepted;
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date persPoliticsaccepteddate;
 
 	private Institution institution;

@@ -19,23 +19,23 @@
 		<h2 class="mb-5">New Document</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="#" th:object="${documentt}" th:action="@{documentt/add}" method="post" >
+				<form action="#" th:object="${documentt}" th:action="@{/documentt/add}" method="post" >
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-12">
 							<label for="docName" class="col-form-label">Document Name</label>
-							<input type="text"  th:field="*{docName}">
-							<span th:if="${#fields.hasErrors('docName')}" th:errors="*{docName}" class="text-danger"></span>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="docName" class="col-form-label">Document name</label>
-							<input type="text"  th:field="*{docName}">
+							<input type="text"  class="form-control" th:field="*{docName}">
 							<span th:if="${#fields.hasErrors('docName')}" th:errors="*{docName}" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-md-6">
+							<label for="docIspositive" class="col-form-label">Document URL</label>
+							<input type="text"   class="form-control" th:field="*{docIspositive}">
+							<span th:if="${#fields.hasErrors('docIspositive')}" th:errors="*{docIspositive}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
 							<label for="docUrl" class="col-form-label">Document URL</label>
-							<input type="text"  th:field="*{docUrl}">
+							<input type="text"   class="form-control" th:field="*{docUrl}">
 							<span th:if="${#fields.hasErrors('docUrl')}" th:errors="*{docUrl}" class="text-danger"></span>
 						</div>
 					</div>

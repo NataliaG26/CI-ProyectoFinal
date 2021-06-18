@@ -19,29 +19,34 @@
 		<h2 class="mb-5">New Document Type</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="#" th:object="${documenttype}" th:action="@{documenttype/add}" method="post" >
+				<form action="#" th:object="${documenttype}" th:action="@{/documenttype/add}" method="post" >
 					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="doctypeName" class="col-form-label">Document Type</label>
-							<input type="text"  th:field="*{doctypeName}">
+						<div class="form-group col-md-12">
+							<label for="doctypeName" class="col-form-label">Document Type Name</label>
+							<input type="text"  class="form-control" th:field="*{doctypeName}">
 							<span th:if="${#fields.hasErrors('doctypeName')}" th:errors="*{doctypeName}" class="text-danger"></span>
 						</div>
 					</div>
 					
 					<div class="row">
 					<div class="form-group col-md-6">
-							<label for="documentt" class="col-form-label">Document</label>
+							<label for="doctypeIsactive" class="col-form-label">Document Type Is active</label>
+							<input type="text"  class="form-control" th:field="*{doctypeIsactive}">
+							<span th:if="${#fields.hasErrors('doctypeIsactive')}" th:errors="*{doctypeIsactive}" class="text-danger"></span>
+
+						</div>	
+						<div class="form-group col-md-6">
+							<label for="person" class="col-form-label">Institution</label>
 							<div class="form-group col-md-3">
-								<a href="/documentts/"><input type="button"  class="btn btn-secondary" value="More"></a>
+								<a href="/institution/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							<select th:field="*{documentt}" class="form-control"
-								id="documenttype">
-								<option th:each="doc : ${documentts}"
-									th:value="${doc.docId}" th:text="${doc.docName}" />
+							<select th:field="*{instInstId}" class="form-control"
+								id="person">
+								<option th:each="inst : ${institutions}"
+									th:value="${inst.instId}" th:text="${inst.instName}" />
 							</select> 
-						</div>
-												
+						</div>					
 					</div>
 					
 					<div class="row">

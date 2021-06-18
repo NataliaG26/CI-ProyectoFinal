@@ -19,7 +19,7 @@
 		<h2 class="mb-5">New Person Autotransition</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="#" th:object="${personautotran}" th:action="@{personautotran/add}" method="post" >
+				<form action="#" th:object="${personautotran}" th:action="@{/personautotran/add}" method="post" >
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="perautDate" class="col-form-label">Personautotran Date</label>
@@ -35,8 +35,8 @@
 								<a href="/autotransition/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							<select th:field="*{autotransition}" class="form-control"
-								id="institution">
+							<select th:field="*{autotranId}" class="form-control"
+								id="autotranId">
 								<option th:each="auto : ${autotransitions}"
 									th:value="${auto.autotranId}" th:text="${auto.autotranName}" />
 							</select> 
@@ -47,8 +47,7 @@
 								<a href="/person/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							<select th:field="*{person}" class="form-control"
-								id="person">
+							<select th:field="*{personId}" class="form-control">
 								<option th:each="pers : ${persons}"
 									th:value="${pers.persId}" th:text="${pers.persName}" />
 							</select> 

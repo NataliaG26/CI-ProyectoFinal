@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Edit Document Type</title>
+<title>New Document Type</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,47 +14,51 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
 	<div class="container my-5" >
-		<h2 class="mb-5">Edit Document Type</h2>
+		<h2 class="mb-5">New Document Type</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="#" th:object="${documenttype}" th:action="@{documenttype/update}" method="post" >
+				<form action="#" th:object="${documenttype}" th:action="@{/documenttype/add}" method="post" >
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-9">
 							<label for="doctypeName" class="col-form-label">Document Type Name</label>
-							<input type="text"  th:field="*{doctypeName}">
+							<input type="text"  class="form-control" th:field="*{doctypeName}">
 							<span th:if="${#fields.hasErrors('doctypeName')}" th:errors="*{doctypeName}" class="text-danger"></span>
 						</div>
+						
 						<div class="form-group col-md-3">
 							<label for="doctypeId" class="col-form-label">Id</label>
-							<input type="text"  th:field="*{doctypeId}" readonly>
+							<input type="text"   class="form-control" th:field="*{doctypeId}" readonly>
 							<span th:if="${#fields.hasErrors('doctypeId')}" th:errors="*{doctypeId}" class="text-danger"></span>
 						</div>
 					</div>
 					
 					<div class="row">
 					<div class="form-group col-md-6">
-							<label for="documentt" class="col-form-label">Documentt</label>
+							<label for="doctypeIsactive" class="col-form-label">Document Type Is active</label>
+							<input type="text"  class="form-control" th:field="*{doctypeIsactive}">
+							<span th:if="${#fields.hasErrors('doctypeIsactive')}" th:errors="*{doctypeIsactive}" class="text-danger"></span>
+
+						</div>	
+						<div class="form-group col-md-6">
+							<label for="person" class="col-form-label">Institution</label>
 							<div class="form-group col-md-3">
-								<a href="/documentt/"><input type="button"  class="btn btn-secondary" value="More"></a>
+								<a href="/institution/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							
-							<select th:field="*{documentt}" class="form-control"
-								id="institution">
-								<option th:each="doc : ${documentts}"
-									th:value="${doc.docName}" th:text="${doc.docName}" />
+							<select th:field="*{instInstId}" class="form-control"
+								id="person">
+								<option th:each="inst : ${institutions}"
+									th:value="${inst.instId}" th:text="${inst.instName}" />
 							</select> 
-						</div>
-						
+						</div>					
 					</div>
 					
 					<div class="row">
 						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Add Documentt">
+							<input type="submit" name="action" class="btn btn-primary" value="Add Document">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">

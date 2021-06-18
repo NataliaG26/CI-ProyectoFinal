@@ -99,7 +99,7 @@ public class DocumenttControllerImpl implements DocumenttController{
 				documenttDelegate.createDocumentt(documentt);
 			}
 		}
-		return "redirect:/documentte/";
+		return "redirect:/documentt/";
 	}
 	
 	@GetMapping("/showDocumentt/{id}")

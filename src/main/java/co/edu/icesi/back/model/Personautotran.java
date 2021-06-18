@@ -1,6 +1,7 @@
 package co.edu.icesi.back.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the PERSONAUTOTRAN database table.
@@ -35,10 +39,10 @@ public class Personautotran implements Serializable {
 	@Column(name="PERAUT_ID")
 	private long perautId;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="PERAUT_DATE")
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
-	private Date perautDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate perautDate;
 
 	//bi-directional many-to-one association to Autotransition
 	@ManyToOne
@@ -49,19 +53,23 @@ public class Personautotran implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="PERS_PERS_ID")
 	private Person person;
-
+	
+	private long personId;
+	
+	private long autotranId;
+	@JsonIgnore
 	//bi-directional many-to-one association to Queuecreatefence
 	@OneToMany(mappedBy="personautotran")
 	private List<Queuecreatefence> queuecreatefences;
-
+	@JsonIgnore
 	//bi-directional many-to-one association to Queuecreatefencehistory
 	@OneToMany(mappedBy="personautotran")
 	private List<Queuecreatefencehistory> queuecreatefencehistories;
-
+	@JsonIgnore
 	//bi-directional many-to-one association to Queuedisablefence
 	@OneToMany(mappedBy="personautotran")
 	private List<Queuedisablefence> queuedisablefences;
-
+	@JsonIgnore
 	//bi-directional many-to-one association to Queuedisablefencehistory
 	@OneToMany(mappedBy="personautotran")
 	private List<Queuedisablefencehistory> queuedisablefencehistories;
@@ -77,11 +85,11 @@ public class Personautotran implements Serializable {
 		this.perautId = perautId;
 	}
 
-	public Date getPerautDate() {
+	public LocalDate getPerautDate() {
 		return this.perautDate;
 	}
 
-	public void setPerautDate(Date perautDate) {
+	public void setPerautDate(LocalDate perautDate) {
 		this.perautDate = perautDate;
 	}
 
@@ -187,6 +195,19 @@ public class Personautotran implements Serializable {
 		queuedisablefencehistory.setPersonautotran(null);
 
 		return queuedisablefencehistory;
+	}
+	
+	public long getAutotranId() {
+		return autotranId;
+	}
+	public void setAutotranId(long autotranId) {
+		this.autotranId = autotranId;
+	}
+	public long getPersonId() {
+		return personId;
+	}
+	public void setPersonId(long personId) {
+		this.personId = personId;
 	}
 
 }

@@ -6,7 +6,7 @@ import co.edu.icesi.back.model.Personautotran;
 
 public interface PersonautotranService {
 	
-	public Personautotran createPersonautotran(Personautotran personautotran) throws LogicalException;
+	public Personautotran createPersonautotran(Personautotran personautotran, long personId, long autotranId) throws LogicalException;
 	
 	public Personautotran updatePersonautotran(Personautotran personautotran) throws LogicalException;
 	

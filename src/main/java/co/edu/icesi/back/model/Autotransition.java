@@ -17,6 +17,8 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.edu.icesi.back.groups.CreateAutotransition;
 import co.edu.icesi.back.groups.UpdateAutotransition;
 
@@ -51,7 +53,8 @@ public class Autotransition implements Serializable {
 	@Column(name="INST_INST_ID")
 	@NotNull(groups = {CreateAutotransition.class, UpdateAutotransition.class})
 	private BigDecimal instInstId;
-
+	
+	@JsonIgnore
 	//bi-directional many-to-one association to Actionn
 	@OneToMany(mappedBy="autotransition")
 	private List<Actionn> actionns;
@@ -68,14 +71,15 @@ public class Autotransition implements Serializable {
 	@JoinColumn(name="EVESTAT_EVESTAT_IDDESTINATION")
 	private Eventstatus eventstatus2;
 */
+	@JsonIgnore
 	//bi-directional many-to-one association to AutotranTrigger
 	@OneToMany(mappedBy="autotransition")
 	private List<AutotranTrigger> autotranTriggers;
-
+	@JsonIgnore
 	//bi-directional many-to-one association to Personautotran
 	@OneToMany(mappedBy="autotransition")
 	private List<Personautotran> personautotrans;
-
+	@JsonIgnore
 	//bi-directional many-to-one association to Precondition
 	@OneToMany(mappedBy="autotransition")
 	private List<Precondition> preconditions;

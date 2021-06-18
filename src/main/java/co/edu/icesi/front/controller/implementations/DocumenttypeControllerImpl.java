@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.front.bd.interfaces.DocumenttypeDelegate;
+import co.edu.icesi.front.bd.interfaces.InstitutionDelegate;
 import co.edu.icesi.front.controller.interfaces.DocumenttypeController;
 import co.edu.icesi.front.model.classes.Documenttype;
-import co.edu.icesi.front.model.classes.Institution;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
@@ -23,10 +23,12 @@ import lombok.extern.log4j.Log4j2;
 public class DocumenttypeControllerImpl implements DocumenttypeController{
 	
 	private DocumenttypeDelegate documenttypeDelegate;
+	private InstitutionDelegate institutionDelegate;
 	
 	@Autowired
-	public DocumenttypeControllerImpl(DocumenttypeDelegate documenttypeDelegate) {
+	public DocumenttypeControllerImpl(DocumenttypeDelegate documenttypeDelegate, InstitutionDelegate institutionDelegate) {
 		this.documenttypeDelegate = documenttypeDelegate;
+		this.institutionDelegate = institutionDelegate;
 	}
 	
 	@GetMapping("/")
@@ -41,6 +43,7 @@ public class DocumenttypeControllerImpl implements DocumenttypeController{
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 		Documenttype documenttype = documenttypeDelegate.getDocumenttypeById(id);
 		model.addAttribute("documenttype", documenttype);
+		model.addAttribute("institutions", institutionDelegate.findAll());
 		return "documenttype/update";
 	}
 	
@@ -50,7 +53,8 @@ public class DocumenttypeControllerImpl implements DocumenttypeController{
 			throws LogicalException {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {	
-			 	return "documenttype/update/{id}";
+				model.addAttribute("institutions", institutionDelegate.findAll());
+			 	return "/documenttype/update/{id}";
 			}else {
 				documenttypeDelegate.updateDocumenttype(documenttype);
 				return "redirect:/documenttype/showDocumenttype/{id}";
@@ -70,8 +74,9 @@ public class DocumenttypeControllerImpl implements DocumenttypeController{
 	@GetMapping("/add")
 	@Override
 	public String showAdd(Model model) {
-		model.addAttribute("documenttype", new Institution());
-		return "documenttype/add";
+		model.addAttribute("documenttype", new Documenttype());
+		model.addAttribute("institutions", institutionDelegate.findAll());
+		return "/documenttype/add";
 	}
 	
 	@PostMapping("/add")
@@ -80,7 +85,8 @@ public class DocumenttypeControllerImpl implements DocumenttypeController{
 			throws LogicalException {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {	
-			 	return "documenttype/add";
+				model.addAttribute("institutions", institutionDelegate.findAll());
+			 	return "/documenttype/add";
 			}else {
 				documenttypeDelegate.createDocumenttype(documenttype);
 			}

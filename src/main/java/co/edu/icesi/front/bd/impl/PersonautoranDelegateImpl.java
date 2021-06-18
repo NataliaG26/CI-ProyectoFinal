@@ -21,8 +21,10 @@ public class PersonautoranDelegateImpl implements PersonautotranDelegate{
 	}
 
 	@Override
-	public Personautotran createPersonautotran(Personautotran personautotran) throws LogicalException {
-		return restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class).getBody();
+	public Personautotran createPersonautotran(Personautotran personautotran, long personId, long autotranId) throws LogicalException {
+		String s = SERVER + "add/"+personId+"/"+autotranId;
+		System.out.println(s);
+		return restTemplate.postForEntity(s, personautotran, Personautotran.class).getBody();
 	}
 
 	@Override
