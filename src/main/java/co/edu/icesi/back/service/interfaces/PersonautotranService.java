@@ -14,5 +14,5 @@ public interface PersonautotranService {
 
 	public Iterable<Personautotran> findAll();
 	
-	public void delete(Personautotran personautotran);
+	public void delete(long id) throws LogicalException;
 }

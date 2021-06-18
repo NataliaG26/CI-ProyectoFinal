@@ -97,9 +97,10 @@ public class PersonautotranServiceImpl implements PersonautotranService{
 	
 	@Override
 	@Transactional
-	public void delete(Personautotran personautotran) {
+	public void delete(long id) throws LogicalException {
 		//personautotranRepository.delete(personautotran);
-		personautotranDAO.Delete(personautotran);
+		Personautotran personAutotran = getPersonautotranById(id);
+		personautotranDAO.Delete(personAutotran);
 	}
 
 }
