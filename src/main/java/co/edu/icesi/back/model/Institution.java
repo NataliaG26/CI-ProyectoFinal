@@ -3,6 +3,7 @@ package co.edu.icesi.back.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -100,7 +101,7 @@ public class Institution implements Serializable {
 	
 	@JsonIgnore
 	// bi-directional many-to-one association to Accessdenialevent
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Accessdenialevent> accessdenialevents;
 	@JsonIgnore
 	// bi-directional many-to-one association to Devicestatus
@@ -114,9 +115,9 @@ public class Institution implements Serializable {
 	// bi-directional many-to-one association to Epidemstatustransition
 	@OneToMany(mappedBy = "institution")
 	private List<Epidemstatustransition> epidemstatustransitions;
-	
+	@JsonIgnore
 	// bi-directional many-to-one association to Eventstatus
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Eventstatus> eventstatuses;
 	@JsonIgnore
 	// bi-directional many-to-one association to HatParameter
@@ -130,7 +131,7 @@ public class Institution implements Serializable {
 	// bi-directional many-to-one association to Measurement
 	@OneToMany(mappedBy = "institution")
 	private List<Measurement> measurements;
-
+	@JsonIgnore
 	// bi-directional many-to-one association to Person
 	@OneToMany(mappedBy = "institution")
 	private List<Person> persons;

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,15 +29,11 @@ public class InstitutionRestControllerImpl implements InstitutionRestController 
 	@Override
 	@GetMapping("/")
 	public Iterable<Institution> showAllInstitutions() {
-		//Institutions institutions = new Institutions();
-		//institutions.setInstitutions(institutionService.findAll());
-		//System.out.println(institutions);
-		//return institutions;
 		return institutionService.findAll();
 	}
 
 	@Override
-	@GetMapping("/show/{id}")
+	@GetMapping("/{id}")
 	public Institution showInstitution(@PathVariable("id") long id) {
 		try {
 			return institutionService.getInstitutionById(id);
@@ -47,23 +45,25 @@ public class InstitutionRestControllerImpl implements InstitutionRestController 
 	}
 
 	@Override
-	@PutMapping("/update/{id}")
-	public void updateInstitution(Institution institution) throws LogicalException {
+	@RequestMapping(value = "/update", method = {RequestMethod.PUT})
+	public void updateInstitution(@RequestBody Institution institution) throws LogicalException {
 		institutionService.updateInstitution(institution);
 	}
 
 	@Override
 	@PostMapping("/add")
-	public Institution saveInstitution(Institution institution) throws LogicalException {
+	public Institution saveInstitution(@RequestBody Institution institution) throws LogicalException {
 		return institutionService.createInstitution(institution);
 	}
 
 
 	@Override
-	@DeleteMapping("/del/{id}")
+	@RequestMapping(value = "/{id}", method = {RequestMethod.DELETE})
 	public void deleteInstitution(@PathVariable("id") long id) {
+		System.out.println("Delete Rest controller 1");
 		try {
 			institutionService.delete(id);
+			System.out.println("Delete Rest controller");
 		} catch (LogicalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

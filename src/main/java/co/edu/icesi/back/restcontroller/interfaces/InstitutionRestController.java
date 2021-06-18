@@ -1,10 +1,9 @@
 package co.edu.icesi.back.restcontroller.interfaces;
 
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.*;
 import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.back.model.Institution;
-import co.edu.icesi.back.model.Institutions;
 
 public interface InstitutionRestController {
 	
@@ -12,9 +11,9 @@ public interface InstitutionRestController {
 	
 	public Institution showInstitution(@PathVariable("id") long id);
 	
-	public void updateInstitution(Institution institution) throws LogicalException;
+	public void updateInstitution(@RequestBody Institution institution) throws LogicalException;
 	
-	public Institution saveInstitution(Institution institution) throws LogicalException;
+	public Institution saveInstitution(@RequestBody Institution institution) throws LogicalException;
 	
 	public void deleteInstitution(@PathVariable("id") long id) throws LogicalException;
 	

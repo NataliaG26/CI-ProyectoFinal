@@ -26,9 +26,15 @@ public class InstitutionDAOImpl implements InstitutionDAO{
 
 	@Override
 	public void Delete(Institution entity) {
-		Institution attachedEntity = em.merge(entity);
-		em.remove(attachedEntity);
-		
+//		Institution attachedEntity = em.merge(entity);
+//		em.remove(attachedEntity);
+//		String q = "DELETE FROM Institution where INST_ID="+entity.getInstId();
+//		em.createQuery(q).getResultList();
+		if (em.contains(entity)) {
+			em.remove(entity);
+		} else {
+			em.remove(em.merge(entity));
+		}
 	}
 
 	@Override

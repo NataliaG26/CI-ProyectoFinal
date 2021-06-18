@@ -14,11 +14,7 @@ public class AutotransitionDelegateImpl  implements AutotransitionDelegate{
 	
 	RestTemplate restTemplate;
 	final String SERVER="http://localhost:8080/api-rest/autotransition/";
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 3e673c56906c6dfaede13c54d30b358835dcd430
 	public AutotransitionDelegateImpl() {
 		this.restTemplate = new RestTemplate();
 	}

@@ -25,11 +25,6 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 	
 	public InstitutionDelegateImpl() {
 		this.restTemplate = new RestTemplate();
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
-        messageConverters.add(converter);
-        this.restTemplate.setMessageConverters(messageConverters);
 	}
 	
 	public void setRestTemplate(RestTemplate restTemplate) {
@@ -49,14 +44,8 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 
 	@Override
 	public Institution getInstitutionById(long id){
-		return restTemplate.getForObject(SERVER + "show/"+id, Institution.class);
+		return restTemplate.getForObject(SERVER + id, Institution.class);
 	}
-
-//	@Override
-//	public Iterable<Institution> findAll() {
-//		Institutions institutions = restTemplate.getForObject(SERVER, Institutions.class);
-//		return institutions.getInstitutions();
-//	}
 	
 	@Override
 	public List<Institution> findAll() {
@@ -67,7 +56,8 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 
 	@Override
 	public void delete(long id) {
-		restTemplate.delete(SERVER + "del/"+ id);
-		
+		System.out.println("Delegado 1 ");
+		restTemplate.delete(SERVER + id);
+		System.out.println("Delegado");
 	}
 }

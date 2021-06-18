@@ -5,10 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.back.exception.LogicalException;
@@ -50,7 +53,6 @@ public class InstitutionControllerImpl implements InstitutionController{
 			@Validated Institution institution, BindingResult bindingresult, Model model) throws LogicalException {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {	
-				//model.addAttribute("institution", new Institution());
 			 	return "institution/update/{id}";
 			}else {
 				institutionDelegate.updateInstitution(institution);
@@ -61,12 +63,13 @@ public class InstitutionControllerImpl implements InstitutionController{
 			
 	}
 	
-	@GetMapping("/del/{id}")
+	@RequestMapping(value = "/del/{id}", method = {RequestMethod.GET})
 	public String showDeleteForm(@PathVariable("id") long id, Model model) {
-		Institution institution = institutionDelegate.getInstitutionById(id);
-		institutionDelegate.delete(institution.getInstId());
-		model.addAttribute("institutions", institutionDelegate.findAll());
-		return "institution/index";
+		System.out.println("Delete controller 1");
+		institutionDelegate.delete(id);
+		//model.addAttribute("institutions", institutionDelegate.findAll());
+		System.out.println("Delete controller");
+		return "redirect:/institution/";
 	}
 	
 	@GetMapping("/add")
@@ -93,6 +96,7 @@ public class InstitutionControllerImpl implements InstitutionController{
 	public String showInstitution(@PathVariable("id") long id, Model model) {
 		Institution institution = institutionDelegate.getInstitutionById(id);
 		model.addAttribute("institution", institution);
+
 		return "institution/showInstitution";
 	}
 

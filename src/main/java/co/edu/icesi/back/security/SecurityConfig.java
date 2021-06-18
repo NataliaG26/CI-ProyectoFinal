@@ -16,11 +16,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-/*
+
 		httpSecurity.
-				authorizeRequests()
+			csrf().disable()
+				.authorizeRequests()
 					.antMatchers("/login**").permitAll()
-					.antMatchers("/api-rest/**").permitAll()
+						.antMatchers("/api-rest/**").permitAll()
 			        .antMatchers("/h2/**").permitAll()
 					.antMatchers("/institution/**").hasRole(UserType.admin.toString())
 					.antMatchers("/institution/index").hasRole(UserType.operator.toString())
@@ -42,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.permitAll()
 					.and()
 				.exceptionHandling()
-					.accessDeniedHandler(accessDeniedHandler);*/
+					.accessDeniedHandler(accessDeniedHandler);
 
 //				.and().logout()
 //				.invalidateHttpSession(true).clearAuthentication(true)
