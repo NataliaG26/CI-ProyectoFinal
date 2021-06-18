@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the DOCUMENTTYPE database table.
@@ -37,11 +39,13 @@ public class Documenttype implements Serializable {
 
 	@Column(name="INST_INST_ID")
 	private BigDecimal instInstId;
-
+	
+	@JsonIgnore
 	//bi-directional many-to-one association to Documentstate
 	@OneToMany(mappedBy="documenttype")
 	private List<Documentstate> documentstates;
-
+	
+	@JsonIgnore
 	//bi-directional many-to-one association to Documentt
 	@OneToMany(mappedBy="documenttype")
 	private List<Documentt> documentts;

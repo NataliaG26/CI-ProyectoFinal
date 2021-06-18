@@ -3,6 +3,8 @@ package co.edu.icesi.front.model.classes;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Documenttype{
 	
 	private static final long serialVersionUID = 1L;
@@ -14,7 +16,8 @@ public class Documenttype{
 	private String doctypeName;
 
 	private BigDecimal instInstId;
-
+	
+	@JsonIgnore
 	private List<Documentt> documentts;
 
 	public Documenttype() {

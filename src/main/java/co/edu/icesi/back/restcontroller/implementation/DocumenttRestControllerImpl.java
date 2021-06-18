@@ -27,7 +27,7 @@ public class DocumenttRestControllerImpl implements DocumenttRestController{
 	}
 
 	@Override
-	@GetMapping("showDocumentt/{id}")
+	@GetMapping("/{id}")
 	public Documentt showDocumentt(@PathVariable("id") long id) {
 		return documenttService.getDocumenttById(id);
 	}

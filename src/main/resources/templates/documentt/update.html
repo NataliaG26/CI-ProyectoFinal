@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Edit Person Autotransition</title>
+<title>New Document</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,39 +13,44 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
 	<div class="container my-5" >
-		<h2 class="mb-5">Edit Person Autotransition</h2>
+		<h2 class="mb-5">New Document</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="#" th:object="${personautotran}" th:action="@{personautotran/add}" method="post" >
+				<form action="#" th:object="${documentt}" th:action="@{documentt/update}" method="post" >
 					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="perautDate" class="col-form-label">Personautotran Date</label>
-							<input type="date"  th:field="*{perautDate}">
-							<span th:if="${#fields.hasErrors('perautDate')}" th:errors="*{perautDate}" class="text-danger"></span>
+						<div class="form-group col-md-9">
+							<label for="docName" class="col-form-label">Document Name</label>
+							<input type="text"  th:field="*{docName}">
+							<span th:if="${#fields.hasErrors('docName')}" th:errors="*{docName}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-3">
-							<label for="perautDate" class="col-form-label">Id</label>
-							<input type="text"  th:field="*{perautId}" readonly>
-							<span th:if="${#fields.hasErrors('perautId')}" th:errors="*{perautId}" class="text-danger"></span>
+							<label for="docId" class="col-form-label">Document ID</label>
+							<input type="text" class="form-control" th:field="*{docId}" placeholder="Document ID" readonly>
+							<span th:if="${#fields.hasErrors('docId')}" th:errors="*{docId}" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="docUrl" class="col-form-label">Document URL</label>
+							<input type="text"  th:field="*{docUrl}">
+							<span th:if="${#fields.hasErrors('docUrl')}" th:errors="*{docUrl}" class="text-danger"></span>
 						</div>
 					</div>
 					
 					<div class="row">
 					<div class="form-group col-md-6">
-							<label for="autotransition" class="col-form-label">Autotransition</label>
+							<label for="documenttype" class="col-form-label">Documenttype</label>
 							<div class="form-group col-md-3">
-								<a href="/autotransition/"><input type="button"  class="btn btn-secondary" value="More"></a>
+								<a href="/documenttype/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							
-							<select th:field="*{autotransition}" class="form-control"
-								id="institution">
-								<option th:each="auto : ${autotransitions}"
-									th:value="${auto.autotranId}" th:text="${auto.autotranName}" />
+							<select th:field="*{documenttype}" class="form-control"
+								id="documenttype">
+								<option th:each="doctt : ${documenttypes}"
+									th:value="${doctt.doctypeId}" th:text="${doctt.doctypeName}" />
 							</select> 
 						</div>
 						<div class="form-group col-md-6">
@@ -54,7 +59,6 @@
 								<a href="/person/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							
 							<select th:field="*{person}" class="form-control"
 								id="person">
 								<option th:each="pers : ${persons}"

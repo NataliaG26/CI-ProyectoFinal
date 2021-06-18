@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Personautotran</title>
+<title>Document</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -16,39 +16,41 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<div th:switch="${personautotrans}" class="container my-5">
+	<div th:switch="${documentts}" class="container my-5">
 		<div class="row">
 			<div class="col-md-10">
-				<h2 th:case="null">No personautotran yet!</h2>
+				<h2 th:case="null">No Document yet!</h2>
 				<div th:case="*">
-					<h2 class="my-5">Personautotran</h2>
+					<h2 class="my-5">Document</h2>
 					<table class="table table-striped table-responsive-md">
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Date</th>
-								<th>Autotransition</th>
-								<th>Person</th>
+								<th>DocIspositive</th>
+								<th>docName</th>
+								<th>docUrl</th>
+								<th>documenttype</th>
 								<th>Edit</th>
 								<th>Delete</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="pers : ${personautotrans}" th:value="pers">		
-								<td class="text-info" th:text="${pers.perautId}"></td>						
-								<td class="date-info" th:text="${pers.perautDate}"></td>
-								<td class="text-info" th:text="${pers.autotransition.autotranName}"></td>
-								<td class="text-info" th:text="${pers.person.persName}"></td>
-								<td><a th:href="@{/personautotran/update/{id}(id=${pers.perautId})}"
+							<tr th:each="doc : ${documentts}" th:value="pers">		
+								<td class="text-info" th:text="${doc.docId}"></td>						
+								<td class="date-info" th:text="${doc.docIspositive}"></td>
+								<td class="text-info" th:text="${doc.docName}"></td>
+								<td class="text-info" th:text="${doc.docUrl}"></td>
+								<td class="text-info" th:text="${doc.documenttype.doctypeName}"></td>
+								<td><a th:href="@{/documentt/update/{id}(id=${doc.docId})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td><a th:href="@{/personautotran/del/{id}(id=${pers.perautId})}"
-									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+								<td><a th:href="@{/documentt/del/{id}(id=${doc.docId})}"
+									class="btn btn-primary"> X Delete</a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<p class="my-5">
-					<a href="/personautotran/add" class="btn btn-primary"><i
+					<a href="/documentt/add" class="btn btn-primary"><i
 						class="fas fa-user-plus ml-2"></i></a>
 				</p>
 			</div>

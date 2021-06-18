@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<div th:switch="${personautotrans}" class="container my-5">
+	<div th:switch="${documenttypes}" class="container my-5">
 		<div class="row">
 			<div class="col-md-10">
 				<h2 th:case="null">No Documenttype yet!</h2>
@@ -28,18 +28,19 @@
 								<th>ID</th>
 								<th>Isactive</th>
 								<th>Name</th>
-								<th>Documentts</th>
+								<th>Edit</th>
+								<th>Delete</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="doc : ${documenttype}" th:value="doc">		
 								<td class="text-info" th:text="${doc.doctypeId}"></td>						
 								<td class="text-info" th:text="${doc.doctypeIsactive}"></td>
-								<td class="text-info" th:text="${doc.doctypeIsactive.docName}"></td>
+								<td class="text-info" th:text="${doc.doctypeName}"></td>
 								<td><a th:href="@{/documenttype/update/{id}(id=${doc.doctypeId})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/documenttype/del/{id}(id=${doc.doctypeId})}"
-									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+									class="btn btn-primary"> X Delete</a></td>
 							</tr>
 						</tbody>
 					</table>

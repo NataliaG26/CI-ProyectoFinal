@@ -6,11 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.back.model.Documenttype;
 import co.edu.icesi.back.restcontroller.interfaces.DocumenttypeRestController;
 import co.edu.icesi.back.service.interfaces.DocumenttypeService;
 
+
+@RestController
+@RequestMapping("/api-rest/documenttype")
 public class DocumenttypeRestControllerImpl implements DocumenttypeRestController{
 
 	@Autowired
@@ -23,7 +28,7 @@ public class DocumenttypeRestControllerImpl implements DocumenttypeRestControlle
 	}
 
 	@Override
-	@GetMapping("showDocumenttype/{id}")
+	@GetMapping("/{id}")
 	public Documenttype showDocumenttype(@PathVariable("id") long id) {
 		return documenttypeService.getDocumenttypeById(id);
 	}
