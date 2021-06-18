@@ -6,12 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.back.restcontroller.interfaces.PersonautotranRestController;
 import co.edu.icesi.back.service.interfaces.PersonautotranService;
 import co.edu.icesi.back.model.Personautotran;
 
+@RestController
+@RequestMapping("/api-rest/personautotran")
 public class PersonautotranRestControllerImpl implements PersonautotranRestController {
 
 	@Autowired
