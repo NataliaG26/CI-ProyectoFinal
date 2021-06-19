@@ -14,4 +14,11 @@ public interface AutotransitionService {
 	public Iterable<Autotransition> findAll();
 	
 	public void delete(long id) throws LogicalException;
+	
+	public Iterable<Autotransition> findByName(String name);
+	
+	public Iterable<Autotransition> findByIsActive(String isactive);
+	
+	public Iterable<Autotransition> findByLogicOp(String logicOp);
+	
 }

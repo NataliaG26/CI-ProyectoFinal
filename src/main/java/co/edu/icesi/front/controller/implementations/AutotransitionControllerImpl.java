@@ -49,13 +49,52 @@ public class AutotransitionControllerImpl implements AutotransitionController{
 		autotranLogicaloperandL.add("AND");
 		
 	}
-		
+	//<input type="text" class="form-control" th:field="${isactive}" placeholder="is">	
 	@GetMapping("/")
 	public String indexAutotransition(Model model) {
 		model.addAttribute("autotransitions", autotransitionDelegate.findAll());
+		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
+		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
+		model.addAttribute("autoName", new String());
+		model.addAttribute("isactive", new String());
+		model.addAttribute("logicOp", new String());
 		return "autotransition/index";
 	}
 	
+	@GetMapping("/searchName")
+	public String searchByName(Model model, @RequestParam(value = "autoName", required = false) String autoName) {
+		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
+		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
+		model.addAttribute("autotransitions", autotransitionDelegate.searchByName(autoName));
+		model.addAttribute("autoName", new String());
+		model.addAttribute("isactive", new String());
+		model.addAttribute("logicOp", new String());
+		System.out.println(autoName+" searchName Controller");
+		return "autotransition/index";
+	}
+	
+	@GetMapping("/searchIsActive")
+	public String searchByIsActive(Model model, @RequestParam(value = "isactive", required = false) String isactive) {
+		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
+		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
+		model.addAttribute("autotransitions", autotransitionDelegate.searchByIsActive(isactive));
+		model.addAttribute("autoName", new String());
+		model.addAttribute("isactive",isactive);
+		model.addAttribute("logicOp", new String());
+		return "autotransition/index";
+	}
+	
+	@GetMapping("/searchLogiOp")
+	public String searchByLogicOp(Model model, @RequestParam(value = "logicOp", required = false) String logicOp) {
+		model.addAttribute("autotranIsactiveList", autotranIsactiveL);
+		model.addAttribute("autotranLogicaloperandList", autotranLogicaloperandL);
+		model.addAttribute("autotransitions", autotransitionDelegate.searchByLogicOp(logicOp));
+		model.addAttribute("autoName", new String());
+		model.addAttribute("isactive", new String());
+		model.addAttribute("logicOp", logicOp);
+		return "autotransition/index";
+	}
+
 	@GetMapping("/add")
 	public String addAutotransition(Model model) {
 		model.addAttribute("autotransition", new Autotransition());

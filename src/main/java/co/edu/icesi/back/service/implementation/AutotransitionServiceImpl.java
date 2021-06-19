@@ -141,4 +141,19 @@ public class AutotransitionServiceImpl implements AutotransitionService{
 		autotransitionDAO.Delete(autotransition);
 	}
 	
+	
+	@Override
+	public Iterable<Autotransition> findByName(String name){
+		return autotransitionDAO.findByName(name);
+	}
+
+	@Override
+	public Iterable<Autotransition> findByIsActive(String isactive) {
+		return autotransitionDAO.findByIsactive(isactive);
+	}
+
+	@Override
+	public Iterable<Autotransition> findByLogicOp(String logicOp) {
+		return autotransitionDAO.findByLogicOperand(logicOp);
+	}
 }

@@ -13,5 +13,11 @@ public interface AutotransitionDelegate {
 	public Iterable<Autotransition> findAll();
 	
 	public void delete(long id);
+	
+	public Iterable<Autotransition> searchByName(String autoName);
+	
+	public Iterable<Autotransition> searchByIsActive(String isActive);
+	
+	public Iterable<Autotransition> searchByLogicOp(String logicOp);
 
 }

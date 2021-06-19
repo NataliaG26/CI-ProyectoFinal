@@ -29,5 +29,9 @@ public interface AutotransitionController {
 			@Validated(UpdateAutotransition.class) @ModelAttribute("autotransition") Autotransition autotransition, 
 			BindingResult bindingresult, Model model);
 	
+	public String searchByName(Model model, @RequestParam(value = "autoName", required = false) String autoName);
 	
+	public String searchByIsActive(Model model, @RequestParam(value = "isactive", required = false) String isactive);
+	
+	public String searchByLogicOp(Model model, @RequestParam(value = "logicOp", required = false) String logicOp);
 }

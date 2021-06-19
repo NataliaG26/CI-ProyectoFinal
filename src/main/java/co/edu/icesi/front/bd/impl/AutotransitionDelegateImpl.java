@@ -37,19 +37,35 @@ public class AutotransitionDelegateImpl  implements AutotransitionDelegate{
 	@Override
 	public Iterable<Autotransition> findAll() {
 		Autotransition[] autotransitions = restTemplate.getForObject(SERVER, Autotransition[].class);
-		List<Autotransition> list;
-		try {
-			list = Arrays.asList(autotransitions);
-			return list;
-		}catch (Exception e) {
-			e.printStackTrace();
+		List<Autotransition> at = Arrays.asList(autotransitions);
+		if(at.size()==0) {
 			return null;
 		}
+		return at;
 	}
 
 	@Override
 	public void delete(long id) {
 		restTemplate.delete(SERVER+ id);
+	}
+
+	@Override
+	public Iterable<Autotransition> searchByName(String autoName) {
+		Autotransition[] autotransitions = restTemplate.getForObject(SERVER+"?autoName="+autoName, Autotransition[].class);
+		System.out.println(autoName+" searchName Delegate");
+		return Arrays.asList(autotransitions);
+	}
+
+	@Override
+	public Iterable<Autotransition> searchByIsActive(String isActive) {
+		Autotransition[] autotransitions = restTemplate.getForObject(SERVER+"?isActive="+isActive, Autotransition[].class);
+		return Arrays.asList(autotransitions);
+	}
+
+	@Override
+	public Iterable<Autotransition> searchByLogicOp(String logicOp) {
+		Autotransition[] autotransitions = restTemplate.getForObject(SERVER+"?logicOp="+logicOp, Autotransition[].class);
+		return Arrays.asList(autotransitions);
 	}
 	
 	

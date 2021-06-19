@@ -11,7 +11,7 @@ import co.edu.icesi.back.model.Autotransition;
 
 public interface AutotransitionRestController {
 	
-	public Iterable<Autotransition> showAllAutotransition();
+	public Iterable<Autotransition> showAllAutotransition(String autoName, String isactive, String logicalOp);
 	
 	public Autotransition showAutotransition(@PathVariable("id") long id)  throws LogicalException;
 	

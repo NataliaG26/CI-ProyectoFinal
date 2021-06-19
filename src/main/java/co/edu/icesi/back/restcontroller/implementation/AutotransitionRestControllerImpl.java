@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.back.exception.LogicalException;
@@ -26,8 +27,19 @@ public class AutotransitionRestControllerImpl implements AutotransitionRestContr
 
 	@Override
 	@GetMapping("/")
-	public Iterable<Autotransition> showAllAutotransition() {
-		return autotransitionService.findAll();
+	public Iterable<Autotransition> showAllAutotransition( @RequestParam(value = "autoName", required = false ) String autoName,
+			@RequestParam(value = "isactive", required = false) String isactive, @RequestParam(value = "logicOp", required = false) String logicOp) {
+		
+		if(autoName != null) {
+			System.out.println(autoName+" searchName Rest");
+			return autotransitionService.findByName(autoName);
+		}else if(isactive != null) {
+			return autotransitionService.findByIsActive(isactive);
+		}else if(logicOp != null) {
+			return autotransitionService.findByLogicOp(logicOp);
+		}else {
+			return autotransitionService.findAll();
+		}
 	}
 
 	@Override
