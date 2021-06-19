@@ -14,8 +14,8 @@ public class Documenttype{
 	private String doctypeIsactive;
 
 	private String doctypeName;
-
-	private long instInstId;
+	
+	private BigDecimal instInstId;
 	
 	@JsonIgnore
 	private List<Documentt> documentts;
@@ -47,11 +47,11 @@ public class Documenttype{
 		this.doctypeName = doctypeName;
 	}
 
-	public long getInstInstId() {
+	public BigDecimal getInstInstId() {
 		return this.instInstId;
 	}
 
-	public void setInstInstId(long instInstId) {
+	public void setInstInstId(BigDecimal instInstId) {
 		this.instInstId = instInstId;
 	}
 

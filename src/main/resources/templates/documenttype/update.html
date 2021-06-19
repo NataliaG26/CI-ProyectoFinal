@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>New Document Type</title>
+<title>Edit Document Type</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -17,10 +17,10 @@
 </head>
 <body>
 	<div class="container my-5" >
-		<h2 class="mb-5">New Document Type</h2>
+		<h2 class="mb-5">Edit Document Type</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="#" th:object="${documenttype}" th:action="@{/documenttype/add}" method="post" >
+				<form action="#" th:object="${documenttype}" th:action="@{/documenttype/update/{id}(id=${documenttype.doctypeId})}" method="post" >
 					<div class="row">
 						<div class="form-group col-md-9">
 							<label for="doctypeName" class="col-form-label">Document Type Name</label>
@@ -58,7 +58,7 @@
 					
 					<div class="row">
 						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Add Document">
+							<input type="submit" name="action" class="btn btn-primary" value="Update Document">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">

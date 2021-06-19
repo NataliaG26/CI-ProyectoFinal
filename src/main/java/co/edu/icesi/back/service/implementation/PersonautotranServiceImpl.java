@@ -66,20 +66,21 @@ public class PersonautotranServiceImpl implements PersonautotranService{
 		if(personautotran == null) {
 			throw new LogicalException("La autotrancición de la persona no puede ser null");
 		}
-		else if(personautotran.getPerson()== null) {
-			throw new LogicalException("La persona no puede ser null");
-		}
-		personService.getPersonById(personautotran.getPerson().getPersId());
+//		else if(personautotran.getPerson()== null) {
+//			throw new LogicalException("La persona no puede ser null");
+//		}
+		Person person = personService.getPersonById(personautotran.getPersonId());
 		
-		if(personautotran.getAutotransition() == null) {
-			throw new LogicalException("La autotransición no puede ser null");
-		}
-		autotransitionService.getAutotransitionById(personautotran.getAutotransition().getAutotranId());
+//		if(personautotran.getAutotransition() == null) {
+//			throw new LogicalException("La autotransición no puede ser null");
+//		}
+		Autotransition autotran = autotransitionService.getAutotransitionById(personautotran.getAutotranId());
 		
-		if(personautotran.getPerautDate()==null) {
-			throw new LogicalException("La fecha no puede ser null");
-		}
-		
+//		if(personautotran.getPerautDate()==null) {
+//			throw new LogicalException("La fecha no puede ser null");
+//		}
+		personautotran.setPerson(person);
+		personautotran.setAutotransition(autotran);
 		//personautotranRepository.save(personautotran);
 		personautotranDAO.Edit(personautotran);
 		

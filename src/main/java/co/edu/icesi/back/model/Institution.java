@@ -105,15 +105,15 @@ public class Institution implements Serializable {
 	private List<Accessdenialevent> accessdenialevents;
 	@JsonIgnore
 	// bi-directional many-to-one association to Devicestatus
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Devicestatus> devicestatuses;
 	@JsonIgnore
 	// bi-directional many-to-one association to Devicetype
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Devicetype> devicetypes;
 	@JsonIgnore
 	// bi-directional many-to-one association to Epidemstatustransition
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Epidemstatustransition> epidemstatustransitions;
 	@JsonIgnore
 	// bi-directional many-to-one association to Eventstatus
@@ -121,27 +121,27 @@ public class Institution implements Serializable {
 	private List<Eventstatus> eventstatuses;
 	@JsonIgnore
 	// bi-directional many-to-one association to HatParameter
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<HatParameter> hatParameters;
 	@JsonIgnore
 	// bi-directional many-to-one association to Institutioncampus
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Institutioncampus> institutioncampuses;
 	@JsonIgnore
 	// bi-directional many-to-one association to Measurement
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Measurement> measurements;
 	@JsonIgnore
 	// bi-directional many-to-one association to Person
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Person> persons;
 	@JsonIgnore
 	// bi-directional many-to-one association to Physicalspacetype
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Physicalspacetype> physicalspacetypes;
 	@JsonIgnore
 	// bi-directional many-to-one association to Posessiontype
-	@OneToMany(mappedBy = "institution")
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Posessiontype> posessiontypes;
 
 	public Institution() {

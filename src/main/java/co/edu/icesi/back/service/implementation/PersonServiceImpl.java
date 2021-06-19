@@ -120,6 +120,7 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
+	@Transactional
 	public Person getPersonById(long id) throws LogicalException {
 		try {
 			//Person person = personRepository.findById(id).get();
@@ -131,6 +132,7 @@ public class PersonServiceImpl implements PersonService {
 	}
 	
 	@Override
+	@Transactional
 	public Iterable<Person> findAll(){
 		//return personRepository.findAll();
 		return personDAO.findAll();

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -90,42 +91,42 @@ public class Person implements Serializable {
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Accessdenialevent
-	@OneToMany(mappedBy="person1")
+	@OneToMany(mappedBy="person1", cascade = CascadeType.REMOVE)
 	private List<Accessdenialevent> accessdenialevents1;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Accessdenialevent
-	@OneToMany(mappedBy="person2")
+	@OneToMany(mappedBy="person2", cascade = CascadeType.REMOVE)
 	private List<Accessdenialevent> accessdenialevents2;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Attendance
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Attendance> attendances;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Contactfence
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Contactfence> contactfences;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Docstateinstance
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Docstateinstance> docstateinstances;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Documentt
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Documentt> documentts;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Followup
-	@OneToMany(mappedBy="person1")
+	@OneToMany(mappedBy="person1", cascade = CascadeType.REMOVE)
 	private List<Followup> followups1;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Followup
-	@OneToMany(mappedBy="person2")
+	@OneToMany(mappedBy="person2", cascade = CascadeType.REMOVE)
 	private List<Followup> followups2;
 
 	//bi-directional many-to-one association to Iddocumenttype
@@ -142,72 +143,72 @@ public class Person implements Serializable {
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Personautotran
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Personautotran> personautotrans;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Personrelationship
-	@OneToMany(mappedBy="person1")
+	@OneToMany(mappedBy="person1", cascade = CascadeType.REMOVE)
 	private List<Personrelationship> personrelationships1;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Personrelationship
-	@OneToMany(mappedBy="person2")
+	@OneToMany(mappedBy="person2", cascade = CascadeType.REMOVE)
 	private List<Personrelationship> personrelationships2;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to PersonFence
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<PersonFence> personFences;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to PersonRole
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<PersonRole> personRoles;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to PersonVulner
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<PersonVulner> personVulners;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Physicalcheckup
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Physicalcheckup> physicalcheckups;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Posession
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Posession> posessions;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Userr
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Userr> userrs;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to UstPersonNexus
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<UstPersonNexus> ustPersonNexuses;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to UstPersonStatus
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<UstPersonStatus> ustPersonStatuses;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to UstPersonSymptom
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<UstPersonSymptom> ustPersonSymptoms;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to UstSocialclosecontact
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<UstSocialclosecontact> ustSocialclosecontacts;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Visit
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", cascade = CascadeType.REMOVE)
 	private List<Visit> visits;
 
 	public Person() {

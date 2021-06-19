@@ -70,7 +70,7 @@ public class DocumenttControllerImpl implements DocumenttController{
 			
 	}
 
-	@RequestMapping(value = "/del/{id}", method = {RequestMethod.GET})
+	@RequestMapping(value = "/del/{id}", method = {RequestMethod.DELETE})
 	@Override
 	public String deleteForm(@PathVariable("id") long id, Model model) {
 		documenttDelegate.delete(id);

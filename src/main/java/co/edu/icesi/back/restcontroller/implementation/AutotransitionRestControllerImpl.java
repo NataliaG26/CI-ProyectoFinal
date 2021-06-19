@@ -31,7 +31,7 @@ public class AutotransitionRestControllerImpl implements AutotransitionRestContr
 	}
 
 	@Override
-	@GetMapping("/show/{id}")
+	@GetMapping("/{id}")
 	public Autotransition showAutotransition(@PathVariable("id") long id) throws LogicalException {
 		return autotransitionService.getAutotransitionById(id);
 	}
@@ -43,13 +43,13 @@ public class AutotransitionRestControllerImpl implements AutotransitionRestContr
 	}
 
 	@Override
-	@PutMapping("/update/{id}")
-	public void updateAutotransition(long id, Autotransition autotransition) throws LogicalException {
+	@PutMapping("/update")
+	public void updateAutotransition(@RequestBody Autotransition autotransition) throws LogicalException {
 		autotransitionService.updateAutotransition(autotransition);
 	}
 
 	@Override
-	@DeleteMapping("/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteAutotransition(long id) throws LogicalException {
 		try {
 			autotransitionService.delete(id);

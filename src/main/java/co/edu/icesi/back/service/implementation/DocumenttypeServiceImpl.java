@@ -28,7 +28,7 @@ public class DocumenttypeServiceImpl implements DocumenttypeService{
 	@Override
 	@Transactional
 	public Documenttype updateDocumenttype(Documenttype documenttype) {
-		documenttypeDAO.Save(documenttype);
+		documenttypeDAO.Edit(documenttype);
 		return documenttype;
 	}
 

@@ -34,7 +34,7 @@ public class PersonautoranDelegateImpl implements PersonautotranDelegate{
 
 	@Override
 	public Personautotran getPersonautotranById(long id) throws LogicalException {
-		return restTemplate.getForObject(SERVER + "showPersonautotran/" + id, Personautotran.class);
+		return restTemplate.getForObject(SERVER  + id, Personautotran.class);
 	}
 
 	@Override
@@ -52,6 +52,6 @@ public class PersonautoranDelegateImpl implements PersonautotranDelegate{
 
 	@Override
 	public void delete(long id) {
-		restTemplate.delete(SERVER + "del/" + id);
+		restTemplate.delete(SERVER + + id);
 	}
 }

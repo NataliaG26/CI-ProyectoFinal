@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,15 +67,13 @@ public class PersonControllerImpl implements PersonController {
 			@Validated Person person, BindingResult bindingresult, Model model) throws LogicalException {
 		if (!action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {
-				model.addAttribute("person", person);
+				//model.addAttribute("person", person);
 				model.addAttribute("personIsactiveL", personIsactiveL);
 				model.addAttribute("institutions", institutionDelegate.findAll());
 			 	return "person/update";
 			}else {
-				
-		//institutionService.createInstitution(institution);
 			try {
-				long instid = person.getInstitution().getInstId();
+				long instid = person.getInstid();
 				personDelegate.updatePerson(person, instid);
 				return "redirect:/person/showPerson/{id}";
 			}catch(LogicalException e) {

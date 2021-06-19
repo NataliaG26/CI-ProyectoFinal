@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,18 +36,19 @@ public class DocumenttypeRestControllerImpl implements DocumenttypeRestControlle
 
 	@Override
 	@PostMapping("/add")
-	public Documenttype saveDocumenttype(Documenttype documenttype) {
+	public Documenttype saveDocumenttype(@RequestBody Documenttype documenttype) {
 		return documenttypeService.createDocumenttype(documenttype);
 	}
 
 	@Override
 	@PutMapping("/update")
-	public void updateDocumenttype(Documenttype documenttype) {
+	public void updateDocumenttype(@RequestBody Documenttype documenttype) {
+		System.out.println(documenttype.getDoctypeId());
 		documenttypeService.updateDocumenttype(documenttype);
 	}
 
 	@Override
-	@DeleteMapping("/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteDocumenttype(@PathVariable("id") long id) {
 		documenttypeService.delete(id);
 	}

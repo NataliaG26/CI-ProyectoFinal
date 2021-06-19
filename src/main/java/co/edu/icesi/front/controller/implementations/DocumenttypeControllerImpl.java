@@ -56,8 +56,10 @@ public class DocumenttypeControllerImpl implements DocumenttypeController{
 				model.addAttribute("institutions", institutionDelegate.findAll());
 			 	return "/documenttype/update/{id}";
 			}else {
+				System.out.println("update controller 2");
 				documenttypeDelegate.updateDocumenttype(documenttype);
-				return "redirect:/documenttype/showDocumenttype/{id}";
+				//return "redirect:/documenttype/showDocumenttype/{id}";
+				return "redirect:/documenttype/";
 			}
 		}
 		return "redirect:/documenttype/";

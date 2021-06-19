@@ -17,7 +17,7 @@ public interface AutotransitionRestController {
 	
 	public Autotransition saveAutotransition(@RequestBody Autotransition autotransition) throws LogicalException;
 	
-	public void updateAutotransition(@PathVariable("id") long id, @Validated(UpdateAutotransition.class) Autotransition autotransition )throws LogicalException;
+	public void updateAutotransition(@Validated(UpdateAutotransition.class) Autotransition autotransition )throws LogicalException;
 	
 	public void deleteAutotransition(@PathVariable("id") long id) throws LogicalException;
 	

@@ -27,8 +27,13 @@ public class PersonDAOImpl implements PersonDAO{
 
 	@Override
 	public void Delete(Person entity) {
-		Person attachedEntity = em.merge(entity);
-		em.remove(attachedEntity);
+//		Person attachedEntity = em.merge(entity);
+//		em.remove(attachedEntity);
+		if (em.contains(entity)) {
+			em.remove(entity);
+		} else {
+			em.remove(em.merge(entity));
+		}
 	}
 
 	@Override

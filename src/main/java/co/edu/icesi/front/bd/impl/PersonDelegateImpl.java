@@ -35,7 +35,7 @@ public class PersonDelegateImpl implements PersonDelegate{
 
 	@Override
 	public Person getPersonById(long id) throws LogicalException {
-		return restTemplate.getForObject(SERVER + "showPerson/" + id, Person.class);
+		return restTemplate.getForObject(SERVER + id, Person.class);
 	}
 
 	@Override
@@ -53,6 +53,6 @@ public class PersonDelegateImpl implements PersonDelegate{
 
 	@Override
 	public void delete(long id) {
-		restTemplate.delete(SERVER + "del/" + id);
+		restTemplate.delete(SERVER + id);
 	}
 }

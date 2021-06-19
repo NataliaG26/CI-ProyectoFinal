@@ -24,8 +24,8 @@ public class Autotransition{
 
 	private Eventstatus eventstatus2; */
 	
-//	@JsonIgnore
-//	private List<Personautotran> personautotrans;
+	@JsonIgnore
+	private List<Personautotran> personautotrans;
 
 	public Autotransition() {
 	}

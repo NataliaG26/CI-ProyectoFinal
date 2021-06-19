@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.back.exception.LogicalException;
@@ -29,27 +31,28 @@ public class PersonRestControllerImpl implements PersonRestController {
 	}
 
 	@Override
-	@GetMapping("/showPerson/{id}")
+	@GetMapping("/{id}")
 	public Person showPerson(@PathVariable("id") long id) throws LogicalException {
 		return personService.getPersonById(id);
 	}
 
 	@Override
 	@PostMapping("/add/{instid}")
-	public Person savePerson(Person person, @PathVariable(value="instid", required = true) long instid) throws LogicalException {
+	public Person savePerson(@RequestBody Person person, @PathVariable(value="instid", required = true) long instid) throws LogicalException {
 		System.out.println("back  "+person.getPersName());
 		return personService.createPerson(person, instid);
 	}
 
 	@Override
-	@DeleteMapping("/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deletePerson(@PathVariable("id") long id) throws LogicalException {
 		personService.delete(id);
 	}
 
 	@Override
-	@PutMapping("/update/{instid}")
-	public void updatePerson(Person person, @PathVariable("instid") long instid) throws LogicalException {
+	//@PutMapping("/update/{instid}")
+	@RequestMapping(value = "/update/{instid}", method = {RequestMethod.PUT})
+	public void updatePerson(@RequestBody Person person, @PathVariable(value="instid", required = true) long instid) throws LogicalException {
 		personService.updatePerson(person, instid);
 	}
 

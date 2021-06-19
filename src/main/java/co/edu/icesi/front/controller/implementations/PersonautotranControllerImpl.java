@@ -109,7 +109,7 @@ public class PersonautotranControllerImpl implements PersonautotranController {
 	public String updatePersonautotran(@PathVariable("id") long id,
 			@RequestParam(value = "action", required = true) String action,
 			@Validated @ModelAttribute("personautotran") Personautotran personautotran,
-			BindingResult bindingresult,   Model model) {
+			BindingResult bindingresult, Model model) {
 		if (action != null && !action.equals("Cancel")) {
 			if(bindingresult.hasErrors()) {
 				model.addAttribute("persons", personDelegate.findAll());

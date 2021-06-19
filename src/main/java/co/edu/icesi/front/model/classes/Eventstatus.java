@@ -2,6 +2,8 @@ package co.edu.icesi.front.model.classes;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Eventstatus{
 	
 	private static final long serialVersionUID = 1L;
@@ -14,11 +16,13 @@ public class Eventstatus{
 
 	private String evestatName;
 
+	@JsonIgnore
 	private List<Autotransition> autotransitions1;
-
+	
+	@JsonIgnore
 	private List<Autotransition> autotransitions2;
 
-	private Institution institution;
+	//private Institution institution;
 
 	public Eventstatus() {
 	}
@@ -99,12 +103,12 @@ public class Eventstatus{
 		return autotransitions2;
 	}
 */
-	public Institution getInstitution() {
-		return this.institution;
-	}
-
-	public void setInstitution(Institution institution) {
-		this.institution = institution;
-	}
+//	public Institution getInstitution() {
+//		return this.institution;
+//	}
+//
+//	public void setInstitution(Institution institution) {
+//		this.institution = institution;
+//	}
 
 }

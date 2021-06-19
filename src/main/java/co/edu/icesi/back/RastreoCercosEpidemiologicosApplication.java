@@ -128,8 +128,9 @@ public class RastreoCercosEpidemiologicosApplication {
 		eventstatus3.setEpidemstatuscolor(epidemstatuscolor1);
 		eventstatus3.setInstitution(institution1);
 		
-		Documentt documentt1 = new Documentt();
-		documentt1.setDocName("Doc 1");
+		//Documentt documentt1 = new Documentt();
+		//documentt1.setDocName("Doc 1");
+		
 		
 		try {
 			institutionService.createInstitution(institution1);
@@ -145,7 +146,7 @@ public class RastreoCercosEpidemiologicosApplication {
 			eventstatusService.createEventstatus(eventstatus1);
 			eventstatusService.createEventstatus(eventstatus2);
 			eventstatusService.createEventstatus(eventstatus3);
-			documenttServiceImpl.createDocumentt(documentt1);
+			//documenttServiceImpl.createDocumentt(documentt1);
 		} catch (LogicalException e) {
 			e.printStackTrace();
 		}
