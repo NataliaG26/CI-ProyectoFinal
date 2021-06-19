@@ -3,43 +3,47 @@ package co.edu.icesi.front.bd;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
+import javax.persistence.PersistenceContext;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.front.model.classes.Institution;
+import co.edu.icesi.front.bd.impl.InstitutionDelegateImpl;
 import co.edu.icesi.front.bd.interfaces.InstitutionDelegate;
 
-@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(classes = {PersistenceContext.class})
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class InstitutionDelegateTest {
 	
 	@Mock
 	private RestTemplate restTemplate;
 	
 	@InjectMocks
-	@Autowired
-	private InstitutionDelegate institutionDelegate;
+	private static InstitutionDelegate institutionDelegate;
 	
 	final String SERVER="http://localhost:8080/api-rest/institution/";
 	
-	@SuppressWarnings("deprecation")
-	@BeforeEach
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
+	@BeforeAll
+	public static void setUp() {
+		institutionDelegate = new InstitutionDelegateImpl();
 	}
 	
 	@Test
-	public void testCreateAutotransition() {
+	public void testCreateInstitution() {
 		
 		Institution institution = new Institution();
 		institution.setInstId(123);
@@ -47,9 +51,9 @@ public class InstitutionDelegateTest {
 		institution.setInstAcadloginusername("loginUsername");
 		institution.setInstName("Test institution");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
+		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.OK));
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class)).thenReturn(institution);
+		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class)).thenReturn(institution);
 
 		institutionDelegate.createInstitution(institution);
 		
@@ -60,7 +64,7 @@ public class InstitutionDelegateTest {
 	}
 	
 	@Test
-	public void testUpdateAutotransition() {
+	public void testUpdateInstitution() {
 		
 		Institution institution = new Institution();
 		institution.setInstId(123);
@@ -74,10 +78,10 @@ public class InstitutionDelegateTest {
 		newInstitution.setInstAcadloginusername("loginUsername2");
 		newInstitution.setInstName("Test institution #2");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
+		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.OK));
-		Mockito.doNothing().when(restTemplate).put(SERVER + "update/" + institution.getInstId(), newInstitution, Institution.class);
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class))
+		doNothing().when(restTemplate).put(SERVER + "update/" + institution.getInstId(), newInstitution, Institution.class);
+		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class))
 		.thenReturn(newInstitution);
 		
 		institutionDelegate.createInstitution(institution);
@@ -92,7 +96,7 @@ public class InstitutionDelegateTest {
 	}
 	
 	@Test
-	public void testGetAutotransitionById() {
+	public void testGetInstitutionById() {
 		
 		Institution institution = new Institution();
 		institution.setInstId(123);
@@ -100,10 +104,10 @@ public class InstitutionDelegateTest {
 		institution.setInstAcadloginusername("loginUsername");
 		institution.setInstName("Test institution");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
+		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.OK));
 
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class)).thenReturn(institution);
+		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class)).thenReturn(institution);
 
 		institutionDelegate.createInstitution(institution);
 		
@@ -136,13 +140,13 @@ public class InstitutionDelegateTest {
 		
 		Institution[] institutions = {institution1, institution2, institution3};
 		
-		Mockito.when(restTemplate.getForObject(SERVER, Institution[].class))
+		when(restTemplate.getForObject(SERVER, Institution[].class))
 		.thenReturn(new ResponseEntity<Institution[]>(institutions, HttpStatus.OK).getBody());
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", institution1, Institution.class))
+		when(restTemplate.postForEntity(SERVER + "add/", institution1, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution1, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", institution2, Institution.class))
+		when(restTemplate.postForEntity(SERVER + "add/", institution2, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution2, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", institution3, Institution.class))
+		when(restTemplate.postForEntity(SERVER + "add/", institution3, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution3, HttpStatus.OK));
 
 		institutionDelegate.createInstitution(institution1);
@@ -165,15 +169,15 @@ public class InstitutionDelegateTest {
 		institution.setInstAcadloginusername("loginUsername");
 		institution.setInstName("Test institution");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
+		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.ACCEPTED));
 		
 		institutionDelegate.createInstitution(institution);
 		
-		Mockito.doNothing().when(restTemplate).delete(SERVER + institution.getInstId());
+		doNothing().when(restTemplate).delete(SERVER + institution.getInstId());
 		institutionDelegate.delete(institution.getInstId());
 
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), null))
+		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), null))
 				.thenReturn(new ResponseEntity(null, HttpStatus.OK).getBody());
 		assertNull(institutionDelegate.getInstitutionById(institution.getInstId()));
 		
