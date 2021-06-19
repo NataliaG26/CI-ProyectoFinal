@@ -90,6 +90,7 @@ public class DocumenttypeControllerImpl implements DocumenttypeController{
 				model.addAttribute("institutions", institutionDelegate.findAll());
 			 	return "/documenttype/add";
 			}else {
+				System.out.println("Controller "+ documenttype.getInstInstId());
 				documenttypeDelegate.createDocumenttype(documenttype);
 			}
 		}

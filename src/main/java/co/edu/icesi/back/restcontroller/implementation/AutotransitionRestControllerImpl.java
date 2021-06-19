@@ -37,13 +37,13 @@ public class AutotransitionRestControllerImpl implements AutotransitionRestContr
 	}
 
 	@Override
-	@PostMapping("/add")
+	@PostMapping("/")
 	public Autotransition saveAutotransition(@RequestBody Autotransition autotransition) throws LogicalException {
 		return autotransitionService.createAutotransition(autotransition);
 	}
 
 	@Override
-	@PutMapping("/update")
+	@PutMapping("/")
 	public void updateAutotransition(@RequestBody Autotransition autotransition) throws LogicalException {
 		autotransitionService.updateAutotransition(autotransition);
 	}

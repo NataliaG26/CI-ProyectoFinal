@@ -47,8 +47,7 @@
 								<a href="/documenttype/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							<select th:field="*{documenttype}" class="form-control"
-								id="documenttype">
+							<select th:field="*{docttypeId}" class="form-control">
 								<option th:each="doctt : ${documenttypes}"
 									th:value="${doctt.doctypeId}" th:text="${doctt.doctypeName}" />
 							</select> 
@@ -59,8 +58,7 @@
 								<a href="/person/"><input type="button"  class="btn btn-secondary" value="More"></a>
 								
 							</div>
-							<select th:field="*{person}" class="form-control"
-								id="person">
+							<select th:field="*{personId}" class="form-control">
 								<option th:each="pers : ${persons}"
 									th:value="${pers.persId}" th:text="${pers.persName}" />
 							</select> 

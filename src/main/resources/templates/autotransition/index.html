@@ -27,6 +27,8 @@
 							<tr>
 								<th>ID</th>
 								<th>Name</th>
+								<th>Is Active</th>
+								<th>Logical Op</th>
 								<th>Edit</th>
 								<th>Delete</th>
 							</tr>
@@ -35,6 +37,8 @@
 							<tr th:each="autotran : ${autotransitions}" th:value="autotran">		
 								<td class="text-info" th:text="${autotran.autotranId}"></td>						
 								<td class="text-info" th:text="${autotran.autotranName}"></td>
+								<td class="text-info" th:text="${autotran.autotranIsactive}"></td>
+								<td class="text-info" th:text="${autotran.autotranLogicaloperand}"></td>
 								<td><a th:href="@{/autotransition/update/{id}(id=${autotran.autotranId})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/autotransition/del/{id}(id=${autotran.autotranId})}"

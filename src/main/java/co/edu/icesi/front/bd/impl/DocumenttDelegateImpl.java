@@ -23,12 +23,12 @@ public class DocumenttDelegateImpl implements DocumenttDelegate{
 	
 	@Override
 	public Documentt createDocumentt(Documentt documentt) {
-		return restTemplate.postForEntity(SERVER +"add", documentt, Documentt.class).getBody();
+		return restTemplate.postForEntity(SERVER, documentt, Documentt.class).getBody();
 	}
 
 	@Override
 	public void updateDocumentt(Documentt documentt) {
-		restTemplate.put(SERVER + "update/", documentt, Documentt.class);
+		restTemplate.put(SERVER, documentt, Documentt.class);
 	}
 
 	@Override
@@ -38,14 +38,12 @@ public class DocumenttDelegateImpl implements DocumenttDelegate{
 
 	@Override
 	public List<Documentt> findAll() {
-		List<Documentt> documenttlist = new ArrayList<Documentt>();
-		try {
-			Documentt[] documentts = restTemplate.getForObject(SERVER, Documentt[].class);
-			documenttlist = Arrays.asList(documentts);
-		}catch(Exception e) {
-			return documenttlist;
+		Documentt[] documentts = restTemplate.getForObject(SERVER, Documentt[].class);
+		List<Documentt> at = Arrays.asList(documentts);
+		if(at.size()==0) {
+			return null;
 		}
-		return documenttlist;
+		return at;
 	}
 
 	@Override

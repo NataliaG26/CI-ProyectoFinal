@@ -35,15 +35,17 @@ public class DocumenttypeRestControllerImpl implements DocumenttypeRestControlle
 	}
 
 	@Override
-	@PostMapping("/add")
+	@PostMapping("/")
 	public Documenttype saveDocumenttype(@RequestBody Documenttype documenttype) {
+		//System.out.println("Rest "+ documenttype.getInstInstId());
 		return documenttypeService.createDocumenttype(documenttype);
 	}
 
 	@Override
-	@PutMapping("/update")
+	@PutMapping("/")
 	public void updateDocumenttype(@RequestBody Documenttype documenttype) {
-		System.out.println(documenttype.getDoctypeId());
+		//System.out.println(documenttype.getDoctypeId());
+		//System.out.println("Rest "+ documenttype.getInstInstId());
 		documenttypeService.updateDocumenttype(documenttype);
 	}
 

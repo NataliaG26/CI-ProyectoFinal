@@ -21,17 +21,17 @@ public class AutotransitionDelegateImpl  implements AutotransitionDelegate{
 
 	@Override
 	public Autotransition createAutotransition(Autotransition autotransition) {
-		return restTemplate.postForEntity(SERVER +"add", autotransition, Autotransition.class).getBody();
+		return restTemplate.postForEntity(SERVER, autotransition, Autotransition.class).getBody();
 	}
 
 	@Override
 	public void updateAutotransition(Autotransition autotransition) {
-		restTemplate.put(SERVER + "update/", autotransition, Autotransition.class);
+		restTemplate.put(SERVER, autotransition, Autotransition.class);
 	}
 
 	@Override
 	public Autotransition getAutotransitionById(long id) {
-		return restTemplate.getForObject(SERVER + "show/"+id, Autotransition.class);
+		return restTemplate.getForObject(SERVER+id, Autotransition.class);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class AutotransitionDelegateImpl  implements AutotransitionDelegate{
 
 	@Override
 	public void delete(long id) {
-		restTemplate.delete(SERVER + "del/"+ id);
+		restTemplate.delete(SERVER+ id);
 	}
 	
 	

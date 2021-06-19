@@ -55,6 +55,10 @@ public class Documentt implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="PERS_PERS_ID")
 	private Person person;
+	
+private long docttypeId;
+	
+	private long personId;
 
 	public Documentt() {
 	}
@@ -127,6 +131,22 @@ public class Documentt implements Serializable {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+	
+	public long getDocttypeId() {
+		return docttypeId;
+	}
+	
+	public void setDocttypeId(long docttypeId) {
+		this.docttypeId = docttypeId;
+	}
+	
+	public long getPersonId() {
+		return personId;
+	}
+	
+	public void setPersonId(long personId) {
+		this.personId = personId;
 	}
 
 }

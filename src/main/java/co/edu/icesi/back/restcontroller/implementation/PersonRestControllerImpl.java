@@ -37,7 +37,7 @@ public class PersonRestControllerImpl implements PersonRestController {
 	}
 
 	@Override
-	@PostMapping("/add/{instid}")
+	@PostMapping("/{instid}")
 	public Person savePerson(@RequestBody Person person, @PathVariable(value="instid", required = true) long instid) throws LogicalException {
 		System.out.println("back  "+person.getPersName());
 		return personService.createPerson(person, instid);
@@ -50,8 +50,7 @@ public class PersonRestControllerImpl implements PersonRestController {
 	}
 
 	@Override
-	//@PutMapping("/update/{instid}")
-	@RequestMapping(value = "/update/{instid}", method = {RequestMethod.PUT})
+	@PutMapping("/{instid}")
 	public void updatePerson(@RequestBody Person person, @PathVariable(value="instid", required = true) long instid) throws LogicalException {
 		personService.updatePerson(person, instid);
 	}

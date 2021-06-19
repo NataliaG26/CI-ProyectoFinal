@@ -13,7 +13,6 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
 	<div th:switch="${persons}" class="container my-5">
@@ -30,9 +29,9 @@
 								<th>Last Name</th>
 								<th>ID Document</th>
 								<th>Is Active</th>
-								<th>Address</th>
 								<th>Contact Number</th>
 								<th>Email</th>
+								<th>Institution</th>
 								<th>More information</th>
 								<th>Edit</th>
 								<th>Delete</th>
@@ -45,9 +44,10 @@
 								<td class="text-info" th:text="${person.persLastname}"></td>
 								<td class="text-info" th:text="${person.persIddocument}"></td>
 								<td class="text-info" th:text="${person.persIsactive}"></td>
-								<td class="text-info" th:text="${person.persAddress}"></td>
 								<td class="text-info" th:text="${person.persContactnumber}"></td>
 								<td class="text-info" th:text="${person.persEmail}"></td>
+								<td class="text-info" th:text="${person.institution.instName}"></td>
+								
 								<td><a th:href="@{/person/showPerson/{id}(id=${person.persId})}"
 									class="btn btn-primary">See more</a></td>
 								<td><a th:href="@{/person/update/{id}(id=${person.persId})}"

@@ -34,12 +34,12 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 
 	@Override
 	public Institution createInstitution(Institution institution){
-		return restTemplate.postForEntity(SERVER +"add", institution, Institution.class).getBody();
+		return restTemplate.postForEntity(SERVER, institution, Institution.class).getBody();
 	}
 
 	@Override
 	public void updateInstitution(Institution institution){
-		restTemplate.put(SERVER + "update/", institution, Institution.class);
+		restTemplate.put(SERVER, institution, Institution.class);
 	}
 
 	@Override
@@ -50,8 +50,11 @@ public class InstitutionDelegateImpl implements InstitutionDelegate{
 	@Override
 	public List<Institution> findAll() {
 		Institution[] institutions = restTemplate.getForObject(SERVER, Institution[].class);
-		List<Institution> list = Arrays.asList(institutions);
-		return list;
+		List<Institution> at = Arrays.asList(institutions);
+		if(at.size()==0) {
+			return null;
+		}
+		return at;
 	}
 
 	@Override

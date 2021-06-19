@@ -2,6 +2,8 @@ package co.edu.icesi.front.model.classes;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,13 +27,14 @@ public class Person {
 	@Email
 	@Size(min=6)
 	private String persEmail;
-
+	
 	private String persExtid;
-
+	
 	private String persIddocument;
 
 	private String persIsactive;
-
+	
+	//@NotBlank(message="the link cannot be blank")
 	private String persLastname;
 
 	private String persLatitude;
@@ -39,7 +42,7 @@ public class Person {
 	private String persLocaldata;
 
 	private String persLongitude;
-
+	
 	private String persName;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -54,6 +57,7 @@ public class Person {
 
 	private Institution institution;
 	
+	//@NotBlank(message="the link cannot be blank")
 	private long instid;
 
 //	@JsonIgnore

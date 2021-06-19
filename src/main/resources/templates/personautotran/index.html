@@ -37,8 +37,8 @@
 							<tr th:each="pers : ${personautotrans}" th:value="pers">		
 								<td class="text-info" th:text="${pers.perautId}"></td>						
 								<td class="date-info" th:text="${pers.perautDate}"></td>
-								<!-- <td class="text-info" th:text="${pers.autotransition.autotranName}"></td>
-								<td class="text-info" th:text="${pers.person.persName}"></td>-->
+								<td class="text-info" th:text="${pers.autotransition.autotranName}"></td>
+								<td class="text-info" th:text="${pers.person.persName}"></td>
 								<td><a th:href="@{/personautotran/update/{id}(id=${pers.perautId})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/personautotran/del/{id}(id=${pers.perautId})}"

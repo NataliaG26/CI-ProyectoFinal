@@ -45,20 +45,20 @@ public class InstitutionRestControllerImpl implements InstitutionRestController 
 	}
 
 	@Override
-	@RequestMapping(value = "/update", method = {RequestMethod.PUT})
+	@PutMapping("/")
 	public void updateInstitution(@RequestBody Institution institution) throws LogicalException {
 		institutionService.updateInstitution(institution);
 	}
 
 	@Override
-	@PostMapping("/add")
+	@PostMapping("/")
 	public Institution saveInstitution(@RequestBody Institution institution) throws LogicalException {
 		return institutionService.createInstitution(institution);
 	}
 
 
 	@Override
-	@RequestMapping(value = "/{id}", method = {RequestMethod.DELETE})
+	@DeleteMapping("/{id}")
 	public void deleteInstitution(@PathVariable("id") long id) {
 		System.out.println("Delete Rest controller 1");
 		try {

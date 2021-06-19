@@ -23,14 +23,15 @@ public class DocumenttypeDelegateImpl implements DocumenttypeDelegate{
 	
 	@Override
 	public Documenttype createDocumenttype(Documenttype documenttype) {
-		return restTemplate.postForEntity(SERVER +"add", documenttype, Documenttype.class).getBody();
+		System.out.println("Delegate "+ documenttype.getInstInstId());
+		return restTemplate.postForEntity(SERVER, documenttype, Documenttype.class).getBody();
 	}
 
 	@Override
 	public void updateDocumenttype(Documenttype documenttype) {
-		String s = SERVER + "update";
+		String s = SERVER;
 		System.out.println(s);
-		restTemplate.put(s, documenttype, Documenttype.class);
+		restTemplate.put(SERVER, documenttype, Documenttype.class);
 	}
 
 	@Override
@@ -40,14 +41,13 @@ public class DocumenttypeDelegateImpl implements DocumenttypeDelegate{
 
 	@Override
 	public List<Documenttype> findAll() {
-		List<Documenttype> documenttypelist = new ArrayList<Documenttype>();
-		try {
-			Documenttype[] documenttypes = restTemplate.getForObject(SERVER, Documenttype[].class);
-			documenttypelist = Arrays.asList(documenttypes);
-		}catch(Exception e) {
-			return documenttypelist;
+		Documenttype[] documenttypes = restTemplate.getForObject(SERVER, Documenttype[].class);
+		List<Documenttype> at = Arrays.asList(documenttypes);
+		if(at.size()==0) {
+			return null;
 		}
-		return documenttypelist;
+		return at;
+
 	}
 
 	@Override

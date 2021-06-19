@@ -23,14 +23,14 @@ public class PersonDelegateImpl implements PersonDelegate{
 
 	@Override
 	public Person createPerson(@RequestBody Person person, long instid) throws LogicalException {
-		String s = SERVER + "add/"+instid;
+		String s = SERVER +instid;
 		System.out.println(s + "  "+person.getPersName());
 		return restTemplate.postForEntity(s, person, Person.class).getBody();
 	}
 
 	@Override
 	public void updatePerson(Person person, long instid) throws LogicalException {
-		restTemplate.put(SERVER + "update/"+instid, person, Person.class);
+		restTemplate.put(SERVER+instid, person, Person.class);
 	}
 
 	@Override
@@ -41,14 +41,11 @@ public class PersonDelegateImpl implements PersonDelegate{
 	@Override
 	public Iterable<Person> findAll() {
 		Person[] people = restTemplate.getForObject(SERVER, Person[].class);
-		List<Person> at;
-		try {
-			at = Arrays.asList(people);
-			return at;
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<Person> at = Arrays.asList(people);
+		if(at.size()==0) {
 			return null;
 		}
+		return at;
 	}
 
 	@Override

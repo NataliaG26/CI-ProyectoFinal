@@ -35,20 +35,20 @@ public class PersonautotranRestControllerImpl implements PersonautotranRestContr
 	}
 
 	@Override
-	@PostMapping("/add/{personid}/{autotranid}")
+	@PostMapping("/{personid}/{autotranid}")
 	public Personautotran savePersonautotran( @PathVariable(value="personid", required = true) long personid,  @PathVariable(value="autotranid", required = true) long autotranId,
 			Personautotran personautotran) throws LogicalException {
 		return personautotranService.createPersonautotran(personautotran, personid, autotranId);
 	}
 
 	@Override
-	@DeleteMapping("/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deletePersonautotran(@PathVariable("id") long id) throws LogicalException {
 		personautotranService.delete(id);
 	}
 
 	@Override
-	@PutMapping("/update")
+	@PutMapping("/")
 	public void updatePersonautotran(Personautotran personautotran) throws LogicalException {
 		personautotranService.updatePersonautotran(personautotran);
 	}

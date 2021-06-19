@@ -2,6 +2,8 @@ package co.edu.icesi.front.model.classes;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -17,12 +19,15 @@ public class Personautotran {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate perautDate;
 	
+	@NotBlank(message="the link cannot be blank")
 	private Autotransition autotransition;
 
 	private Person person;
 
+	@NotBlank(message="the link cannot be blank")
 	private long personId;
 
+	@NotBlank(message="the link cannot be blank")
 	private long autotranId;
 
 	public Personautotran() {

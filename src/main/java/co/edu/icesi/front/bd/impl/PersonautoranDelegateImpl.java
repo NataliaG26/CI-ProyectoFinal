@@ -22,14 +22,14 @@ public class PersonautoranDelegateImpl implements PersonautotranDelegate{
 
 	@Override
 	public Personautotran createPersonautotran(Personautotran personautotran, long personId, long autotranId) throws LogicalException {
-		String s = SERVER + "add/"+personId+"/"+autotranId;
+		String s = SERVER+personId+"/"+autotranId;
 		System.out.println(s);
 		return restTemplate.postForEntity(s, personautotran, Personautotran.class).getBody();
 	}
 
 	@Override
 	public void updatePersonautotran(Personautotran personautotran) throws LogicalException {
-		restTemplate.put(SERVER + "update/", personautotran, Personautotran.class);
+		restTemplate.put(SERVER, personautotran, Personautotran.class);
 	}
 
 	@Override
@@ -40,18 +40,15 @@ public class PersonautoranDelegateImpl implements PersonautotranDelegate{
 	@Override
 	public Iterable<Personautotran> findAll() {
 		Personautotran[] personautotrans = restTemplate.getForObject(SERVER, Personautotran[].class);
-		List<Personautotran> at;
-		try {
-			at = Arrays.asList(personautotrans);
-			return at;
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<Personautotran> at =  Arrays.asList(personautotrans);		
+		if(at.size()==0) {
 			return null;
 		}
+		return at;
 	}
 
 	@Override
 	public void delete(long id) {
-		restTemplate.delete(SERVER + + id);
+		restTemplate.delete(SERVER + id);
 	}
 }
