@@ -45,7 +45,14 @@ public class DocumenttServiceImpl implements DocumenttService{
 	@Override
 	@Transactional
 	public Documentt updateDocumentt(Documentt documentt) {
-		documenttDAO.Save(documentt);
+		documentt.setDocumenttype(documenttypeService.getDocumenttypeById(documentt.getDocttypeId()));
+		try {
+			documentt.setPerson(personService.getPersonById(documentt.getPersonId()));
+		} catch (LogicalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		documenttDAO.Edit(documentt);
 		return documentt;
 	}
 

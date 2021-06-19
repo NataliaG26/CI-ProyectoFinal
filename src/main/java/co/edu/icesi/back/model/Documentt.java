@@ -56,7 +56,7 @@ public class Documentt implements Serializable {
 	@JoinColumn(name="PERS_PERS_ID")
 	private Person person;
 	
-private long docttypeId;
+	private long docttypeId;
 	
 	private long personId;
 

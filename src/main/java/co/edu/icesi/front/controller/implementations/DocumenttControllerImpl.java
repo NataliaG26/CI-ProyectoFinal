@@ -63,7 +63,7 @@ public class DocumenttControllerImpl implements DocumenttController{
 			 	return "documentt/update/{id}";
 			}else {
 				documenttDelegate.updateDocumentt(documentt);
-				return "redirect:/documentt/showDocumentt/{id}";
+				return "redirect:/documentt/";
 			}
 		}
 		return "redirect:/documentt/";
