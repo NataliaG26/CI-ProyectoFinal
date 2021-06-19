@@ -4,57 +4,70 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import org.junit.jupiter.api.BeforeEach;
+import javax.persistence.PersistenceContext;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Autotransition;
+import co.edu.icesi.front.bd.impl.PersonautoranDelegateImpl;
 import co.edu.icesi.front.bd.interfaces.PersonautotranDelegate;
+import co.edu.icesi.front.model.classes.Person;
 import co.edu.icesi.front.model.classes.Personautotran;
 
-@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(classes = {PersistenceContext.class})
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class PersonautotranDelegateTest {
 	
 	@Mock
 	private RestTemplate restTemplate;
 	
 	@InjectMocks
-	@Autowired
-	private PersonautotranDelegate personautotranDelegate;
+	private static PersonautotranDelegate personautotranDelegate;
 	
 	final String SERVER="http://localhost:8080/api-rest/personautotran/";
 	
-	@SuppressWarnings("deprecation")
-	@BeforeEach
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
+	@BeforeAll
+	public static void setUp() {
+		personautotranDelegate = new PersonautoranDelegateImpl();
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreateAutotransition() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(new Date(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
 		personautotran.setPerautId(123);
+		
+		Autotransition autotran = new Autotransition();
+		autotran.setAutotranId(12);
+		
+		Person person = new Person();
+		person.setInstid(6);
+		
+		personautotran.setAutotranId(autotran.getAutotranId());
+		personautotran.setPersonId(person.getPersId());
 		
 		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.OK));
 		Mockito.when(restTemplate.getForObject(SERVER + "show/" + personautotran.getPerautId(), Personautotran.class)).thenReturn(personautotran);
 		
 		try {
-			personautotranDelegate.createPersonautotran(personautotran);
+			personautotranDelegate.createPersonautotran(personautotran, person.getPersId(), autotran.getAutotranId());
 			Personautotran personautotran2 = personautotranDelegate.getPersonautotranById(personautotran.getPerautId());
 			assertTrue(personautotran.equals(personautotran2));
 		} catch (LogicalException e) {
@@ -64,17 +77,34 @@ public class PersonautotranDelegateTest {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateAutotransition() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(new Date(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
 		personautotran.setPerautId(123);
 		
 		Personautotran newPersonautotran = new Personautotran();
-		newPersonautotran.setPerautDate(new Date(27, 04, 1999));
+		newPersonautotran.setPerautDate(LocalDate.of(27, 04, 1999));
 		newPersonautotran.setPerautId(123);
+		
+		Autotransition autotran = new Autotransition();
+		autotran.setAutotranId(12);
+		
+		Person person = new Person();
+		person.setPersId(6);
+		
+		Autotransition newAutotran = new Autotransition();
+		autotran.setAutotranId(6);
+		
+		Person newPerson = new Person();
+		person.setPersId(12);
+		
+		personautotran.setAutotranId(autotran.getAutotranId());
+		personautotran.setPersonId(person.getPersId());
+		
+		newPersonautotran.setAutotranId(newAutotran.getAutotranId());
+		newPersonautotran.setPersonId(newPerson.getPersId());
 		
 		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.OK));
@@ -84,7 +114,7 @@ public class PersonautotranDelegateTest {
 		
 		try {
 			
-			personautotranDelegate.createPersonautotran(personautotran);
+			personautotranDelegate.createPersonautotran(personautotran, person.getPersId(), autotran.getAutotranId());
 			personautotranDelegate.updatePersonautotran(newPersonautotran);
 			
 			Personautotran personautotranProve = personautotranDelegate.getPersonautotranById(personautotran.getPerautId());
@@ -98,13 +128,21 @@ public class PersonautotranDelegateTest {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetAutotransitionById() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(new Date(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
 		personautotran.setPerautId(123);
+		
+		Autotransition autotran = new Autotransition();
+		autotran.setAutotranId(12);
+		
+		Person person = new Person();
+		person.setPersId(6);
+		
+		personautotran.setAutotranId(autotran.getAutotranId());
+		personautotran.setPersonId(person.getPersId());
 		
 		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.OK));
@@ -113,7 +151,7 @@ public class PersonautotranDelegateTest {
 
 		try {
 			
-			personautotranDelegate.createPersonautotran(personautotran);
+			personautotranDelegate.createPersonautotran(personautotran, person.getPersId(), autotran.getAutotranId());
 			
 			Personautotran personautotranById = personautotranDelegate.getPersonautotranById(personautotran.getPerautId());
 			
@@ -126,21 +164,47 @@ public class PersonautotranDelegateTest {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testfindAll() {
 		
 		Personautotran personautotran1 = new Personautotran();
-		personautotran1.setPerautDate(new Date(12, 06, 2000));
+		personautotran1.setPerautDate(LocalDate.of(12, 06, 2000));
 		personautotran1.setPerautId(1);
 		
 		Personautotran personautotran2 = new Personautotran();
-		personautotran2.setPerautDate(new Date(27, 04, 1999));
+		personautotran2.setPerautDate(LocalDate.of(27, 04, 1999));
 		personautotran2.setPerautId(2);
 		
 		Personautotran personautotran3 = new Personautotran();
-		personautotran3.setPerautDate(new Date(9, 03, 1964));
+		personautotran3.setPerautDate(LocalDate.of(9, 03, 1964));
 		personautotran3.setPerautId(3);
+		
+		Autotransition autotran = new Autotransition();
+		autotran.setAutotranId(12);
+		
+		Person person = new Person();
+		person.setPersId(6);
+		
+		Autotransition autotran2 = new Autotransition();
+		autotran.setAutotranId(6);
+		
+		Person person2 = new Person();
+		person.setPersId(12);
+		
+		Autotransition autotran3 = new Autotransition();
+		autotran.setAutotranId(27);
+		
+		Person person3 = new Person();
+		person.setPersId(4);
+		
+		personautotran1.setAutotranId(autotran.getAutotranId());
+		personautotran1.setPersonId(person.getPersId());
+		
+		personautotran2.setAutotranId(autotran2.getAutotranId());
+		personautotran2.setPersonId(person2.getPersId());
+		
+		personautotran3.setAutotranId(autotran2.getAutotranId());
+		personautotran3.setPersonId(person2.getPersId());
 		
 		Personautotran[] personautotrans = {personautotran1, personautotran2, personautotran3};
 		
@@ -155,9 +219,9 @@ public class PersonautotranDelegateTest {
 
 		try {
 			
-			personautotranDelegate.createPersonautotran(personautotran1);
-			personautotranDelegate.createPersonautotran(personautotran2);
-			personautotranDelegate.createPersonautotran(personautotran3);
+			personautotranDelegate.createPersonautotran(personautotran1, person.getPersId(), autotran.getAutotranId());
+			personautotranDelegate.createPersonautotran(personautotran2, person2.getPersId(), autotran2.getAutotranId());
+			personautotranDelegate.createPersonautotran(personautotran3, person3.getPersId(), autotran3.getAutotranId());
 			
 			Iterable<Personautotran> personautotranAll = personautotranDelegate.findAll();
 			
@@ -170,20 +234,29 @@ public class PersonautotranDelegateTest {
 		
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes", "deprecation" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void testDelete() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(new Date(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
 		personautotran.setPerautId(123);
+		
+		Autotransition autotran = new Autotransition();
+		autotran.setAutotranId(12);
+		
+		Person person = new Person();
+		person.setPersId(6);
+		
+		personautotran.setAutotranId(autotran.getAutotranId());
+		personautotran.setPersonId(person.getPersId());
 		
 		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.ACCEPTED));
 		
 		try {
 			
-			personautotranDelegate.createPersonautotran(personautotran);
+			personautotranDelegate.createPersonautotran(personautotran, person.getPersId(), autotran.getAutotranId());
 			
 			Mockito.doNothing().when(restTemplate).delete(SERVER + personautotran.getPerautId());
 			personautotranDelegate.delete(personautotran.getPerautId());
