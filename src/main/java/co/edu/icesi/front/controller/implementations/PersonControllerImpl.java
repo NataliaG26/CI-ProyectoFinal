@@ -74,7 +74,8 @@ public class PersonControllerImpl implements PersonController {
 				
 		//institutionService.createInstitution(institution);
 			try {
-				personDelegate.updatePerson(person);
+				long instid = person.getInstitution().getInstId();
+				personDelegate.updatePerson(person, instid);
 				return "redirect:/person/showPerson/{id}";
 			}catch(LogicalException e) {
 				//model.addAttribute("institution", new Institution());
@@ -109,10 +110,12 @@ public class PersonControllerImpl implements PersonController {
 			if(bindingresult.hasErrors()) {	
 				model.addAttribute("personIsactiveL", personIsactiveL);
 				model.addAttribute("institutions", institutionDelegate.findAll());
+				System.out.println("Save Person controller error");
 			 	return "person/add";
 			}else {
 				try {
-					personDelegate.createPerson(person);
+					long instid = person.getInstid();
+					personDelegate.createPerson(person, instid);
 				}catch(LogicalException e) {
 					e.printStackTrace();
 					return "redirect:/person/";

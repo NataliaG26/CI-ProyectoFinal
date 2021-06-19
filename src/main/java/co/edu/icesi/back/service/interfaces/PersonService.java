@@ -6,9 +6,9 @@ import co.edu.icesi.back.model.Person;
 
 public interface PersonService {
 	
-	public Person createPerson(Person person) throws LogicalException;
+	public Person createPerson(Person person, long instid) throws LogicalException;
 	
-	public Person updatePerson(Person person) throws LogicalException;
+	public Person updatePerson(Person person, long instid) throws LogicalException;
 	
 	public Person getPersonById(long id) throws LogicalException;
 	

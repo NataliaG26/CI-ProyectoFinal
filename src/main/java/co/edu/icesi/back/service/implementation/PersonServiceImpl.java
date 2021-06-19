@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import co.edu.icesi.back.daos.interfaces.PersonDAO;
 import co.edu.icesi.back.exception.LogicalException;
+import co.edu.icesi.back.model.Institution;
 import co.edu.icesi.back.model.Person;
 import co.edu.icesi.back.repository.PersonRepository;
 import co.edu.icesi.back.service.interfaces.InstitutionService;
@@ -31,55 +32,56 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	@Transactional
-	public Person createPerson(Person person) throws LogicalException {
+	public Person createPerson(Person person, long instid) throws LogicalException {
 		if(person == null) {
 			throw new LogicalException("La persona a ingresar no puede ser null");
 		}
-		else if(person.getInstitution() == null ) {
-			throw new LogicalException("La institución asociada a la persona no puede ser null");
-		}
+//		else if(person.getInstitution() == null ) {
+//			throw new LogicalException("La institución asociada a la persona no puede ser null");
+//		}
 		
-		institutionService.getInstitutionById(person.getInstitution().getInstId());
+		Institution inst = institutionService.getInstitutionById(instid);
 		
-		if(person.getPersName() == null ) {
-			throw new LogicalException("El nombre de la persona no puede ser null");
-		}
-		else if(person.getPersName().equals("")) {
-			throw new LogicalException("El nombre de la persona no puede ser vacío");
-		}
-		else if(person.getPersLastname() == null) {
-			throw new LogicalException("El apellido de la persona no puede ser null");
-		}
-		else if(person.getPersLastname().equals("")) {
-			throw new LogicalException("El apellido de la persona no puede ser vacío");
-		}
-		else if(person.getPersEmail() == null) {
-			throw new LogicalException("El email de la persona no puede ser null");
-		}
-		else if(person.getPersEmail().length() < 6) {
-			throw new LogicalException("El email de la persona debe tener mínimo 6 caracteres");
-		}
-		else {
+//		if(person.getPersName() == null ) {
+//			throw new LogicalException("El nombre de la persona no puede ser null");
+//		}
+//		else if(person.getPersName().equals("")) {
+//			throw new LogicalException("El nombre de la persona no puede ser vacío");
+//		}
+//		else if(person.getPersLastname() == null) {
+//			throw new LogicalException("El apellido de la persona no puede ser null");
+//		}
+//		else if(person.getPersLastname().equals("")) {
+//			throw new LogicalException("El apellido de la persona no puede ser vacío");
+//		}
+//		else if(person.getPersEmail() == null) {
+//			throw new LogicalException("El email de la persona no puede ser null");
+//		}
+//		else if(person.getPersEmail().length() < 6) {
+//			throw new LogicalException("El email de la persona debe tener mínimo 6 caracteres");
+//		}
+//		else {
 			//personRepository.save(person);
+			person.setInstitution(inst);
 			personDAO.Save(person);
 			return person;
-		}
+		//}
 	}
 
 	@Override
 	@Transactional
-	public Person updatePerson(Person person) throws LogicalException {
+	public Person updatePerson(Person person, long instid) throws LogicalException {
 		if(person == null) {
 			throw new LogicalException("La persona a ingresar no puede ser null");
 		}
 		
 		Person existingPerson = getPersonById(person.getPersId());
 		
-		if(person.getInstitution() == null ) {
-			throw new LogicalException("La institución asociada a la persona no puede ser null");
-		}
+//		if(person.getInstitution() == null ) {
+//			throw new LogicalException("La institución asociada a la persona no puede ser null");
+//		}
 		
-		institutionService.getInstitutionById(person.getInstitution().getInstId());
+		Institution inst = institutionService.getInstitutionById(instid);
 		
 		if(person.getPersName() == null ) {
 			throw new LogicalException("El nombre de la persona no puede ser null");
@@ -110,10 +112,10 @@ public class PersonServiceImpl implements PersonService {
 			existingPerson.setPersLocaldata(person.getPersLocaldata());
 			existingPerson.setPersLongitude(person.getPersLongitude());
 			existingPerson.setPersName(person.getPersName());
-			existingPerson.setInstitution(person.getInstitution());
+			existingPerson.setInstitution(inst);
 			//personRepository.save(existingPerson);
 			personDAO.Edit(existingPerson);
-			return person;
+			return existingPerson;
 		}
 	}
 

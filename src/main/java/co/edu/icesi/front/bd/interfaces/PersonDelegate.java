@@ -5,9 +5,9 @@ import co.edu.icesi.front.model.classes.Person;
 
 public interface PersonDelegate {
 	
-	public Person createPerson(Person person) throws LogicalException;
+	public Person createPerson(Person person, long instid) throws LogicalException;
 	
-	public void updatePerson(Person person) throws LogicalException;
+	public void updatePerson(Person person, long instid) throws LogicalException;
 	
 	public Person getPersonById(long id) throws LogicalException;
 	

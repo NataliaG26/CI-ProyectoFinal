@@ -72,9 +72,8 @@
 							<span th:if="${#fields.hasErrors('persEmail')}" th:errors="*{persEmail}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="institution" class="col-form-label">Institution</label>
-							<select th:field="*{institution}" class="form-control"
-								id="institution">
+							<label for="instid" class="col-form-label">Institution</label>
+							<select th:field="*{instid}" class="form-control">
 								<option th:each="inst : ${institutions}"
 									th:value="${inst.instId}" th:text="${inst.instName}" />
 							</select> 

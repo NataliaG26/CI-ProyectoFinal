@@ -134,8 +134,8 @@ public class RastreoCercosEpidemiologicosApplication {
 		try {
 			institutionService.createInstitution(institution1);
 			institutionService.createInstitution(institution2);
-			personService.createPerson(person1);
-			personService.createPerson(person2);
+			personService.createPerson(person1, person1.getInstitution().getInstId());
+			personService.createPerson(person2, person2.getInstitution().getInstId());
 			userrService.createUserr(userr1);
 			userrService.createUserr(userr2);
 			epidemeventService.createEpidemevent(epidemevent1);

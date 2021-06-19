@@ -29,15 +29,16 @@ public class PersonRestControllerImpl implements PersonRestController {
 	}
 
 	@Override
-	@GetMapping("showPerson/{id}")
+	@GetMapping("/showPerson/{id}")
 	public Person showPerson(@PathVariable("id") long id) throws LogicalException {
 		return personService.getPersonById(id);
 	}
 
 	@Override
-	@PostMapping("/add")
-	public Person savePerson(Person person) throws LogicalException {
-		return personService.createPerson(person);
+	@PostMapping("/add/{instid}")
+	public Person savePerson(Person person, @PathVariable(value="instid", required = true) long instid) throws LogicalException {
+		System.out.println("back  "+person.getPersName());
+		return personService.createPerson(person, instid);
 	}
 
 	@Override
@@ -47,9 +48,9 @@ public class PersonRestControllerImpl implements PersonRestController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public void updatePerson(Person person) throws LogicalException {
-		personService.updatePerson(person);
+	@PutMapping("/update/{instid}")
+	public void updatePerson(Person person, @PathVariable("instid") long instid) throws LogicalException {
+		personService.updatePerson(person, instid);
 	}
 
 	@Override

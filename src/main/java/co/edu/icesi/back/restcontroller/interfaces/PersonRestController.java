@@ -12,11 +12,11 @@ public interface PersonRestController {
 	
 	public Person showPerson(@PathVariable("id") long id) throws LogicalException;
 	
-	public Person savePerson(Person person) throws LogicalException;
+	public Person savePerson(Person person, @PathVariable("instid") long instid) throws LogicalException;
 	
 	public void deletePerson(@PathVariable("id") long id) throws LogicalException;
 	
-	public void updatePerson(Person person) throws LogicalException;
+	public void updatePerson(Person person, @PathVariable("instid") long instid) throws LogicalException;
 	
 	public void updateInstitution(@PathVariable("id") long id, Institution institution);
 

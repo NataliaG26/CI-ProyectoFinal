@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import co.edu.icesi.back.exception.LogicalException;
@@ -21,13 +22,15 @@ public class PersonDelegateImpl implements PersonDelegate{
 	}
 
 	@Override
-	public Person createPerson(Person person) throws LogicalException {
-		return restTemplate.postForEntity(SERVER + "add/", person, Person.class).getBody();
+	public Person createPerson(@RequestBody Person person, long instid) throws LogicalException {
+		String s = SERVER + "add/"+instid;
+		System.out.println(s + "  "+person.getPersName());
+		return restTemplate.postForEntity(s, person, Person.class).getBody();
 	}
 
 	@Override
-	public void updatePerson(Person person) throws LogicalException {
-		restTemplate.put(SERVER + "update/", person, Person.class);
+	public void updatePerson(Person person, long instid) throws LogicalException {
+		restTemplate.put(SERVER + "update/"+instid, person, Person.class);
 	}
 
 	@Override

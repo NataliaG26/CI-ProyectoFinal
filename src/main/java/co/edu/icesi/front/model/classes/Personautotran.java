@@ -16,7 +16,7 @@ public class Personautotran {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate perautDate;
-
+	
 	private Autotransition autotransition;
 
 	private Person person;

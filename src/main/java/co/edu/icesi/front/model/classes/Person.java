@@ -6,6 +6,9 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
 import java.util.Date;
 //import co.edu.icesi.front.model.classes.Personautotran;
 
@@ -39,15 +42,19 @@ public class Person {
 
 	private String persName;
 
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	private Date persOnsetdate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate persOnsetdate;
 
 	private String persPoliticsaccepted;
 
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	private Date persPoliticsaccepteddate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate persPoliticsaccepteddate;
 
 	private Institution institution;
+	
+	private long instid;
 
 //	@JsonIgnore
 //	private List<Personautotran> personautotrans;
@@ -151,11 +158,11 @@ public class Person {
 		this.persName = persName;
 	}
 
-	public Date getPersOnsetdate() {
+	public LocalDate getPersOnsetdate() {
 		return this.persOnsetdate;
 	}
 
-	public void setPersOnsetdate(Date persOnsetdate) {
+	public void setPersOnsetdate(LocalDate persOnsetdate) {
 		this.persOnsetdate = persOnsetdate;
 	}
 
@@ -167,11 +174,11 @@ public class Person {
 		this.persPoliticsaccepted = persPoliticsaccepted;
 	}
 
-	public Date getPersPoliticsaccepteddate() {
+	public LocalDate getPersPoliticsaccepteddate() {
 		return this.persPoliticsaccepteddate;
 	}
 
-	public void setPersPoliticsaccepteddate(Date persPoliticsaccepteddate) {
+	public void setPersPoliticsaccepteddate(LocalDate persPoliticsaccepteddate) {
 		this.persPoliticsaccepteddate = persPoliticsaccepteddate;
 	}
 
@@ -182,6 +189,13 @@ public class Person {
 
 	public void setInstitution(Institution institution) {
 		this.institution = institution;
+	}
+	
+	public long getInstid() {
+		return instid;
+	}
+	public void setInstid(long instid) {
+		this.instid = instid;
 	}
 //
 //	public List<Personautotran> getPersonautotrans() {

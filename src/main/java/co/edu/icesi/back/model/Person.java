@@ -1,6 +1,7 @@
 package co.edu.icesi.back.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import javax.validation.constraints.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -73,18 +75,18 @@ public class Person implements Serializable {
 	@Column(name="PERS_NAME")
 	private String persName;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="PERS_ONSETDATE")
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
-	private Date persOnsetdate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate persOnsetdate;
 
 	@Column(name="PERS_POLITICSACCEPTED")
 	private String persPoliticsaccepted;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name="PERS_POLITICSACCEPTEDDATE")
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
-	private Date persPoliticsaccepteddate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate persPoliticsaccepteddate;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Accessdenialevent
@@ -135,6 +137,8 @@ public class Person implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="INST_INST_ID")
 	private Institution institution;
+	
+	private long instid;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Personautotran
@@ -305,11 +309,11 @@ public class Person implements Serializable {
 		this.persName = persName;
 	}
 
-	public Date getPersOnsetdate() {
+	public LocalDate getPersOnsetdate() {
 		return this.persOnsetdate;
 	}
 
-	public void setPersOnsetdate(Date persOnsetdate) {
+	public void setPersOnsetdate(LocalDate persOnsetdate) {
 		this.persOnsetdate = persOnsetdate;
 	}
 
@@ -321,11 +325,11 @@ public class Person implements Serializable {
 		this.persPoliticsaccepted = persPoliticsaccepted;
 	}
 
-	public Date getPersPoliticsaccepteddate() {
+	public LocalDate getPersPoliticsaccepteddate() {
 		return this.persPoliticsaccepteddate;
 	}
 
-	public void setPersPoliticsaccepteddate(Date persPoliticsaccepteddate) {
+	public void setPersPoliticsaccepteddate(LocalDate persPoliticsaccepteddate) {
 		this.persPoliticsaccepteddate = persPoliticsaccepteddate;
 	}
 
@@ -827,6 +831,13 @@ public class Person implements Serializable {
 		visit.setPerson(null);
 
 		return visit;
+	}
+	
+	public long getInstid() {
+		return instid;
+	}
+	public void setInstid(long instid) {
+		this.instid = instid;
 	}
 
 }
