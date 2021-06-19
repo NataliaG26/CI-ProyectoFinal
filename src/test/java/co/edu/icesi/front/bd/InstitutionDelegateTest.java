@@ -51,15 +51,18 @@ public class InstitutionDelegateTest {
 		institution.setInstAcadloginusername("loginUsername");
 		institution.setInstName("Test institution");
 		
-		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
-		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.OK));
-		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class)).thenReturn(institution);
+		when(restTemplate.postForEntity(SERVER, institution, Institution.class))
+		.thenReturn(new ResponseEntity<>(institution, HttpStatus.OK));
+		when(restTemplate.getForObject(SERVER + institution.getInstId(), Institution.class)).thenReturn(institution);
 
 		institutionDelegate.createInstitution(institution);
 		
 		Institution newInstitution = institutionDelegate.getInstitutionById(institution.getInstId());
 		
-		assertTrue(institution.equals(newInstitution));
+		assertTrue(institution.getInstId() == newInstitution.getInstId());
+		assertTrue(institution.getInstAcadloginpassword().equals(newInstitution.getInstAcadloginpassword()));
+		assertTrue(institution.getInstAcadloginusername().equals(newInstitution.getInstAcadloginusername()));
+		assertTrue(institution.getInstName().equals(newInstitution.getInstName()));
 		
 	}
 	
@@ -78,10 +81,10 @@ public class InstitutionDelegateTest {
 		newInstitution.setInstAcadloginusername("loginUsername2");
 		newInstitution.setInstName("Test institution #2");
 		
-		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
+		when(restTemplate.postForEntity(SERVER, institution, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.OK));
-		doNothing().when(restTemplate).put(SERVER + "update/" + institution.getInstId(), newInstitution, Institution.class);
-		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class))
+		doNothing().when(restTemplate).put(SERVER + institution.getInstId(), newInstitution, Institution.class);
+		when(restTemplate.getForObject(SERVER + institution.getInstId(), Institution.class))
 		.thenReturn(newInstitution);
 		
 		institutionDelegate.createInstitution(institution);
@@ -104,10 +107,10 @@ public class InstitutionDelegateTest {
 		institution.setInstAcadloginusername("loginUsername");
 		institution.setInstName("Test institution");
 		
-		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
+		when(restTemplate.postForEntity(SERVER, institution, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.OK));
 
-		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), Institution.class)).thenReturn(institution);
+		when(restTemplate.getForObject(SERVER + institution.getInstId(), Institution.class)).thenReturn(institution);
 
 		institutionDelegate.createInstitution(institution);
 		
@@ -142,11 +145,11 @@ public class InstitutionDelegateTest {
 		
 		when(restTemplate.getForObject(SERVER, Institution[].class))
 		.thenReturn(new ResponseEntity<Institution[]>(institutions, HttpStatus.OK).getBody());
-		when(restTemplate.postForEntity(SERVER + "add/", institution1, Institution.class))
+		when(restTemplate.postForEntity(SERVER, institution1, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution1, HttpStatus.OK));
-		when(restTemplate.postForEntity(SERVER + "add/", institution2, Institution.class))
+		when(restTemplate.postForEntity(SERVER, institution2, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution2, HttpStatus.OK));
-		when(restTemplate.postForEntity(SERVER + "add/", institution3, Institution.class))
+		when(restTemplate.postForEntity(SERVER, institution3, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution3, HttpStatus.OK));
 
 		institutionDelegate.createInstitution(institution1);
@@ -169,7 +172,7 @@ public class InstitutionDelegateTest {
 		institution.setInstAcadloginusername("loginUsername");
 		institution.setInstName("Test institution");
 		
-		when(restTemplate.postForEntity(SERVER + "add/", institution, Institution.class))
+		when(restTemplate.postForEntity(SERVER, institution, Institution.class))
 		.thenReturn(new ResponseEntity<Institution>(institution, HttpStatus.ACCEPTED));
 		
 		institutionDelegate.createInstitution(institution);
@@ -177,7 +180,7 @@ public class InstitutionDelegateTest {
 		doNothing().when(restTemplate).delete(SERVER + institution.getInstId());
 		institutionDelegate.delete(institution.getInstId());
 
-		when(restTemplate.getForObject(SERVER + "show/" + institution.getInstId(), null))
+		when(restTemplate.getForObject(SERVER + institution.getInstId(), null))
 				.thenReturn(new ResponseEntity(null, HttpStatus.OK).getBody());
 		assertNull(institutionDelegate.getInstitutionById(institution.getInstId()));
 		

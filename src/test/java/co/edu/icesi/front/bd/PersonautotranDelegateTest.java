@@ -50,7 +50,7 @@ public class PersonautotranDelegateTest {
 	public void testCreateAutotransition() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(2000, 06, 12));
 		personautotran.setPerautId(123);
 		
 		Autotransition autotran = new Autotransition();
@@ -62,9 +62,9 @@ public class PersonautotranDelegateTest {
 		personautotran.setAutotranId(autotran.getAutotranId());
 		personautotran.setPersonId(person.getPersId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
+		Mockito.when(restTemplate.postForEntity(SERVER+person.getPersId()+"/"+autotran.getAutotranId(), personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.OK));
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + personautotran.getPerautId(), Personautotran.class)).thenReturn(personautotran);
+		Mockito.when(restTemplate.getForObject(SERVER + personautotran.getPerautId(), Personautotran.class)).thenReturn(personautotran);
 		
 		try {
 			personautotranDelegate.createPersonautotran(personautotran, person.getPersId(), autotran.getAutotranId());
@@ -81,11 +81,11 @@ public class PersonautotranDelegateTest {
 	public void testUpdateAutotransition() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(2000, 06, 12));
 		personautotran.setPerautId(123);
 		
 		Personautotran newPersonautotran = new Personautotran();
-		newPersonautotran.setPerautDate(LocalDate.of(27, 04, 1999));
+		newPersonautotran.setPerautDate(LocalDate.of(1999, 04, 27));
 		newPersonautotran.setPerautId(123);
 		
 		Autotransition autotran = new Autotransition();
@@ -106,10 +106,10 @@ public class PersonautotranDelegateTest {
 		newPersonautotran.setAutotranId(newAutotran.getAutotranId());
 		newPersonautotran.setPersonId(newPerson.getPersId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
+		Mockito.when(restTemplate.postForEntity(SERVER+person.getPersId()+"/"+autotran.getAutotranId(), personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.OK));
-		Mockito.doNothing().when(restTemplate).put(SERVER + "update/" + personautotran.getPerautId(), newPersonautotran, Personautotran.class);
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + personautotran.getPerautId(), Personautotran.class))
+		Mockito.doNothing().when(restTemplate).put(SERVER + personautotran.getPerautId(), newPersonautotran, Personautotran.class);
+		Mockito.when(restTemplate.getForObject(SERVER + personautotran.getPerautId(), Personautotran.class))
 		.thenReturn(newPersonautotran);
 		
 		try {
@@ -132,7 +132,7 @@ public class PersonautotranDelegateTest {
 	public void testGetAutotransitionById() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(2000, 06, 12));
 		personautotran.setPerautId(123);
 		
 		Autotransition autotran = new Autotransition();
@@ -144,10 +144,10 @@ public class PersonautotranDelegateTest {
 		personautotran.setAutotranId(autotran.getAutotranId());
 		personautotran.setPersonId(person.getPersId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
+		Mockito.when(restTemplate.postForEntity(SERVER+person.getPersId()+"/"+autotran.getAutotranId(), personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.OK));
 
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + personautotran.getPerautId(), Personautotran.class)).thenReturn(personautotran);
+		Mockito.when(restTemplate.getForObject(SERVER + personautotran.getPerautId(), Personautotran.class)).thenReturn(personautotran);
 
 		try {
 			
@@ -168,15 +168,15 @@ public class PersonautotranDelegateTest {
 	public void testfindAll() {
 		
 		Personautotran personautotran1 = new Personautotran();
-		personautotran1.setPerautDate(LocalDate.of(12, 06, 2000));
+		personautotran1.setPerautDate(LocalDate.of(2000, 06, 12));
 		personautotran1.setPerautId(1);
 		
 		Personautotran personautotran2 = new Personautotran();
-		personautotran2.setPerautDate(LocalDate.of(27, 04, 1999));
+		personautotran2.setPerautDate(LocalDate.of(1999, 04, 27));
 		personautotran2.setPerautId(2);
 		
 		Personautotran personautotran3 = new Personautotran();
-		personautotran3.setPerautDate(LocalDate.of(9, 03, 1964));
+		personautotran3.setPerautDate(LocalDate.of(1964, 03, 9));
 		personautotran3.setPerautId(3);
 		
 		Autotransition autotran = new Autotransition();
@@ -210,11 +210,11 @@ public class PersonautotranDelegateTest {
 		
 		Mockito.when(restTemplate.getForObject(SERVER, Personautotran[].class))
 		.thenReturn(new ResponseEntity<Personautotran[]>(personautotrans, HttpStatus.OK).getBody());
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran1, Personautotran.class))
+		Mockito.when(restTemplate.postForEntity(SERVER+person.getPersId()+"/"+autotran.getAutotranId(), personautotran1, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran1, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran2, Personautotran.class))
+		Mockito.when(restTemplate.postForEntity(SERVER+person2.getPersId()+"/"+autotran2.getAutotranId(), personautotran2, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran2, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran3, Personautotran.class))
+		Mockito.when(restTemplate.postForEntity(SERVER+person3.getPersId()+"/"+autotran3.getAutotranId(), personautotran3, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran3, HttpStatus.OK));
 
 		try {
@@ -239,7 +239,7 @@ public class PersonautotranDelegateTest {
 	public void testDelete() {
 		
 		Personautotran personautotran = new Personautotran();
-		personautotran.setPerautDate(LocalDate.of(12, 06, 2000));
+		personautotran.setPerautDate(LocalDate.of(2000, 06, 12));
 		personautotran.setPerautId(123);
 		
 		Autotransition autotran = new Autotransition();
@@ -251,7 +251,7 @@ public class PersonautotranDelegateTest {
 		personautotran.setAutotranId(autotran.getAutotranId());
 		personautotran.setPersonId(person.getPersId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", personautotran, Personautotran.class))
+		Mockito.when(restTemplate.postForEntity(SERVER+person.getPersId()+"/"+autotran.getAutotranId(), personautotran, Personautotran.class))
 		.thenReturn(new ResponseEntity<Personautotran>(personautotran, HttpStatus.ACCEPTED));
 		
 		try {
@@ -261,7 +261,7 @@ public class PersonautotranDelegateTest {
 			Mockito.doNothing().when(restTemplate).delete(SERVER + personautotran.getPerautId());
 			personautotranDelegate.delete(personautotran.getPerautId());
 
-			Mockito.when(restTemplate.getForObject(SERVER + "show/" + personautotran.getPerautId(), null))
+			Mockito.when(restTemplate.getForObject(SERVER + personautotran.getPerautId(), null))
 					.thenReturn(new ResponseEntity(null, HttpStatus.OK).getBody());
 			assertNull(personautotranDelegate.getPersonautotranById(personautotran.getPerautId()));
 			

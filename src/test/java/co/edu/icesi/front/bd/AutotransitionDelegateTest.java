@@ -48,9 +48,9 @@ public class AutotransitionDelegateTest {
 		autotransition.setAutotranIsactive("Is Active");
 		autotransition.setAutotranName("Autotransition Test");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", autotransition, Autotransition.class))
+		Mockito.when(restTemplate.postForEntity(SERVER, autotransition, Autotransition.class))
 		.thenReturn(new ResponseEntity<Autotransition>(autotransition, HttpStatus.OK));
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + autotransition.getAutotranId(), Autotransition.class)).thenReturn(autotransition);
+		Mockito.when(restTemplate.getForObject(SERVER + autotransition.getAutotranId(), Autotransition.class)).thenReturn(autotransition);
 
 		autotransitionDelegate.createAutotransition(autotransition);
 		
@@ -73,10 +73,10 @@ public class AutotransitionDelegateTest {
 		newAutotransition.setAutotranIsactive("Is Not Active");
 		newAutotransition.setAutotranName("New Autotransition Test");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", autotransition, Autotransition.class))
+		Mockito.when(restTemplate.postForEntity(SERVER, autotransition, Autotransition.class))
 		.thenReturn(new ResponseEntity<Autotransition>(autotransition, HttpStatus.OK));
-		Mockito.doNothing().when(restTemplate).put(SERVER + "update/" + autotransition.getAutotranId(), newAutotransition, Autotransition.class);
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + autotransition.getAutotranId(), Autotransition.class))
+		Mockito.doNothing().when(restTemplate).put(SERVER + autotransition.getAutotranId(), newAutotransition, Autotransition.class);
+		Mockito.when(restTemplate.getForObject(SERVER + autotransition.getAutotranId(), Autotransition.class))
 		.thenReturn(newAutotransition);
 		
 		autotransitionDelegate.createAutotransition(autotransition);
@@ -97,10 +97,10 @@ public class AutotransitionDelegateTest {
 		autotransition.setAutotranIsactive("Is Active");
 		autotransition.setAutotranName("Autotransition Test");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", autotransition, Autotransition.class))
+		Mockito.when(restTemplate.postForEntity(SERVER, autotransition, Autotransition.class))
 		.thenReturn(new ResponseEntity<Autotransition>(autotransition, HttpStatus.OK));
 
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + autotransition.getAutotranId(), Autotransition.class)).thenReturn(autotransition);
+		Mockito.when(restTemplate.getForObject(SERVER + autotransition.getAutotranId(), Autotransition.class)).thenReturn(autotransition);
 
 		autotransitionDelegate.createAutotransition(autotransition);
 		
@@ -132,11 +132,11 @@ public class AutotransitionDelegateTest {
 		
 		Mockito.when(restTemplate.getForObject(SERVER, Autotransition[].class))
 		.thenReturn(new ResponseEntity<Autotransition[]>(autotransitions, HttpStatus.OK).getBody());
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", autotransition1, Autotransition.class))
+		Mockito.when(restTemplate.postForEntity(SERVER, autotransition1, Autotransition.class))
 		.thenReturn(new ResponseEntity<Autotransition>(autotransition1, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", autotransition2, Autotransition.class))
+		Mockito.when(restTemplate.postForEntity(SERVER, autotransition2, Autotransition.class))
 		.thenReturn(new ResponseEntity<Autotransition>(autotransition2, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", autotransition3, Autotransition.class))
+		Mockito.when(restTemplate.postForEntity(SERVER, autotransition3, Autotransition.class))
 		.thenReturn(new ResponseEntity<Autotransition>(autotransition3, HttpStatus.OK));
 
 		autotransitionDelegate.createAutotransition(autotransition1);
@@ -158,7 +158,7 @@ public class AutotransitionDelegateTest {
 		autotransition.setAutotranIsactive("Is Active");
 		autotransition.setAutotranName("Autotransition Test");
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", autotransition, Autotransition.class))
+		Mockito.when(restTemplate.postForEntity(SERVER, autotransition, Autotransition.class))
 		.thenReturn(new ResponseEntity<Autotransition>(autotransition, HttpStatus.ACCEPTED));
 		
 		autotransitionDelegate.createAutotransition(autotransition);
@@ -166,7 +166,7 @@ public class AutotransitionDelegateTest {
 		Mockito.doNothing().when(restTemplate).delete(SERVER + autotransition.getAutotranId());
 		autotransitionDelegate.delete(autotransition.getAutotranId());
 
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + autotransition.getAutotranId(), null))
+		Mockito.when(restTemplate.getForObject(SERVER + autotransition.getAutotranId(), null))
 				.thenReturn(new ResponseEntity(null, HttpStatus.OK).getBody());
 		assertNull(autotransitionDelegate.getAutotransitionById(autotransition.getAutotranId()));
 		

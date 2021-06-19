@@ -3,6 +3,7 @@ package co.edu.icesi.front.bd;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import javax.persistence.PersistenceContext;
 
@@ -58,9 +59,9 @@ public class PersonDelegateTest {
 		
 		person.setInstid(inst.getInstId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", person, Person.class))
-		.thenReturn(new ResponseEntity<Person>(person, HttpStatus.OK));
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + person.getPersId(), Person.class)).thenReturn(person);
+		when(restTemplate.postForEntity(SERVER + inst.getInstId(), person, Person.class))
+		.thenReturn(new ResponseEntity<>(person, HttpStatus.OK));
+		Mockito.when(restTemplate.getForObject(SERVER + person.getPersId(), Person.class)).thenReturn(person);
 		
 		try {
 			personDelegate.createPerson(person, inst.getInstId());
@@ -84,11 +85,11 @@ public class PersonDelegateTest {
 		person.setPersName("Juan Diego");
 		
 		Person person2 = new Person();
-		person.setPersContactnumber("7654321");
-		person.setPersEmail("Email@Nuevo.com");
-		person.setPersId(123);
-		person.setPersLastname("Gonzalez");
-		person.setPersName("Natalia");
+		person2.setPersContactnumber("7654321");
+		person2.setPersEmail("Email@Nuevo.com");
+		person2.setPersId(123);
+		person2.setPersLastname("Gonzalez");
+		person2.setPersName("Natalia");
 		
 		Institution inst = new Institution();
 		inst.setInstId(12);
@@ -100,10 +101,10 @@ public class PersonDelegateTest {
 		
 		person2.setInstid(inst2.getInstId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", person, Person.class))
+		Mockito.when(restTemplate.postForEntity(SERVER + inst.getInstId(), person, Person.class))
 		.thenReturn(new ResponseEntity<Person>(person, HttpStatus.OK));
-		Mockito.doNothing().when(restTemplate).put(SERVER + "update/" + person.getPersId(), person2, Person.class);
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + person.getPersId(), Person.class))
+		Mockito.doNothing().when(restTemplate).put(SERVER + person.getPersId(), person2, Person.class);
+		Mockito.when(restTemplate.getForObject(SERVER + person.getPersId(), Person.class))
 		.thenReturn(person2);
 		
 		try {
@@ -140,10 +141,10 @@ public class PersonDelegateTest {
 		
 		person.setInstid(inst.getInstId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", person, Person.class))
+		Mockito.when(restTemplate.postForEntity(SERVER + inst.getInstId(), person, Person.class))
 		.thenReturn(new ResponseEntity<Person>(person, HttpStatus.OK));
 
-		Mockito.when(restTemplate.getForObject(SERVER + "show/" + person.getPersId(), Person.class)).thenReturn(person);
+		Mockito.when(restTemplate.getForObject(SERVER + person.getPersId(), Person.class)).thenReturn(person);
 
 		try {
 			
@@ -203,11 +204,11 @@ public class PersonDelegateTest {
 		
 		Mockito.when(restTemplate.getForObject(SERVER, Person[].class))
 		.thenReturn(new ResponseEntity<Person[]>(people, HttpStatus.OK).getBody());
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", person, Person.class))
+		Mockito.when(restTemplate.postForEntity(SERVER + inst.getInstId(), person, Person.class))
 		.thenReturn(new ResponseEntity<Person>(person, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", person1, Person.class))
+		Mockito.when(restTemplate.postForEntity(SERVER + inst2.getInstId(), person1, Person.class))
 		.thenReturn(new ResponseEntity<Person>(person1, HttpStatus.OK));
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", person2, Person.class))
+		Mockito.when(restTemplate.postForEntity(SERVER + inst3.getInstId(), person2, Person.class))
 		.thenReturn(new ResponseEntity<Person>(person2, HttpStatus.OK));
 
 		try {
@@ -243,7 +244,7 @@ public class PersonDelegateTest {
 		
 		person.setInstid(inst.getInstId());
 		
-		Mockito.when(restTemplate.postForEntity(SERVER + "add/", person, Person.class))
+		Mockito.when(restTemplate.postForEntity(SERVER + inst.getInstId(), person, Person.class))
 		.thenReturn(new ResponseEntity<Person>(person, HttpStatus.ACCEPTED));
 		
 		try {
@@ -253,8 +254,8 @@ public class PersonDelegateTest {
 			Mockito.doNothing().when(restTemplate).delete(SERVER + person.getPersId());
 			personDelegate.delete(person.getPersId());
 
-			Mockito.when(restTemplate.getForObject(SERVER + "show/" + person.getPersId(), null))
-					.thenReturn(new ResponseEntity(null, HttpStatus.OK).getBody());
+			Mockito.when(restTemplate.getForObject(SERVER + person.getPersId(), null))
+					.thenReturn(new ResponseEntity(person, HttpStatus.OK).getBody());
 			assertNull(personDelegate.getPersonById(person.getPersId()));
 			
 		} catch (LogicalException e) {
