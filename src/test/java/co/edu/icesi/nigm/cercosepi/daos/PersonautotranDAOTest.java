@@ -81,8 +81,8 @@ public class PersonautotranDAOTest {
 		eventstatus2.setEvestatId(2);
 		autotransition = new Autotransition();
 		autotransition.setInstInstId(new BigDecimal(1));
-		autotransition.setEventstatus1(eventstatus1);
-		autotransition.setEventstatus2(eventstatus2);
+		//autotransition.setEventstatus1(eventstatus1);
+		//autotransition.setEventstatus2(eventstatus2);
 		autotransition.setAutotranIsactive("Y");
 		autotransition.setAutotranName("Autotransition 1");
 		autotransition.setAutotranLogicaloperand("AND");
@@ -90,8 +90,8 @@ public class PersonautotranDAOTest {
 		
 		Autotransition autotransition2 = new Autotransition();
 		autotransition2.setInstInstId(new BigDecimal(1));
-		autotransition2.setEventstatus1(eventstatus1);
-		autotransition2.setEventstatus2(eventstatus2);
+		//autotransition2.setEventstatus1(eventstatus1);
+		//autotransition2.setEventstatus2(eventstatus2);
 		autotransition2.setAutotranIsactive("Y");
 		autotransition2.setAutotranName("Autotransition 2");
 		autotransition2.setAutotranLogicaloperand("AND");
