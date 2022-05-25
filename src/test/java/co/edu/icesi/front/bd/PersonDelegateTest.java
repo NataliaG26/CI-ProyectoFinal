@@ -193,12 +193,12 @@ public class PersonDelegateTest {
 		person.setInstid(inst.getInstId());
 		
 		Institution inst2 = new Institution();
-		inst2.setInstId(12);
+		inst2.setInstId(13);
 		
 		person1.setInstid(inst2.getInstId());
 		
 		Institution inst3 = new Institution();
-		inst3.setInstId(12);
+		inst3.setInstId(14);
 		
 		person2.setInstid(inst3.getInstId());
 		

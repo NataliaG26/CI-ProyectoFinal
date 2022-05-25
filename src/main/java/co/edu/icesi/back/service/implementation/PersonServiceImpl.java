@@ -36,36 +36,36 @@ public class PersonServiceImpl implements PersonService {
 		if(person == null) {
 			throw new LogicalException("La persona a ingresar no puede ser null");
 		}
-//		else if(person.getInstitution() == null ) {
-//			throw new LogicalException("La institución asociada a la persona no puede ser null");
-//		}
+		else if(person.getInstitution() == null ) {
+			throw new LogicalException("La institución asociada a la persona no puede ser null");
+		}
 		
 		Institution inst = institutionService.getInstitutionById(instid);
 		
-//		if(person.getPersName() == null ) {
-//			throw new LogicalException("El nombre de la persona no puede ser null");
-//		}
-//		else if(person.getPersName().equals("")) {
-//			throw new LogicalException("El nombre de la persona no puede ser vacío");
-//		}
-//		else if(person.getPersLastname() == null) {
-//			throw new LogicalException("El apellido de la persona no puede ser null");
-//		}
-//		else if(person.getPersLastname().equals("")) {
-//			throw new LogicalException("El apellido de la persona no puede ser vacío");
-//		}
-//		else if(person.getPersEmail() == null) {
-//			throw new LogicalException("El email de la persona no puede ser null");
-//		}
-//		else if(person.getPersEmail().length() < 6) {
-//			throw new LogicalException("El email de la persona debe tener mínimo 6 caracteres");
-//		}
-//		else {
+		if(person.getPersName() == null ) {
+			throw new LogicalException("El nombre de la persona no puede ser null");
+		}
+		else if(person.getPersName().equals("")) {
+			throw new LogicalException("El nombre de la persona no puede ser vacío");
+		}
+		else if(person.getPersLastname() == null) {
+			throw new LogicalException("El apellido de la persona no puede ser null");
+		}
+		else if(person.getPersLastname().equals("")) {
+			throw new LogicalException("El apellido de la persona no puede ser vacío");
+		}
+		else if(person.getPersEmail() == null) {
+			throw new LogicalException("El email de la persona no puede ser null");
+		}
+		else if(person.getPersEmail().length() < 6) {
+			throw new LogicalException("El email de la persona debe tener mínimo 6 caracteres");
+		}
+		else {
 			//personRepository.save(person);
 			person.setInstitution(inst);
 			personDAO.Save(person);
 			return person;
-		//}
+		}
 	}
 
 	@Override
@@ -77,9 +77,9 @@ public class PersonServiceImpl implements PersonService {
 		
 		Person existingPerson = getPersonById(person.getPersId());
 		
-//		if(person.getInstitution() == null ) {
-//			throw new LogicalException("La institución asociada a la persona no puede ser null");
-//		}
+		if(person.getInstitution() == null ) {
+			throw new LogicalException("La institución asociada a la persona no puede ser null");
+		}
 		
 		Institution inst = institutionService.getInstitutionById(instid);
 		
