@@ -129,8 +129,9 @@ public class PersonUnitTest {
 			sce_persinst_allGood();
 			try {
 				long instId = person.getInstitution().getInstId();
+				long personId = person.getPersId();
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
-				when(personService.createPerson(person)).thenReturn(person);
+				when(personService.createPerson(person, personId)).thenReturn(person);
 				assertTrue(true);
 				verify(personRepository).save(person);
 				verify(institutionService).getInstitutionById(instId);
@@ -148,7 +149,7 @@ public class PersonUnitTest {
 				long instId = person.getInstitution().getInstId();
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.createPerson(person)).thenReturn(person));
+						()-> when(personService.createPerson(person, instId)).thenReturn(person));
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
 				verifyNoInteractions(personRepository);
@@ -160,8 +161,9 @@ public class PersonUnitTest {
 		@Test
 		public void save_persinst_null_inst() {
 			sce_persinst_null_inst();
+			long instId = person.getInstitution().getInstId();
 			assertThrows(LogicalException.class,
-					()-> when(personService.createPerson(person)).thenReturn(person));
+					()-> when(personService.createPerson(person, instId)).thenReturn(person));
 			verifyNoInteractions(institutionService);
 			verifyNoInteractions(personRepository);
 		}
@@ -173,7 +175,7 @@ public class PersonUnitTest {
 				long instId = person.getInstitution().getInstId();
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.createPerson(person)).thenReturn(person));
+						()-> when(personService.createPerson(person, instId)).thenReturn(person));
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
 				verifyNoInteractions(personRepository);
@@ -189,7 +191,7 @@ public class PersonUnitTest {
 				long instId = person.getInstitution().getInstId();
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.createPerson(person)).thenReturn(person));
+						()-> when(personService.createPerson(person, instId)).thenReturn(person));
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
 				verifyNoInteractions(personRepository);
@@ -205,7 +207,7 @@ public class PersonUnitTest {
 				long instId = person.getInstitution().getInstId();
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.createPerson(person)).thenReturn(person));
+						()-> when(personService.createPerson(person, instId)).thenReturn(person));
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
 				verifyNoInteractions(personRepository);
@@ -221,7 +223,7 @@ public class PersonUnitTest {
 				long instId = person.getInstitution().getInstId();
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.createPerson(person)).thenReturn(person));
+						()-> when(personService.createPerson(person, instId)).thenReturn(person));
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
 				verifyNoInteractions(personRepository);
@@ -237,7 +239,7 @@ public class PersonUnitTest {
 				long instId = person.getInstitution().getInstId();
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.createPerson(person)).thenReturn(person));
+						()-> when(personService.createPerson(person, instId)).thenReturn(person));
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
 				verifyNoInteractions(personRepository);
@@ -253,7 +255,7 @@ public class PersonUnitTest {
 				long instId = person.getInstitution().getInstId();
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.createPerson(person)).thenReturn(person));
+						()-> when(personService.createPerson(person, instId)).thenReturn(person));
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
 				verifyNoInteractions(personRepository);
@@ -265,8 +267,9 @@ public class PersonUnitTest {
 		@Test
 		public void save_persinst_null_person() {
 			sce_persinst_null_person();
+			long instId = person.getInstitution().getInstId();
 			assertThrows(LogicalException.class,
-					()-> when(personService.createPerson(person)).thenReturn(person));
+					()-> when(personService.createPerson(person, instId)).thenReturn(person));
 			verifyNoInteractions(institutionService);
 			verifyNoInteractions(personRepository);
 		}
@@ -287,7 +290,7 @@ public class PersonUnitTest {
 				long persId = person.getPersId();
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
-				when(personService.updatePerson(person)).thenReturn(person);
+				when(personService.updatePerson(person, instId)).thenReturn(person);
 				assertTrue(true);
 				verify(personRepository).findById(persId);
 				verify(personRepository).save(person);
@@ -309,7 +312,7 @@ public class PersonUnitTest {
 				when(institutionService.getInstitutionById(instId)).thenThrow(LogicalException.class);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
@@ -323,10 +326,11 @@ public class PersonUnitTest {
 		public void edit_persinst_null_inst() {
 			sce_persinst_null_inst();
 			sce_persinst_allGood_for_Edit();
+			long instId = person.getInstitution().getInstId();
 			long persId = person.getPersId();
 			when(personRepository.findById(persId)).thenReturn(personOpt);
 			assertThrows(LogicalException.class,
-					()-> when(personService.updatePerson(person)).thenReturn(person));
+					()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 			verify(personRepository).findById(persId);
 			verifyNoInteractions(institutionService);
 			verifyNoMoreInteractions(personRepository);
@@ -342,7 +346,7 @@ public class PersonUnitTest {
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
@@ -362,7 +366,7 @@ public class PersonUnitTest {
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
@@ -382,7 +386,7 @@ public class PersonUnitTest {
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
@@ -402,7 +406,7 @@ public class PersonUnitTest {
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
@@ -422,7 +426,7 @@ public class PersonUnitTest {
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
@@ -442,7 +446,7 @@ public class PersonUnitTest {
 				when(institutionService.getInstitutionById(instId)).thenReturn(institution);
 				when(personRepository.findById(persId)).thenReturn(personOpt);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verify(institutionService).getInstitutionById(instId);
 				verifyNoMoreInteractions(institutionService);
@@ -455,8 +459,9 @@ public class PersonUnitTest {
 		@Test
 		public void edit_persinst_null_person() {
 			sce_persinst_null_person();
+			long instId = person.getInstitution().getInstId();
 			assertThrows(LogicalException.class,
-					()-> when(personService.updatePerson(person)).thenReturn(person));
+					()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 			verifyNoInteractions(institutionService);
 			verifyNoInteractions(personRepository);
 		}
@@ -465,10 +470,11 @@ public class PersonUnitTest {
 		public void edit_persinst_noFound_person() {
 			sce_persinst_allGood();
 			sce_persinst_allGood_for_Edit();
+			long instId = person.getInstitution().getInstId();
 				long persId = person.getPersId();
 				when(personRepository.findById(persId)).thenThrow(NoSuchElementException.class);
 				assertThrows(LogicalException.class,
-						()-> when(personService.updatePerson(person)).thenReturn(person));
+						()-> when(personService.updatePerson(person, instId)).thenReturn(person));
 				verify(personRepository).findById(persId);
 				verifyNoInteractions(institutionService);
 				verifyNoMoreInteractions(personRepository);

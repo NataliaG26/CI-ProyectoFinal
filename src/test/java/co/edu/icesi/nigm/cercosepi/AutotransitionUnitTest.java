@@ -22,7 +22,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.icesi.back.back.service.interfaces.AutotransitionDelegate;
 import co.edu.icesi.back.daos.interfaces.AutotransitionDAO;
 import co.edu.icesi.back.exception.LogicalException;
 import co.edu.icesi.back.model.Autotransition;
@@ -30,10 +29,7 @@ import co.edu.icesi.back.model.Eventstatus;
 import co.edu.icesi.back.model.Institution;
 import co.edu.icesi.back.repository.AutotransitionRepository;
 import co.edu.icesi.back.service.implementation.AutotransitionServiceImpl;
-<<<<<<< HEAD
-=======
 import co.edu.icesi.back.service.interfaces.AutotransitionService;
->>>>>>> 3e673c56906c6dfaede13c54d30b358835dcd430
 import co.edu.icesi.back.service.interfaces.InstitutionService;
 
 @ExtendWith(SpringExtension.class)
@@ -72,41 +68,41 @@ public class AutotransitionUnitTest {
 	//Scenearios
 	
 	public void sce_autotran_allGood1() {
-		eventstatus1 = new Eventstatus();
+		/*eventstatus1 = new Eventstatus();
 		eventstatus1.setEvestatId(1);
 		eventstatus2 = new Eventstatus();
-		eventstatus2.setEvestatId(2);
+		eventstatus2.setEvestatId(2);*/
 		Institution inst = new Institution();
 		inst.setInstId(1);
 		institutionOpt = Optional.of(inst);
 		autotransition = new Autotransition();
 		autotransition.setInstInstId(new BigDecimal(1));
 		autotransition.setAutotranId(1);
-		autotransition.setEventstatus1(eventstatus1);
-		autotransition.setEventstatus2(eventstatus2);
+		/*autotransition.setEventstatus1(eventstatus1);
+		autotransition.setEventstatus2(eventstatus2);*/
 		autotransition.setAutotranIsactive("Y");
 		autotransition.setAutotranName("Autotransition 1");
 		autotransition.setAutotranLogicaloperand("AND");
 	}
 	
 	public void sce_autotran_allGood2() {
-		eventstatus1 = new Eventstatus();
+		/*eventstatus1 = new Eventstatus();
 		eventstatus1.setEvestatId(1);
 		eventstatus2 = new Eventstatus();
-		eventstatus2.setEvestatId(2);
+		eventstatus2.setEvestatId(2);*/
 		Institution inst = new Institution();
 		inst.setInstId(1);
 		institutionOpt = Optional.of(inst);
 		autotransition = new Autotransition();
 		autotransition.setInstInstId(new BigDecimal(1));
 		autotransition.setAutotranId(1);
-		autotransition.setEventstatus1(eventstatus1);
-		autotransition.setEventstatus2(eventstatus2);
+		/*autotransition.setEventstatus1(eventstatus1);
+		autotransition.setEventstatus2(eventstatus2);*/
 		autotransition.setAutotranIsactive("N");
 		autotransition.setAutotranName("Autotransition 1");
 		autotransition.setAutotranLogicaloperand("OR");
 	}
-	
+	/*
 	public void sce_autotran_null_eventstatus1() {
 		sce_autotran_allGood1();
 		autotransition.setEventstatus1(null);
@@ -115,7 +111,7 @@ public class AutotransitionUnitTest {
 	public void sce_autotran_null_eventstatus2() {
 		sce_autotran_allGood1();
 		autotransition.setEventstatus2(null);
-	}
+	}*/
 	
 	public void sce_autotran_notFound_inst() {
 		sce_autotran_allGood1();
@@ -166,8 +162,8 @@ public class AutotransitionUnitTest {
 		Autotransition newautotransition = new Autotransition();
 		newautotransition.setInstInstId(new BigDecimal(1));
 		newautotransition.setAutotranId(1);
-		newautotransition.setEventstatus1(eventstatus1);
-		newautotransition.setEventstatus2(eventstatus2);
+		/*newautotransition.setEventstatus1(eventstatus1);
+		newautotransition.setEventstatus2(eventstatus2);*/
 		newautotransition.setAutotranIsactive("Y");
 		newautotransition.setAutotranName("Autotransition 1");
 		newautotransition.setAutotranLogicaloperand("AND");
@@ -211,7 +207,7 @@ public class AutotransitionUnitTest {
 				assertTrue(false);
 			}
 		}
-		
+		/*
 		@Test
 		public void save_autotran_null_evenstatus1() {
 			sce_autotran_null_eventstatus1();
@@ -240,7 +236,7 @@ public class AutotransitionUnitTest {
 			} catch (LogicalException e) {
 				assertTrue(false);
 			}
-		}
+		}*/
 		
 		@Test
 		public void save_autotran_noFound_inst() {
@@ -405,7 +401,7 @@ public class AutotransitionUnitTest {
 				assertTrue(false);
 			}
 		}
-		
+		/*
 		@Test
 		public void edit_autotran_null_evenstatus1() {
 			sce_autotran_null_eventstatus1();
@@ -444,7 +440,7 @@ public class AutotransitionUnitTest {
 			}catch(LogicalException e) {
 				assertTrue(false);
 			}
-		}
+		}*/
 		
 		@Test
 		public void edit_autotran_noFound_inst() {

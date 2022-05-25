@@ -1,5 +1,6 @@
 package co.edu.icesi.nigm.cercosepi;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -12,17 +13,14 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import co.edu.icesi.back.back.service.interfaces.AutotransitionDelegate;
 import co.edu.icesi.back.daos.interfaces.PersonautotranDAO;
 import co.edu.icesi.back.model.Autotransition;
 import co.edu.icesi.back.model.Person;
 import co.edu.icesi.back.model.Personautotran;
 import co.edu.icesi.back.repository.PersonautotranRepository;
 import co.edu.icesi.back.service.implementation.PersonautotranServiceImpl;
-<<<<<<< HEAD
-=======
+
 import co.edu.icesi.back.service.interfaces.AutotransitionService;
->>>>>>> 3e673c56906c6dfaede13c54d30b358835dcd430
 import co.edu.icesi.back.service.interfaces.PersonService;
 import co.edu.icesi.back.service.interfaces.PersonautotranService;
 import lombok.extern.java.Log;
@@ -69,7 +67,7 @@ public class PersonautotranUnitTest {
 		autotransitionOpt = Optional.of(autotransition);
 		personautotran.setPerson(person);
 		personautotran.setAutotransition(autotransition);
-		personautotran.setPerautDate(new Date("2/2/2021"));
+		personautotran.setPerautDate(LocalDate.parse("2021-2-2"));
 	}
 	
 	public void sce_persautotran_null_person() {
@@ -90,7 +88,7 @@ public class PersonautotranUnitTest {
 	@SuppressWarnings("deprecation")
 	public void sce_persautotran_after_date() {
 		sce_persautotran_allGood();
-		personautotran.setPerautDate(new Date("2/2/2022"));
+		personautotran.setPerautDate(LocalDate.parse("2021-2-2"));
 	}
 	
 	public void sce_persautotran_null_personautotran() {
@@ -104,7 +102,7 @@ public class PersonautotranUnitTest {
 		Personautotran newPersonautotran = new Personautotran();
 		newPersonautotran.setPerson(person);
 		newPersonautotran.setAutotransition(autotransition);
-		newPersonautotran.setPerautDate(new Date("2/2/2022"));
+		newPersonautotran.setPerautDate(LocalDate.parse("2021-2-2"));
 		personautotranOpt = Optional.of(newPersonautotran);
 	}
 	
