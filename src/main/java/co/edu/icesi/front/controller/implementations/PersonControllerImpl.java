@@ -114,6 +114,7 @@ public class PersonControllerImpl implements PersonController {
 			}else {
 				try {
 					long instid = person.getInstid();
+					System.out.println(instid);
 					personDelegate.createPerson(person, instid);
 				}catch(LogicalException e) {
 					e.printStackTrace();

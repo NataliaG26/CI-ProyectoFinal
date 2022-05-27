@@ -36,9 +36,6 @@ public class PersonServiceImpl implements PersonService {
 		if(person == null) {
 			throw new LogicalException("La persona a ingresar no puede ser null");
 		}
-		else if(person.getInstitution() == null ) {
-			throw new LogicalException("La institución asociada a la persona no puede ser null");
-		}
 		
 		Institution inst = institutionService.getInstitutionById(instid);
 		
@@ -77,9 +74,6 @@ public class PersonServiceImpl implements PersonService {
 		
 		Person existingPerson = getPersonById(person.getPersId());
 		
-		if(person.getInstitution() == null ) {
-			throw new LogicalException("La institución asociada a la persona no puede ser null");
-		}
 		
 		Institution inst = institutionService.getInstitutionById(instid);
 		
