@@ -24,10 +24,9 @@
 
 	import co.edu.icesi.back.exception.LogicalException;
 	import co.edu.icesi.back.model.Institution;
-	import co.edu.icesi.front.bd.impl.PersonDelegateImpl;
-	import co.edu.icesi.front.bd.interfaces.PersonDelegate;
-	import co.edu.icesi.front.model.classes.Person;
+	import co.edu.icesi.back.model.Person;
 	import co.edu.icesi.back.restcontroller.interfaces.PersonRestController;
+	import co.edu.icesi.back.service.interfaces.InstitutionService;
 	import co.edu.icesi.back.restcontroller.implementation.PersonRestControllerImpl;
 
 	@ContextConfiguration(classes = {PersistenceContext.class})
@@ -38,8 +37,13 @@ public class PersonDelegateTestComponent {
 		@Mock
 		private RestTemplate restTemplate;
 		
+		@Mock
+		private InstitutionService institutionService;
+		
 		@InjectMocks
 		private static PersonRestController personRestController;
+		
+		private Institution institution1;
 		
 		final String SERVER="http://localhost:8080/api-rest/person/";
 		
@@ -48,27 +52,40 @@ public class PersonDelegateTestComponent {
 			personRestController = new PersonRestControllerImpl();
 		}
 		
+		public void createInstitution() {
+			institution1 = new Institution();
+			institution1.setInstId(10);
+			institution1.setInstName("Universidad Santiago de Cali");
+			institution1.setInstAcademicserverurl("https://www.usc.co/");
+			institution1.setInstAcadextradataurl("https://www.usc.co/");
+			institution1.setInstAcadloginurl("https://www.usc.co/");
+			institution1.setInstAcadpersoninfodocurl("https://www.usc.co/");
+			institution1.setInstAcadpersoninfoidurl("https://www.usc.co/");
+			institution1.setInstAcadphysicalspacesurl("https://www.usc.co/");
+			institution1.setInstAcadprogrammedcoursesurl("https://www.usc.co/");
+			institution1.setInstLdapurl("https://www.usc.co/");
+		}
+		
 		@Test
 		public void testCreatePerson() {
-			
+			createInstitution();
 			Person person = new Person();
-			person.setPersContactnumber("1234567");
+			person.setPersContactnumber("1234567845752");
 			person.setPersEmail("Email@Viejo.com");
 			person.setPersId(123);
 			person.setPersLastname("Naranjo - Gonzalez");
 			person.setPersName("Juan Diego - Natalia");
-			
-			Institution inst = new Institution();
-			inst.setInstId(12);
-			
-			person.setInstid(inst.getInstId());
-			
-			when(restTemplate.postForEntity(SERVER + inst.getInstId(), person, Person.class))
+			long idInst = institution1.getInstId();
+			person.setInstid(idInst);
+
+			when(restTemplate.postForEntity(SERVER + idInst, person, Person.class))
 			.thenReturn(new ResponseEntity<>(person, HttpStatus.OK));
 			Mockito.when(restTemplate.getForObject(SERVER + person.getPersId(), Person.class)).thenReturn(person);
 			
+			
 			try {
-				personRestController.savePerson(person, inst.getInstId());
+				when(institutionService.getInstitutionById(idInst)).thenReturn(institution1);
+				personRestController.savePerson(person, idInst);
 				Person newPerson = personRestController.showPerson(person.getPersId());
 				assertTrue(person.equals(newPerson));
 			} catch (LogicalException e) {
