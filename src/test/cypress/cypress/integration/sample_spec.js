@@ -2,7 +2,7 @@
 
 describe('My First Test', () => {
 	
-	/*
+	
 	beforeEach( () => {
     cy.visit('/login')
   	})
@@ -49,7 +49,7 @@ describe('My First Test', () => {
 		cy.get('.col-md-4 > .btn').click()
 		cy.get('.alert').should('not.exist')
 		
-	})*/
+	})
 	
 	it('Debe agregar una persona, luego mostrarla, editarla y al final eliminarla', ()=>{
 		cy.visit('/login')
